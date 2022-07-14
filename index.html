@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>   
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">簡介與軟體安裝</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>簡介</li>
+            <li>軟體安裝-Windows</li>
+            <li>軟體安裝-MacOS</li>
+          </ul>
+        </p>
+        <h3 class="text-danger p-3">簡介</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <a href="https://flutter.io/">Flutter</a>為一開發套件用於開發混合式行動應用程式(Hybrid APP)。所謂的混合式行動應用程式是讓設計者使用相同的程式，讓應用程式執行於不同的行動平台(Android、iOS、Web APP、Mac OS與Windows)。當使用原生應用程式(iOS使用Objective-C/Swift、Android使用Java)進行開發，必須對個別平台撰寫應用程式，對程式開發公司是不符合效益。最早跨平台行動應用程式主要依靠網頁技術(HTML 5、CSS與Javascript)如Cordova或Ionic，將設計網頁內容封裝成WebView來顯示並提供存取原生設備的功能，這類型的行動應用程式一般稱為Web App，Web App最大的優點是進入障礙低與開發時間短，但是主要的限制是執行效能。<br/>
+          另一類接近原生效能的混合式平台稱為原生混合式平台(native hybrid platform)如React Native、NativeScript與Flutter，原生混合式平台與Web APP最大的不同是他會將程式編譯成對應平台執行程式，提升應用程式執行效能。本課程將介紹如何利用Flutter來進行跨平台行動應用設計，選擇Flutter最主要的原因是Flutter為Google作業系統Fuchsia應用程式開發平台，除此之外，React Native與NativeScript使用Javascript技術進行開發，因此在程式執行時並須藉由Javascript Runtime來執行，而Flutter則是將程式直接編譯成對應平台執行碼。<br/>
+          進入課程之前，先說明如何在Windows與MacOS作業系統下安裝Flutter，由於Android平台可在Windows或Mac OS下進行設計，但iOS只能在Mac OS下進行設計，所以在軟體的安裝部分將利用Windows進行Android平台設計，Mac OS進行iOS設計。
+        </p>
+        <h3 class="text-danger p-3">軟體安裝</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          Flutter可安裝於Windows、Mac OS、Linux與Chrome OS，這裡僅介紹Windows與Mac OS安裝，Linux與Chrome OS安裝請參考<a href="https://docs.flutter.dev/get-started/install" target="_blank">官方文件</a>。
+        </p>
+        <h5 class="text-success p-3">Windows安裝</h5>
+        <p class="p-3" style="margin-top:-30px;">軟體安裝分為 <span class="text-danger">工具軟體Git安裝、Flutter SDK安裝、Java JDK 8安裝、程式編輯軟體Android Studio安裝、模擬器安裝、Android版權確認與Flutter doctor</span>，作業系統為Windows 10(64位元)、硬碟需1.64GB以上硬碟空間。</p>
+        <ul>
+          <li>
+            安裝Git：下載並安裝<a href="https://git-scm.com/download/win">Standalone Installer 64-Bit Git for Windows Setup</a>，安裝過程請持續點選下一步，安裝完畢後，請至 <span class="text-danger">控制台-系統及安全-系統-進階系統設定-環境變數-使用者變數-Path</span> 中新增 Git\bin位置(預設會在 <span class="text-danger">C:\Program Files\Git\bin</span>)。<br/>之後開啟命令提示字元視窗並執行下列命列：<br/><span class="text-danger">git config --global user.name "自己英文姓名"</span><br/><span class="text-danger">git config --global user.email 自己的email帳號</span><p></p>
+          </li>
+          <li>
+            安裝Flutter SDK：下載<a href="https://docs.flutter.dev/get-started/install/windows" target="_blank">Flutter SDK</a>，下載後請將解壓縮下載檔案，並將解壓縮後flutter檔案夾放置於使用者自定的檔案夾(如c:\development)，請注意：勿將flutter檔案夾至於Program Files檔案夾中，因為Program Files檔案夾需要設定權限才能執行，之後將 flutter\bin路徑 加入環境變數參數 Path中。請定期開啟命令提示字元視窗並輸入 flutter upgrade 來更新flutter。<p></p>
+          </li>
+          <li>
+            安裝Java JDK 8：下載並安裝<a href="https://www.oracle.com/tw/java/technologies/javase/javase8u211-later-archive-downloads.html" target="_blank">Java JDK 8</a>，請注意：開發Android應用只能使用Java JDK 8版本，並在使用者環境變數中新增JAVA_HOME環境變數，JAVA_HOME值為安裝JAVA JDK的路徑位置。同時請將JAVA JDK中bin的路徑設於環境變數Path中。<p></p>
+          </li>
+          <li>
+            安裝程式編輯軟體Android Studio：下載並安裝<a href="https://developer.android.com/studio" target="_blank">Windows 64-bit Android Studio</a>，並新增 使用者環境變數 ANDROID_HOME ，環境變數值為 Android Studio SDK路徑位置，請注意：預設Android SDK位置在 <span class="text-danger">C磁碟機-使用者-[現在使用者]-AppData-Local-Android-sdk</span>。<br/>開啟Android Studio，選擇 Plugins後，並在搜尋視窗輸入 flutter，選擇 Flutter language並點選 Install，請注意安裝Flutter套件時會同時安裝 Dart語言套件，請記得選確定。安裝完套件必須重新啟動Android Studio。重啟Android Studio後，請至SDK Manager中SDK Tools安裝Android SDK Command-line Tools、Google USB Driver與Intel x86 Emulator Accelerator，並不定期更新Android SDK。<p></p>
+          </li>
+          <li>
+            安裝模擬器：請注意模擬器只需設定一次，除非設計者想要將project執行於不同的模擬器，才須設定多個模擬器。請使用Android Studio中AVD Manager來設定模擬器(選擇 Tools - Android - AVD Manager，選擇Create Virtual Device並選擇對應模擬器，設定中Emulated Performance請選擇 Hardware GLES 2.0，其他保留預設後選擇Finish。之後請開啟設定模擬器。<p></p>
+          </li>
+          <li>
+            Android版權確認與Flutter doctor：請開啟命令提示字元視窗並輸入<br/><span style="color:#f00">flutter doctor --android-licenses</span><br/>版權確認請依照問題回答yes，最後在命令提示字元視窗並輸入<br/><span style="color:#f00">flutter doctor</span><br/>確認所有安裝都正確。<p></p>
+          </li>
+          <img src="imgs/introduction/flutter-doctor.png">
+          <li>
+            安裝VS Code：Flutter程式編輯可使用Android Studio，也可以使用<a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a>，請下載並安裝VS Code，之後在延伸模組安裝Flutter模組。
+          </li>
+          <img src="imgs/introduction/vscode1.png">
+        </ul>
+        <h5 class="text-success p-3">Windows平台第一個Flutter project</h5>
+        <p class="p-3">在Android Studio請選擇 New Flutter project，接下來確定Flutter SDK位置(Flutter SDK檔案夾位置)、設定Flutter project name(名稱)、organization(反轉domain name如tw.edu.stust.mis)及platforms(開發平台)後點選 finish 建立project。project建立後，請開啟模擬器並點選執行按鈕，結果如下圖。實機測試請開啟Android手機<span class="text-danger">開發人員模式中USB偵錯</span>，之後將手機接上電腦，等待電腦連上手機後點選執行即可。</p>
+        <img src="imgs/introduction/wintestapp.png" class="p-3"/>
+        <p class="p-3">
+          使用VS Code建立專案，請選擇 檢視(View)-命令選擇區(Command palette)，並輸入Flutter New Project、選擇Application、選擇 APP專案擺放位置、最後設定專案名稱。執行時請先選擇狀態列右下角設定輸出選項，
+        </p>
+        <img src="imgs/introduction/vscode2.png" class="p-3"/><p></p>
+        <img src="imgs/introduction/vscode3.png" class="p-3"/>
+        
+        <h5 class="text-success p-3">Mac OS安裝</h5>
+        <p class="p-3" style="margin-top:-30px;">Mac OS軟體安裝分為Flutter SDK安裝、安裝Xcode、模擬器安裝、Android版權確認與Flutter doctor，作業系統為Mac OS、硬碟需2.8GB以上硬碟空間。</p>
+        <ul>
+          <li>
+            安裝Flutter SDK：
+            <ol>
+              <li>
+                下載<a href="https://docs.flutter.dev/get-started/install/macos" target="_blank">Flutter MacOS SDK</a>。
+              </li>
+              <li>
+                開啟terminal應用程式，並利用mkdir來建立flutter SDK放置的目錄(如mkdir development)。
+              </li>
+              <li>
+                在terminal中輸入flutter SDK檔案夾(如cd development)，接著輸入<text class="text-danger">cp -r ~/Downloads/flutter .</text>，它會將整個下載flutter檔案夾複製至flutter SDK檔案夾。之後輸入<text class="text-danger">cd</text>並按下輸入鍵回到根目錄。
+              </li>
+              <li>
+                在terminal中輸入<span class="text-danger">nano .bash_profile</span>，接下來在.bash_profile或.zshrc中輸入<span class="text-danger">export PATH="$PATH:/Users/使用者帳號/flutter SDK目錄/flutter/bin"</span>後，按下 Ctrl+O儲存檔案，按下Ctrl+X離開nano編輯器。
+              </li>
+              <li>
+                在terminal中輸入<span class="text-danger">chmod 700 .bash_profile</span>後按下輸入鍵，同時在terminal輸入<span class="text-danger">source .bash_profile或source .zshrc</span>後輸入<span class="text-danger">echo $PATH</span>來確認flutter/bin路徑在PATH中。
+              </li>
+            </ol>
+          </li>
+          <li>
+            安裝Xcode：
+            <ol>
+              <li>下載並安裝Xcode，安裝完畢後請在terminal應用程式中輸入下列命令：</li>
+              <li>
+                <span class="text-danger">sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer</span>
+              </li>
+              <li>
+                <span class="text-danger">sudo xcodebuild -runFirstLaunch</span>
+              </li>
+              <li>
+                <span class="text-danger">sudo xcodebuild -license</span>
+              </li>
+            </ol>
+          </li>
+          <li>
+            安裝cocoapods用於取的iOS平台Flutter套件，請在terminal應用程式中輸入<br/><span class="text-danger">sudo gem install cocoapods</span>
+          </li>
+          <li>
+            安裝完畢後，請在terminal應用程式中輸入<span class="text-danger">flutter doctor</span>來檢查Flutter的開發設定，同時請不定期在terminal應用程式中輸入<span class="text-danger">flutter upgrade</span>來升級Flutter SDK。
+          </li>
+        </ul>
+        <h5 class="text-success p-3">Mac OS平台第一個Flutter project</h5>
+          <ul>
+            <li>
+              開啟terminal應用程式進入project目錄
+            </li>
+            <li>
+              輸入 flutter create PROJECT名稱 來建立project(如 flutter create testapp)
+            </li>
+            <li>
+              輸入 cd PROJECT名稱 進入project目錄(如 cd testapp)
+            </li>
+            <li>
+              輸入 <span class="text-danger">open -a Simulator</span> 開啟模擬器
+            </li>
+            <li>
+              輸入 <span class="text-danger">flutter run</span> 將project執行於iOS模擬器(如下圖)。
+            </li>
+          </ul>
+        <img src="imgs/introduction/maciPhoneX.png" class="p-3"/>
+        <h5 class="text-success p-3">XCode實機測試</h5>
+          <ul>
+            <li>
+              請利用XCode開啟專案ios目錄中<span class="text-danger">Runner.xcworkspace</span>
+            </li>
+            <li>
+              將iOS設備接上電腦、輸入iOS設備密碼並選擇信任此電腦
+            </li>
+            <li>
+              在XCode選擇連接iOS設備，接下選擇<span class="text-danger">Signing&Capabilities</span>，點選<span class="text-danger">Team中Add Account</span>，並輸入Apple ID並建立自我簽名後關閉Account視窗並在Team選擇Apple ID的自我簽名
+            </li>
+            <li>
+              在Bundle Identifier設定唯一值APP ID例如<span class="text-danger">tw.com.xxx.app1</span>後點選Status的Try again
+            </li>
+            <li>
+              點選XCode執行後會出現<span class="text-danger">Could not launch Runner</span>訊息，點選<span class="text-danger">OK</span>並在iOS設備<span class="text-danger">設定-一般-VPN與裝置管理</span>選擇<span class="text-danger">Apple Development</span>選項並點選信任後，重新執行XCode就可以將APP執行於iOS設備
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
