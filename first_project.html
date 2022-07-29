@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li> 
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+            
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">第一個專案- 專案程式說明</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>主程式-main.dart</li>
+            <li>StatelessWidget-不具狀態widget</li>
+            <li>StatelfulWidget-具狀態widget</li>
+          </ul>
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">主程式-main.dart</h3>
+          <p>
+            請利用Android Studio或VS Code建立並開啟第一個專案firstapp，刪除所有註解(//)後完整程式碼如下：
+          </p>
+          <pre><code>
+//匯入預設material模組
+import 'package:flutter/material.dart';
+
+//主程式
+void main() {
+  runApp(const MyApp());
+}
+//主程式傳回MaterialApp widget
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  //Widget build方法用於顯示Widget內容
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      //定義APP層級場景
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+//定義StatefulWidget
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+//定義StatefulWidget State類別
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: &lt;Widget&gt;[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+          </code></pre>
+          <p class="text-danger">
+            接下來進行程式說明。
+            <ul>
+              <li>
+                Flutter預設使用Android Material設計，所以利用 <span class="text-danger">import</span> 匯入material套件material.dart，請注意：iOS APP也可以使用Material設計，只是場景與操作會與預設iOS APP不同。
+              </li>
+              <li>
+                主程式main執行runApp，runApp<a href="https://api.flutter.dev/flutter/widgets/runApp.html" target="_blank">語法</a>為 <span class="text-danger">runApp(const MyApp)</span>，MyApp為一不具狀態Widget，Flutter頁面均由 Widgets 所組成，Widget 為程式類別(class)，具狀態或不具狀態Widget稍後將進行說明。
+              </li>
+              <li>
+                MyApp Widget透過Widget build方法傳回MaterialApp widget，而MaterialApp widget的 <span class="text-danger">home</span> 屬性設定MyHomePage widget為預設頁面
+              </li>
+            </ul>
+          </p>
+          <pre><code>
+//匯入預設material模組
+import 'package:flutter/material.dart';
+
+//主程式
+void main() {
+  runApp(const MyApp());
+}
+//主程式傳回MaterialApp widget
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  //Widget build方法用於顯示Widget內容
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      //定義APP層級場景
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+          </code></pre>
+          <p class="text-danger">
+            <ul>
+              <li>
+                MyHomePage widget為一具狀態widget，宣告具狀態widget一定包含兩個類別，第一個類建立具狀態widget(<span class="text-danger">class MyHomePage extends StatefulWidget</span>)，在這個類別中僅利用createState()來建立狀態類別如_MyHomePageState。第二個類別 <span class="text-danger">_MyHomePageState</span> 為第一個類別 <span class="text-danger">MyHomePage</span> 的狀態類別，當Widget狀態改變時，<span class="text-danger">_MyHomePageState</span>藉由Widget build顯示最新狀態。
+              </li>
+            </ul>
+          </p>
+          <pre><code>
+//定義StatefulWidget
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+//定義StatefulWidget State類別
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: &lt;Widget&gt;[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+          </code></pre>
+          <p class="text-danger">
+            簡單來說，Flutter介面均由Widgets所組成，這些Widgets會建構成一Widgets樹，樹根為<span class="text-danger">MaterialApp或CupertiniApp</span>，Widget可為具狀態或不具狀態，不具狀態Widget在顯示後即無法改變其顯示內容。第一個專案程式Widgets樹如下：
+          </p>
+          <p><img src="imgs/first_project/firstapp_widgetstree.png"></p>
+          <pre><code>
+Flutter專案傳回MaterialApp widget，因此頁面Widgets樹的樹根為 <span class="text-danger">MaterialApp widget</span>，頁面使用 <span class="text-danger">Scaffold widget</span> 版面，在Scaffold widget包含 AppBar widget,頁面內容 body屬性,FloaringActionButton(浮動按鈕) widget。頁面內容 body屬性包含 Center widget(水平垂直置中)，置中內容使用 Column(欄版面) widget，欄版面包含兩個Text(文字) widgets，因此構成上述Widgets。
+          </code></pre>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">StatelessWidget-不具狀態widget</h3>
+          <p>
+            當widgets內容為靜態(固定不變)則Widget可設定為Stateless(不具狀態)widgets，Stateless(不具狀態)widget，首先定義不具狀態widget的類別名稱如MyStatelessClass，之後在類別建構式中如有代入參數，則需定義代入參數，最後覆寫(override)build函數來建立顯示內容。
+          </p>
+          <p class="text-danger">程式架構說明</p>
+          <pre><code>
+//不具狀態widget設定格式
+class MyStatelessClass extends StatelessWidget {
+  const MyStatelessClass({Key key,this.inarg1}) : super(key: key);
+  final 資料類型 inarg1;
+              
+  @override
+  Widget build(BuildContext context) {
+    return 使用者設定widget;
+  }
+}
+          </code></pre>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">StatefulWidget-具狀態widget</h3>
+          <p>
+            Stateful(具狀態)widget一定包含兩個類別，第一個類建立使用者設定類別名稱如StatefulClass來定義具狀態類別StatefulWidget，建構式與代入參數同不具狀態widget，在這個類別中僅利用createState()來建立狀態類別如_MyStatefulClassState。第二個類別為使用者在第一個類別中設定的狀態類別，用widget(build)建立widget並使用、initState設定類別起始動作與setState來觸發狀態事件。
+          </p>
+          <p class="text-danger">程式架構說明</p>
+          <pre><code>
+class MyStatefulClass extends StatefulWidget {
+  MyStatefulClass({Key key, this.inarg1}) : super(key: key);
+  final 資料類型 inarg1;
+  @override
+  _MyStatefulClassState createState() => new _MyStatefulClassState();
+}
+            
+class _MyStatefulClasstState extends State<MyStatefulClass> {
+  資料類型 attr1;
+            
+  @override
+  initState() {
+    super.initState();
+    起始動作;
+  }
+  //setState用於改變狀態，會讓widget傳回build方法來反映變化
+  void myfunction1() {
+    setState((){
+      發布狀態更新;
+    });
+  }
+            
+  @override
+  Widget build(BuildContext context) {
+    return 使用者設定widget;
+  }
+}
+          </code></pre>
+        </div>
+        
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

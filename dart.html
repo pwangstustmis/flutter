@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Dart語言</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>語法、資料類型</li>
+            <li>運算子(operator)</li>
+            <li>條件</li>
+            <li>迴圈</li>
+            <li>函數</li>
+            <li>物件導向-類別(class)、封裝(encapsulation)、介面(interface)、抽象類別(abstract class)</li>
+            <li>非同步(Future、async、await)</li>
+          </ul>
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">語法、變數、資料類型</h3>
+          <p>
+            Flutter使用Dart語言進行開發，Dart為Google開發之前端物件導向語言，課程將使用線上練習工具<a href="https://dartpad.dev/?" target="_blank">DartPad</a>。Dart程式語法類似Java，變數大小寫不同，程式進入點為<span class="text-danger">main()</span>，資料類型包含<span class="text-danger">int(整數)、double(有小數)、num(包含int與double)、String(字串)、bool(布林值)、var(變數宣告)、dynamic(動態)、List(陣列)、Set(集合)、Map(對應)</span>，Dart宣告不包含<span class="text-danger">存取修飾(public、private、protected</span>，變數名稱以<span class="text-danger">_(底線)</span>起始視為區域變數。可透過<span class="text-danger">print()</span>命令進行輸出，Dart預設Null safety，不允許任何宣告變數為空值(null)，如果宣告可能為空值的變數時，必須搭配<span class="text-danger">?(允許設定null值)、!(確定運算不為null值)、??(null值轉換)、late(延遲設定)</span>等，<span class="text-danger">print(物件)</span>命令將物件輸出至主控台。
+            <ul>
+              <li>
+                <span class="text-danger">int(整數)、double(有小數)、num(包含int與double)</span>：用於設定數字變數，num資料類型可用於儲存整數或小數值。常用方法包含<span class="text-danger">abs()、ceil()、floor()、round()、toDouble()、toInt()、toString()</span>，文字性數字可藉由int.parse()或double.parse()轉為數字。
+                <pre><code>
+int? a;
+a=-5;
+print(a.abs());
+print((a.abs()/2).ceil());
+print((a.abs()/2).floor());
+print((a.abs()/2).round());
+print((a.abs()/2).toInt());
+print((a.abs()/2).toDouble());
+print((a.abs()/2).toString());
+                </code></pre>             
+              </li>
+              <li>
+                <span class="text-danger">String(字串)</span>：字串至於單引號或雙引號中，常用屬性與方法包含<span class="text-danger">length、compareTo()、contains()、split()、substring()、toString()</span>，字串提供內插(interpolation)功能可將變數或運算式至於字串中。
+                <pre><code>
+String a='This is a book';
+print(a.length);
+print('a'.compareTo('b')); //傳回負值當a在b之前，正值當a在b之後，0當相同
+print(a.contains('is'));
+List&lt;String&gt; b=a.split(' ');
+b.sort((a,b)=>a.compareTo(b)); //遞增
+print(b);
+b.sort((a,b)=>b.compareTo(a)); //遞減
+print(b);
+print(a.substring(a.length-4));
+print(123.toString());
+
+//內插變數加上$ 內插運算置於{}中
+num a=1;
+print('$a+5=${a+5}');
+                </code></pre>             
+              </li>
+              <li>
+                <span class="text-danger">bool(布林值)</span>：設定值為true與false。            
+              </li>
+              <li>
+                <span class="text-danger">var</span>：當無法預知儲存變數資料類型時，可以使用<span class="text-danger">var</span>宣告變數，變數資料型態會依照設定值自動判斷，可以重新設定新值，但是新值資料類型要與原先設定相同。
+                <pre><code>
+var a="123";
+a="book";
+                </code></pre>             
+              </li>             
+              <li>
+                <span class="text-danger">dynamic</span>：當無法預知儲存變數資料類型時，另一個變數宣告選擇為動態類型，不同於<span class="text-danger">var</span>資料類型，變數可以設定新值或不同資料類型值。<span class="text-danger">請注意：當使用 var 宣告變數未設定值時，該變數為 dynamic 變數。</span>
+                <pre><code>
+dynamic a=123;
+a="book";
+var? b;
+b='123';
+b=123;
+print(b);
+                </code></pre>         
+              </li>
+              <li>
+                <span class="text-danger">List&lt;資料類型&gt;</span>：清單類型，清單類型設定分為兩種：<span class="text-danger">固定大小與變動大小</span>。固定大小清單在程式執行時不能改變清單大小。常用屬性包含<span class="text-danger">length、isEmpty</span>，常用方法包含<span class="text-danger">clear、reversed、add、removeAt、insert、sort、toList、asMap</span>。
+                <pre><code>
+int customSort(int a,int b) {
+  if (a&gt;b)
+    return 1;
+  else if (a&lt;b)
+    return -1;
+  else
+    return 0;
+}
+
+void main() {
+  List&lt;int&gt; b=List&lt;int&gt;.filled(5,0); //產生5個起始值為0的固定大小清單
+  List&lt;int&gt; a=[1,2,3]; //定義整數清單
+  print(a.length); //清單個數
+  a.clear(); //清除清單
+  print(a.isEmpty); //是否空清單
+  a=[1,2,3,4];
+  a=a.reversed.toList(); //反轉清單
+  print(a);
+  a.add(5); //新增最後
+  print(a);
+  a.removeAt(4); //移除特定位置元素
+  print(a);
+  a.insert(0,0); //新增(特定位置,元素)
+  print(a);
+  a.sort(); //遞增排序
+  print(a);
+  a.sort((a,b)=>customSort(a,b)); //遞增:a&gt;b(正),a&lt;b(負),=(0)
+  print(a);
+  a.sort((a,b)=>customSort(b,a)); //遞減
+  print(a);
+  print(a.asMap()); //轉換為Map類型key-value
+}
+                </code></pre>
+                <p class="text-success">練習：請依照下列要求完成練習：
+                  <ul>
+                    <li style="list-style:square">
+                      建立清單變數list1包含1,2,3,4,5,6,7,8
+                    </li>
+                    <li style="list-style:square">
+                      建立清單變數list2包含0,1,,4,5,6
+                    </li>
+                    <li style="list-style:square">
+                      新增元素9至list1，新增元素7,8,9至list2
+                    </li>
+                    <li style="list-style:square">
+                      新增元素0至list1第一個位置，新增元素2,3至list2中元素1之後
+                    </li>
+                    <li style="list-style:square">
+                      list1最後一個元素替換為10，list2最後3個元素替換為11,12,13
+                    </li>
+                    <li style="list-style:square">
+                      將list1元素隨機切換，清除list2
+                    </li>
+                    <li style="list-style:square">
+                      建立新清單list3元素值為list1中2到5的元素
+                    </li>
+                  </ul>
+                </p>      
+              </li>
+              <li>
+                <span class="text-danger">Set</span>：集合類型，集合值包含於大括符中，常用屬性與方法包含<span class="text-danger">length、isEmpty、clear()、contains()、add()、elementAt()、difference()、intersection()、union()、every()、any()、toList()</span>。
+                <pre><code>
+var cities={'高雄市','臺南市'};
+print(cities.contains('臺北市'));
+print(cities.any((c)=>c=='臺北市'));
+var newcities=cities.union({'臺北市'});
+print(newcities);
+print(newcities.contains('臺北市'));
+print(newcities.any((c)=>c=='臺北市'));
+print(newcities.toList());
+                </code></pre>
+                <p class="text-success">練習：請依照下列要求完成練習：
+                  <ul>
+                    <li style="list-style:square">
+                      建立集合變數dept1包含 臺北,新北,臺中,臺南,高雄,屏東
+                    </li>
+                    <li style="list-style:square">
+                      建立集合變數dept2包含 桃園,新竹,臺南,彰化,高雄,雲林
+                    </li>
+                    <li style="list-style:square">
+                      新增 臺東 至dept1，新增 宜蘭,花蓮 至dept2
+                    </li>
+                    <li style="list-style:square">
+                      建立新集合變數 all 包含 dept1及dept2 縣市
+                    </li>
+                    <li style="list-style:square">
+                      建立新集合變數 both 包含 dept1及dept2 共同縣市
+                    </li>
+                    <li style="list-style:square">
+                      建立新集合變數 onlydept1 包含 僅在dept1及不在dept2 縣市
+                    </li>
+                    <li style="list-style:square">
+                      在dept1中移除 dept1及dept2 共同縣市，在dept2移除 新竹
+                    </li>
+                    <li style="list-style:square">
+                      清空集合變數 all
+                    </li>
+                    <li style="list-style:square">
+                      將集合變數 onlydept1 轉換為清單並儲存於清單變數 listdept1
+                    </li>
+                  </ul>
+                </p>       
+              </li>
+              <li>
+                <span class="text-danger">Map(對應)</span>：對應資料類型為一物件定義鍵(key)與值(value)對應，透過<span class="text-danger">Map&lt;key資料類型,值資料類型&gt;</span>定義對應類型，常用屬性與方法包含<span class="text-danger">length、clear()、keys、values、containsKey()、containsValue()、forEach()</span>。
+              </li>
+              <pre><code>
+void main() {
+  Map&lt;String,String&gt; a={};
+  a['name']='甲';
+  a['phone']='1234567';
+  var b=&lt;int,String&gt;{};
+  b[0]='乙';
+  var c={'name':'甲','phone':'1234567'};
+  print(a.length);
+  print(a.keys);
+  print(a.values);
+  print(a.containsKey('address'));
+  a.forEach((k,v)=>print('key:$k, value:$v'));
+}
+              </code></pre>
+              <p class="text-success">練習：請依照下列要求完成練習：
+                <ul>
+                  <li style="list-style:square">
+                    建立對應變數employee包含 name:甲,gender:女,age:21,id:1234567,phone:1234567,email:1234567@gmail.com
+                  </li>
+                  <li style="list-style:square">
+                    變數employee加入 hometown:臺南, enrollDate:2000/1/1
+                  </li>
+                  <li style="list-style:square">
+                    印出employee所有鍵值
+                  </li>
+                  <li style="list-style:square">
+                    印出employee所有值
+                  </li>
+                  <li style="list-style:square">
+                    變數employee的age改為25, phone改為2345678
+                  </li>
+                  <li style="list-style:square">
+                    清空變數employee
+                  </li>
+                </ul>
+              </p>
+              <p class="text-success">練習：請使用<span class="text-danger">List與Map</span>資料類型將<span class="text-danger">DateTime.now().weekday</span>值對應至星期一至星期日。</p>
+            </ul>
+          </p>         
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">運算子(operators)</h3>
+          <p>
+            運算子(operator)用於變數與值的運算，常用運算子包含計算、設定、比較、邏輯、隸屬等。
+            </p>
+            <ul>
+              <li>
+                計算運算子 <span class="text-danger">+、-、*、/、~/、%、++、--</span> ，代表加、減、乘、除、整除、餘數，增加1簡寫，減少1簡寫。
+              </li>
+              <li>
+                關係運算子 <span class="text-danger">&gt;、&lt;、&gt;=、&lt;=、==、!=</span>。
+              </li>
+              <li>
+                邏輯運算子 <span class="text-danger">&&、||、!</span> ，用於串接多個條件比較分別為 且、或、否定。
+              </li>
+              <li>
+                設定運算子 <span class="text-danger">=、+=、-=、*=、/=、%=</span>，用於變數設定表示。
+              </li>
+              <li>
+                空值運算子 <span class="text-danger">?、??、!、late</span>，Dart預設空值檢查，變數預設無法設定為<span class="text-danger">null</span>，藉由<span class="text-danger">?</span>宣告則變數可設定為<span class="text-danger">null</span>。<span class="text-danger">!</span>置於允許空值變數的運算式之後，其目的用於確定該運算值不為空值。<span class="text-danger">?</span>除了宣告則變數可設定為<span class="text-danger">null</span>之外，也可用於確定非空值變數屬性參考或方法執行，例如對允許空值字串變數a設定<span class="text-danger">a?.length</span>代表當字串變數a不為空值時傳回長度值。<span class="text-danger">??</span>用於替代空值，命令<span class="text-danger">x??=5</span>當x為空值時，將x設為5，命令<span class="text-danger">y=x??5</span>當x為空值時，將y設為5，否則設為x。<span class="text-danger">late</span>用於宣告之後依定會設定值變數。
+                <pre><code>
+//請修改下列程式使其符合空值檢查
+int a;
+a=null;
+print('a is $a.');
+
+//請修改下列程式使其符合空值檢查
+List<String> aListOfStrings = ['one', 'two', 'three'];
+List<String> aNullableListOfStrings;
+List<String> aListOfNullableStrings = ['one', null, 'three'];
+
+print('aListOfStrings is $aListOfStrings.');
+print('aNullableListOfStrings is $aNullableListOfStrings.');
+print('aListOfNullableStrings is $aListOfNullableStrings.');
+
+//請修改下列程式使其符合空值檢查
+int? couldReturnNullButDoesnt() => -3;
+
+void main() {
+  int? couldBeNullButIsnt = 1;
+  List<int?> listThatCouldHoldNulls = [2, null, 4];
+
+  int a = couldBeNullButIsnt;
+  int b = listThatCouldHoldNulls.first;
+  int c = couldReturnNullButDoesnt().abs();
+
+  print('a is $a.');
+  print('b is $b.');
+  print('c is $c.');
+}
+
+//修改下列命令當nullableString為空值時傳回0 否則傳回該字串長度
+int getLength(String? str) {
+  return str.length;
+}
+
+void main() {
+  print(getLength('This is a string!'));
+}
+
+//請利用late關鍵字修改下令命令
+class Meal {
+  String _description;
+
+  set description(String desc) {
+    _description = 'Meal description: $desc';
+  }
+
+  String get description => _description;
+}
+
+void main() {
+  final myMeal = Meal();
+  myMeal.description = 'Feijoada!';
+  print(myMeal.description);
+}
+                </code></pre>
+              </li>
+            </ul>         
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">條件- if, switch case</h3>
+          <p>
+            if條件命令包含 <span class="text-danger">if、if else、if ... else if ... else</span>，分別為一個條件動作、兩個條件動作與多個條件動作，條件也包含條件表示式<span class="text-danger">? :</span>。
+          </p>
+          <pre><code>
+//if
+if (1&lt;2) {
+  print("1小於2");
+}
+//if else
+if (1&lt;2) {
+  print("1小於2");
+} else {
+  print("1不小於2");
+}
+//if else if else
+if (1&gt;2) {
+  print("1大於2");
+} else if (1==2) {
+  print("1等於2");
+} else {
+  print("1小於2");
+}
+int x=5>3?1:0;
+          </code></pre>
+          <p>
+            swicth case執行多條件命令。
+          </p>
+          <pre><code>
+//swicth 每個值至於 case之後，default為所有條件不滿足，每個動作需加break
+int x=1;
+switch (x) {
+  case 3:
+    print("x為3");
+    break;
+  case 2:
+    print("x為2");
+    break;
+  default:
+    print("x不為2或3");
+    break;
+}
+          </code></pre>
+      </div>
+      <div class="p-3">
+          <h3 class="text-danger">迴圈</h3>
+          <p>
+              迴圈命令包含 <span class="text-danger">while、do while、for、for ... in、forEach</span>，while、do while差別 <span class="text-danger">結束條件在一開始或結束條件在最後</span>，for迴圈使用方式 <span class="text-danger">for (資料類型 變數=起始值;變數結束條件設定;變數增加值設定)</span>，<span class="text-danger">for (資料類型 變數 in 清單或集合變數)</span>，forEach用於清單、集合或對應類型。
+          </p>
+          <pre><code>
+int i=1;
+while (i&lt;=10) {
+  print(i++);
+}
+
+i=1;
+do {
+  print(i++);
+} while (i&lt;=10);
+
+for (i=1;i&lt;=10;i++) {
+  print(i);
+}
+
+List&lg;int&gt; j=[1,2,3,4,5,6,7,8,9,10];
+j.forEach((int k)=>print(k));
+j.toSet().forEach((i)=>print(i));
+j.asMap().forEach((idx,v)=>print('index:$idx, value:$v'));
+          </code></pre>
+      </div>
+      <div class="p-3">
+        <h3 class="text-danger">函數</h3>
+        <p>
+            函數定義為 <span class="text-danger">函數傳回資料類型 函數名稱(資料類型 代入變數)</span>，函數可以有許多代入值，如果有傳回值則使用 <span class="text-danger">return 傳回值</span>，如果沒有傳回值，函數傳回資料類型請設為，<span class="text-danger">void</span>，Dart允許選擇性代入參數，選擇性代入參數會放在非選擇性代入參數之後，用方括號括起，如果沒有代入值，變數值為null。
+        </p>
+        <pre><code>
+//函數func1沒有代入值、沒有傳回值並印出Hello
+void func1(int a,[int? b,int? c]) {
+  print(a);
+  print(b);
+  print(c);
+}
+void main() {
+  func1(10); //印出 10 null null
+}
+        </code></pre>
+    </div>
+    <div class="p-3">
+      <h3 class="text-danger">物件導向-類別(class)、封裝(encapsulation)、介面(interface)、抽象類別(abstract class)</h3>
+      <p>
+        物件導向程式利用物件來解決問題，而<span class="text-danger">類別(class)</span>為物件的抽象描述，他描述並定義物件的屬性與方法，使用者可以想像<span class="text-danger"> 類別為物件的定義，而物件為類別的實現</span>，另外使用者可以想像：類別就像建造房屋的藍圖，而房屋就是藍圖的實現。類別定義包含<span class="text-danger">類別名稱、屬性、方法</span>，屬性是用於描述對應類別特性，而方法是定義類別可執行的動作，請注意：Dart類別、屬性、方法無存取修飾(public、private、protected)，同時Dart類別不支援過載(overload)，設計者可使用不同名稱或利用命名函數。
+      </p>
+      <pre><code>
+import 'dart:math' as math;
+
+class Point {
+  double x;  //屬性
+  double y;
+        
+  Point(this.x, this.y); //建構式
+  Point.fromOther(this.x,this.y); //命名函數    
+  double distanceTo(Point other) {  //方法
+    var dx = x - other.x;
+    var dy = y - other.y;
+    return math.sqrt(dx * dx + dy * dy);
+  }
+}
+
+void main() {
+  Point p=Point(2,2);
+  print(p.distanceTo(Point.fromOther(3,3)));
+}
+
+//類別屬性getter/setter
+class Vehicle {
+  int vehicleAge;
+
+  int get age {
+    return vehicleAge;
+  }
+
+  void set age(int currentYear) {
+    vehicleAge = currentYear - manufactureYear;
+  }
+}
+
+class Television {
+  void turnOn() {
+    _illuminateDisplay();
+    _activateIrSensor();
+  }
+  set contrast(int value) {...}
+}
+class SmartTelevision extends Television { //使用extends繼承Television類別
+  void turnOn() { //方法隱藏並使用super呼叫父類別Television中turnOn方法
+    super.turnOn();
+    _bootNetworkInterface();
+    _initializeMemory();
+    _upgradeApps();
+  }
+  @override
+  set contrast(num value) {...} //覆寫父類別Televison屬性contrast設定
+}
+
+//定義並繼承抽象類別
+abstract class Doer {
+  void doSomething(); 
+}
+
+class EffectiveDoer extends Doer { //繼承抽象類別並實作方法
+  void doSomething() {
+    
+  }
+}
+      </code></pre>
+      </div>
+      <div class="p-3">
+        <h3 class="text-danger">非同步命令(Future、Stream、async、await、yield)</h3>
+        <p>
+          非同步命令讓程式可以繼續執行，直到某些需要等待結果完成。非同步命令包含<span class="text-danger">Future、Stream、async、await、yield</span>，<span class="text-danger">Future&lt;傳回類別&gt;</span>用於一次性非同步操作，<span class="text-danger">Stream&lt;傳回類別&gt;</span>用於連續性非同步操作，<span class="text-danger">async</span>用於定義非同步函數同時必須宣告於非同步函數開始之前，如果定義連續性非同步函數則使用<span class="text-danger">async*</span>，<span class="text-danger">await</span>用於非同步函數等待非同步操作結果，<span class="text-danger">yield</span>用於產生連續性非同步操作值。
+        </p>
+        <pre><code>
+//定義一次性非同步函數
+Future&lt;void&gt; futureFunc() async {
+  var t=await anotherFutureFunction();
+}
+//定義產生連續性非同步函數
+Stream&lt;int&gt; streamFunc() async* {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+//接收連續性非同步結果
+Future&lt;void&gt; takeStream(Stream&lt;int&gt; stream) async {
+  await for (int i in stream) {
+    print(i);
+  }
+}
+void main() async {
+  var streamf=streamFunc();
+  await takeStream(streamf);
+}
+        </code></pre>
+        <pre><code>
+//錯誤
+void main() {
+  print(Future.value(50)); 
+}
+//正確
+void main() async {
+  print(await Future.value(50)); 
+}
+
+//為什麼錯誤
+Future<String> stringDelayed2s() {
+  return Future.delayed(
+      const Duration(seconds: 2),
+      () => '2',
+    );
+}
+void main() {
+  print(stringDelayed2s());
+  print('1');
+}
+        </code></pre>
+        <p class="text-success">
+          練習：請利用<span class="text-danger">Stream</span>每0.5秒產生數字從1到10，並撰寫非同步函數讀取這10個數並印出．
+        </p>
+        <p class="text-success">
+          練習：讀取臺南市國中小校園開放時間開放資料為例(https://soa.tainan.gov.tw/Api/Service/Get/d1d3935b-2123-4ae6-9016-bf289aaa278c)，使用http套件(https://pub.dev/packages/http)．
+        </p>
+        <pre><code>
+import 'package:http/http.dart' as http;
+void main() {
+  var url = Uri.parse('https://soa.tainan.gov.tw/Api/Service/Get/d1d3935b-2123-4ae6-9016-bf289aaa278c');
+  var response = await http.get(url);
+  print(response.body);
+}
+        </code></pre>
+      </div>
+      <div class="p-3">
+        <h3 class="text-danger">綜合練習</h3>
+        <p class="text-success">
+          練習：pizza價格定義如 const pizzaPrice={'瑪格麗特':650,'美式臘腸':550,'鮮蔬':450}; ，訂單如 const order=['瑪格麗特','鮮蔬']; ，請輸出如下答案(請注意：當訂單項目不在菜單上請輸出 該pizza不在菜單)
+        </p>
+        <pre><core>
+訂購pizzas:
+瑪格麗特-650
+鮮蔬-450
+總共1100元
+        </core></pre>
+        <p class="text-success">
+          練習：請利用下列程式完成資料類別fromJson與toJson方法，fromJson代入Map物件並將資料屬性值設為對應Map物件值，toJson將資料屬性以Map物件傳回(請注意空值檢查問題)。
+          <pre><code>
+class Employee {
+  String name;
+  String department;
+  Employee(this.name,this.department);
+  //撰寫fromJson與toJson
+  
+}
+void main() {
+  Employee e1=Employee.fromJson({'name':'甲','department':'資訊部'});
+  print(e1.toJson());
+}
+          </code></pre>
+        </p>
+        <p class="text-success">
+          練習：請撰寫函數Countdown()，代入整數 n 並使用 Future 每1秒印出 n 到 0倒數，當倒數完畢印出 倒數結束。
+        </p>
+      </div>
+        
+        
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

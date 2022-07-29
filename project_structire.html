@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">第一個專案- 專案檔案架構</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>建立執行專案</li>
+            <li>檔案架構-android資料夾</li>
+            <li>檔案架構-build資料夾</li>
+            <li>檔案架構-lib資料夾</li>
+            <li>檔案架構-pubspec.yaml</li>
+          </ul>
+        </p>
+        <h3 class="text-danger p-3">建立執行專案</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          請依照下列操作開啟或新增專案名稱為testapp的Flutter專案並將專案顯示於模擬器。
+        </p>
+        <pre class="p-3"><code>
+    使用Android Studio
+    -------------------------------------
+    1. 開啟Android Studio
+    2. 選擇New Flutter project
+    3. 確定Flutter SDK位置
+    4. 設定Flutter project name
+    5. 設定organization(一般為反向Domain name)
+    6. 點選 finish 建立project
+    7. 開啟模擬器
+    8. 執行專案
+
+    使用Visual Studio Code
+    -------------------------------------
+    1. 開啟Vsiaul Studio Code
+    2. 選擇 檢視-命令選擇區
+    3. 輸入 Flutter: New Project
+    4. 選擇 Application
+    5. 選擇project擺放檔案夾
+    6. 設定project名稱
+    7. 選擇輸出設定
+    8. 執行專案
+        </code></pre>
+
+        <h3 class="text-danger p-3">檔案架構-android資料夾</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          專案中android資料夾用於進行建立Android原生應用時使用，AndroidManifest.xml為Android APP的設定檔，經常用於設定Android APP權限，build.gradle用於APP建立設定，res檔案夾包含Android平台會使用的圖示(icon)、圖片與樣式</a>。
+        </p>
+        <img src="imgs/project_structure/structure_1.png" class="p-3"/>
+        <p class="text-success p-3">練習：請下載圖片並使用<a href="https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html" target="_blank">Launch icon generator</a>製作並下載Android launch icon壓縮檔，解壓縮Android launch icon壓縮檔後，覆寫<span class="text-danger">res</span>檔案夾並重新執行project，(請注意：res檔案夾內hdip(72x72)、mdip(48x48)、xhdip(96x96)、xxhdip(144x144)、xxxhdip(192x192)分別放置不同大小launch icon。</p>
+        <p>
+          <img src="imgs/project_structure/structure_2.png" class="p-3"/>
+        </p>
+        <h3 class="text-danger p-3">檔案架構-build資料夾</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          用於存放Android APK檔，選擇Android studio命令Build-Flutter-Build APK或在命令提示字元視窗project目錄下輸入<span class="text-danger">flutter build apk</span>時，專案Android apk檔會存放於專案build-app-outputs-apk檔案夾中。如有警告訊息如<span class="text-danger">Runtime JAR files in the classpath should have the same version</span>，請至<span class="text-danger">android-app-build.gradle</span>中，將最後<span class="text-danger">org.jetbrains.kotlin:kotlin-stdlib-jdk7</span>改為<span class="text-danger">org.jetbrains.kotlin:kotlin-stdlib-jdk8</span>即可。
+        </p>
+        <img src="imgs/project_structure/structure_3.png" class="p-3"/>
+        <h3 class="text-danger p-3">檔案架構-ios資料夾</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          用於存放iOS相關檔案，<span class="text-danger">Runner-Info.plist</span>用於設定iOS權限，<span class="text-danger">Runner-Assets.xcassets-AppIcon.appiconset</span>用於設定iOS launch icon，<span class="text-danger">Runner-Runner.xcworkspace</span>用於在XCode開啟專案。
+        </p>
+        <p class="text-success p-3">練習：請下載圖片並使用<a href="https://appicon.co/" target="_blank">App Icon Generator</a>製作並下載iOS launch icon壓縮檔，解壓縮下載檔案後，更名並覆寫<span class="text-danger">Runner-Assets.xcassets-AppIcon.appiconset</span>檔案夾並重新執行project，(請注意：檔案axa@b是指圖片大小abxab。</p>
+        <img src="imgs/project_structure/structure_4.png" class="p-3"/>
+
+        <h3 class="text-danger p-3">檔案架構-lib資料夾</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          用於放置專案葉面程式，專案的頁面程式需置於lib資料夾中，Flutter使用Dart程式來進行頁面設計，頁面檔案必須是Dart檔案，預設project包含一個頁面程式main.dart，也是專案進入程式。
+        </p>
+        <img src="imgs/project_structure/structure_5.png" class="p-3"/>
+
+        <h3 class="text-danger p-3">檔案架構-pubspec.yaml檔</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          pubspec.yaml為專案設定檔，Flutter專案需要利用外部資源包含第三方套件、圖片與影片、外部字型等，這些都必須在pubspec.yaml檔中進行設定，請注意：pubspec.yaml為階層式的資料結構檔案，階層必須使用空白對齊，階層可以是一個以上空白，不能使用TAB鍵來進行對齊，表示方式類似JSON的Key-Value表示式。
+        </p>
+        <img src="imgs/project_structure/structure_6.png" class="p-3"/><br/>
+        <img src="imgs/project_structure/structure_7.png" class="p-3"/><br/>
+        <img src="imgs/project_structure/structure_8.png" class="p-3"/>
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
