@@ -25,9 +25,12 @@
         </li>
         <li class="mx-2">
           <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
-        </li> 
+        </li>
         <li class="mx-2">
           <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
         </li>
             
       </ul>
@@ -51,6 +54,7 @@
         <p class="px-3" style="margin-top:-20px;">
           <ul>
             <li>主程式-main.dart</li>
+            <li>頁面架構與Widgets tree</li>
             <li>StatelessWidget-不具狀態widget</li>
             <li>StatelfulWidget-具狀態widget</li>
           </ul>
@@ -232,6 +236,18 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
           <pre><code>
 Flutter專案傳回MaterialApp widget，因此頁面Widgets樹的樹根為 <span class="text-danger">MaterialApp widget</span>，頁面使用 <span class="text-danger">Scaffold widget</span> 版面，在Scaffold widget包含 AppBar widget,頁面內容 body屬性,FloaringActionButton(浮動按鈕) widget。頁面內容 body屬性包含 Center widget(水平垂直置中)，置中內容使用 Column(欄版面) widget，欄版面包含兩個Text(文字) widgets，因此構成上述Widgets。
           </code></pre>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">頁面架構與Widgets tree</h3>
+          <p>
+            Flutter頁面由widgets所構成，widget為Dart類別(class)，Flutter透過組合不同的widgets來建立頁面。以下圖為例：頁面以縱向來呈現，由上而下包含一張圖片、橫排字、橫排圖示按鈕與文字與一塊文字。這樣的頁面架構可由欄(Column)widget包含四個小孩(children)，欄(Column)widget內容將以縱向呈現，第一個小孩為圖片，第二個小孩為橫向列(row)包含3個小孩，而橫向列的第一個小孩為縱向欄(column)包含兩個小孩。如此類推我們將頁面分解為如圖的widgets樹，版面設計並無一定的規則，但是儘量朝向<span class="text-danger">淺架構(shallow)、封裝(encapsulation)、容易維護</span>方向設計。
+          </p>
+          <p><img src="imgs/material_widgets/pagesample.jpg"></p>
+          <p><img src="imgs/material_widgets/samplewidgetstree.png"></p>
+          <p>
+            頁面widget可具狀態(stateful)或不具狀態(stateless)兩種。具狀態widget允許動態重新顯示widget內容值，也就是說widget內容是可以動態變動。不具狀態(stateless)widget顯示後就部會改變。每個widget一定會有一個build函數，用於將現在的widget加入project widgets架構中。
+          </p>
+            
         </div>
         <div class="p-3">
           <h3 class="text-danger">StatelessWidget-不具狀態widget</h3>

@@ -29,6 +29,9 @@
         <li class="mx-2">
           <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
         </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+        </li>
       </ul>
     </div>
 
@@ -107,7 +110,7 @@
             安裝Flutter SDK：
             <ol>
               <li>
-                下載<a href="https://docs.flutter.dev/get-started/install/macos" target="_blank">Flutter MacOS SDK</a>。
+                下載<a href="https://docs.flutter.dev/get-started/install/macos" target="_blank">Flutter MacOS SDK</a>，<span class="text-danger">請注意：如果CPU為Apple Silicon晶片，請下載ARM64版本</span>。
               </li>
               <li>
                 開啟terminal應用程式，並利用mkdir來建立flutter SDK放置的目錄(如mkdir development)。
@@ -167,7 +170,7 @@
         <h5 class="text-success p-3">XCode實機測試</h5>
           <ul>
             <li>
-              請利用XCode開啟專案ios目錄中<span class="text-danger">Runner.xcworkspace</span>
+              請利用XCode開啟專案ios目錄中<span class="text-danger">Runner.xcworkspace，請注意如果CPU為Apple Silicon晶片，XCode會要求安裝Rosetta，請選擇安裝。</span>
             </li>
             <li>
               將iOS設備接上電腦、輸入iOS設備密碼並選擇信任此電腦

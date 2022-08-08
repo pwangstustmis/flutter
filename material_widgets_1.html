@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+        </li>
+            
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">專案範本widgets</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>            
+            <li>專案範本widgets-MaterialApp、Scaffold、AppBar、Center、Column、Text、FloatingActionButton</li>
+            <li>整合練習</li>
+          </ul>
+        </p>
+        <p class="p-3">
+          專案頁面由widgets組合而成，本單元介紹專案範本使用Widgets，首先介紹Android專案的MaterialApp widget，之後介紹Scaffold widget，Scaffold Widget用於顯示頁面內容並包含其他widgets如AppBar、FloatingActionButton、Drawer、BottomNavigationBar等widgets，因此在說明Scaffold widget之前將對前項widgets先進行說明，最後提供整合性版面練習。
+        </p>
+        
+        <div class="p-3">
+          <h3 class="text-danger">專案範本widgets-MaterialApp、Scaffold、AppBar、FloatingActionButton、Drawer、BottomNavigationBar、Center、Column、Text</h3>
+          <p>
+            <img src="imgs/material_widgets/sampleapp.png"/>
+          </p>
+          <p>
+            專案範本(如上圖)程式執行如下：<span class='text-danger'>main()</span>建立<span class='text-danger'>MyApp</span>類別，<span class='text-danger'>MyApp</span>類別為一不具狀態widget並利用<span class='text-danger'>Widget build()</span>傳回<span class='text-danger'>MaterialApp</span> widget，<span class='text-danger'>MaterialApp</span> widget中的<span class='text-danger'>theme</span>屬性用於定義App的<span class='text-danger'>ThemeData</span> widget，<span class='text-danger'>ThemeData</span> widget設定場景的主要色板(primarySwatch)為藍色，<span class='text-danger'>home</span>屬性用於定義App的起始頁面為<span class='text-danger'>MyHomePage</span> widget，<span class='text-danger'>MyHomePage</span> widget為具狀態widget，透過狀態widget<span class='text-danger'>_MyHomePageState</span>的<span class='text-danger'>Widget build()</span>傳回頁面架構<span class='text-danger'>Scaffold-AppBar-Center-Column-Text-FloatingActionButton</span>，本節widgets介紹將依照MaterialApp、Scaffold、AppBar、FloatingActionButton、Drawer、BottomNavigationBar、Center、Column、Text依序介紹，widgets介紹僅包含常用屬性，其他widgets將在後續單元介紹。
+          </p>
+          <pre><code>
+//匯入預設material模組
+import 'package:flutter/material.dart';
+
+//主程式
+void main() {
+  runApp(const MyApp());
+}
+
+//主程式傳回MaterialApp widget
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  //Widget build方法用於顯示Widget內容
+  @override
+  Widget build(BuildContext context) {
+    return <span class='text-danger'>MaterialApp</span>(
+      title: 'Flutter Demo',
+      //定義APP層級場景
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+//定義StatefulWidget
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+//定義StatefulWidget State類別
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return <span class='text-danger'>Scaffold</span>(
+      appBar: <span class='text-danger'>AppBar</span>(
+        title: Text(widget.title),
+      ),
+      body: <span class='text-danger'>Center</span>(
+        child: <span class='text-danger'>Column</span>(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: &lt;Widget&gt;[
+            const <span class='text-danger'>Text</span>(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      <span class='text-danger'>floatingActionButton</span>: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+          </code></pre>
+          <h4 class="text-danger">Widget- MaterialApp</h4>
+          <p>
+            Android App使用Material設計，Flutter Android App通常以MaterialApp widget為起始，MaterialApp widget定義如下：
+          </p>
+          <pre><code>
+MaterialApp(
+  {Key? key,
+    GlobalKey&lt;NavigatorState&gt;? navigatorKey,
+    GlobalKey&lt;ScaffoldMessengerState&gt;? scaffoldMessengerKey,
+    Widget? home,
+    Map&lt;String, WidgetBuilder> routes = const &lt;String, WidgetBuilder&gt;{},
+    String? initialRoute,
+    RouteFactory? onGenerateRoute,
+    InitialRouteListFactory? onGenerateInitialRoutes,
+    RouteFactory? onUnknownRoute,
+    List&lt;NavigatorObserver&gt; navigatorObservers = const &lt;&lt;NavigatorObserver&gt;[],
+    TransitionBuilder? builder,
+    String title = '',
+    GenerateAppTitle? onGenerateTitle,
+    Color? color,
+    ThemeData? theme,
+    ThemeData? darkTheme,
+    ThemeData? highContrastTheme,
+    ThemeData? highContrastDarkTheme,
+    ThemeMode? themeMode = ThemeMode.system,
+    Locale? locale,
+    Iterable&lt;LocalizationsDelegate&gt;? localizationsDelegates,
+    LocaleListResolutionCallback? localeListResolutionCallback,
+    LocaleResolutionCallback? localeResolutionCallback,
+    Iterable&lt;Locale&gt; supportedLocales = const &lt;Locale&gt;[Locale('en', 'US')],
+    bool debugShowMaterialGrid = false,
+    bool showPerformanceOverlay = false,
+    bool checkerboardRasterCacheImages = false,
+    bool checkerboardOffscreenLayers = false,
+    bool showSemanticsDebugger = false,
+    bool debugShowCheckedModeBanner = true,
+    Map&lt;ShortcutActivator, Intent&gt;? shortcuts,
+    Map&lt;Type, Action&lt;Intent&gt;&gt;? actions,
+    String? restorationScopeId,
+    ScrollBehavior? scrollBehavior,
+    bool useInheritedMediaQuery = false}
+)         
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">key</span>：用於維持widget在widgets樹狀態，一般用於widgets樹中相同類型widgets新增、移除、重組時使用。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">home</span>：用於設定App起始Widget，下列程式片段設定<span class="text-danger">MyHomePage</span>為起始Widget。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">routes</span>：用於App路由(routing)導覽使用named routes(命名路由)時，<span class="text-danger">routes</span>用於設定頁面路由名稱及對應頁面，會在後續導覽單元中介紹。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">initialRoute</span>：App路由(routing)導覽使用named routes(命名路由)時，<span class="text-danger">initialRoute</span>屬性用於設定App起始頁面路由名稱，請注意：<span class="text-danger">initialRoute</span>屬性不能與<span class="text-danger">home</span>屬性並存。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">title</span>：用於設定工作管理員顯示文字，iOS無作用。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">color</span>：用於設定Android應用程式切換(switcher)預設顏色，可以使用預設色板物件<span class="text-danger">Colors</span>來設定顏色，色板包含Material設計預設顏色，每個預設顏色可搭配顏色強度(例如<span class="text-danger">Colors.blue[500]</span>)，顏色強度包含50、100-900每次增加100，<span class="text-danger">Accent</span>顏色強度僅包含100、200、400、700。除了<span class="text-danger">Colors</span>物件，也可以使用<span class="text-danger">Color(0xAARRGGBB)、Color.fromARGB(0-255,0-255,0-255,0-255)、Color.fromRGBO(0-255,0-255,0-255,0-1)</span>來設定顏色，其中<span class="text-danger">0xAARRGGBB</span>中AA代表16進位透明度值(00-FF)、RGB分別代表16進位紅、綠、藍值(00-FF)，<span class="text-danger">Color.fromRGBO</span>中O代表透明度(Opacity)。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">theme</span>：用於設定App階層場景，可設定整個App層級場景，例如<span class="text-danger">ThemeData.light()</span>(淺色模式)、<span class="text-danger">ThemeData.dark()</span>(深色模式)，程式片段<span class="text-danger">primarySwatch</span>用於設定版面主題色調。       
+            </li>
+            <p class="text-success">練習：請改變預設程式主要色調、並嘗試設定單色與深色場景。</p>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">darkTheme</span>：用於設定App暗色場景。       
+            </li>           
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">debugShowCheckedModeBanner</span>：用於設定顯示 Debug 橫幅，預設為true。
+            </li>
+            <p class="text-success">
+              練習：請取消顯示 Debug 橫幅。
+            </p>            
+            <pre><code>
+MaterialApp(
+  title: 'Flutter Demo',
+  theme: ThemeData(
+    primarySwatch: Colors.blue,
+  ),
+  home: const MyHomePage(title: 'Flutter Demo Home Page'),
+);
+            </code></pre>
+          </ul>
+          <h4 class="text-danger">Widget- Scaffold(鷹架)</h4>
+          <p>
+            Scaffold Widget為Material設計最常用版面規劃widget定義如下，Scaffold Widget除了頁面內容body屬性，包含AppBar、FloatingActionButton、Drawer、BottomNavigationBar等widgets，因此說明Scaffold widget之前將對前項widgets先進行說明。
+          </p>
+          <pre><code>
+Scaffold({
+  Key? key,
+  PreferredSizeWidget? appBar,
+  Widget? body,
+  Widget? floatingActionButton,
+  FloatingActionButtonLocation? floatingActionButtonLocation,
+  FloatingActionButtonAnimator? floatingActionButtonAnimator,
+  List&lt;Widget&gt;? persistentFooterButtons,
+  Widget? drawer,
+  DrawerCallback? onDrawerChanged,
+  Widget? endDrawer,
+  DrawerCallback? onEndDrawerChanged,
+  Widget? bottomNavigationBar,
+  Widget? bottomSheet,
+  Color? backgroundColor,
+  bool? resizeToAvoidBottomInset,
+  bool primary = true,
+  DragStartBehavior drawerDragStartBehavior = DragStartBehavior.start,
+  bool extendBody = false,
+  bool extendBodyBehindAppBar = false,
+  Color? drawerScrimColor,
+  double? drawerEdgeDragWidth,
+  bool drawerEnableOpenDragGesture = true,
+  bool endDrawerEnableOpenDragGesture = true,
+  String? restorationId}
+)     
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">body</span>：用於設定Scaffold widget頁面顯示內容。
+            </li>
+          </ul>
+          <h4 class="text-danger">Widget- AppBar(App標題列)</h4>
+          <p>
+            AppBar置於APP的最上方，一般用於設定標題列(title)、動作按鈕(actions)與跳頁選單(Tabs)，AppBar widget基本包含三個區塊如下位置示意圖。
+          </p>
+          <p><img src="imgs/basicwidgets/scaffold_appbar.png"></p>
+          <pre><code>
+AppBar({Key key,
+  Widget leading,
+  bool automaticallyImplyLeading: true,
+  Widget title,
+  List actions,
+  Widget flexibleSpace,
+  PreferredSizeWidget bottom,
+  double elevation: 4.0,
+  Color backgroundColor,
+  Brightness brightness,
+  IconThemeData iconTheme,
+  TextTheme textTheme,
+  bool primary: true,
+  bool centerTitle,
+  double titleSpacing: NavigationToolbar.kMiddleSpacing,
+  double toolbarOpacity: 1.0,
+  double bottomOpacity: 1.0 })     
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">leading</span>：用於設定標題列之前的widget，當屬性automaticallyImplyLeading為false而leading為null時，標題列會占用leading位置，當屬性automaticallyImplyLeading為true而leading為null時，系統會自動設定對應leading widget，如跳頁時會於下一頁leading位置自動加入回上頁圖示按鈕或在Scaffold設定drawer時自動加入menu圖示按鈕。下列程式片段設定leading屬性為空值(null)與非空值(Icon widget)。
+            </li>
+            <img src="imgs/material_widgets/appbar_leadingnull.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        <span class="text-danger">leading: null</span>,
+        title: const Text('AppBar leading:null'),
+      ),
+      body: const Center(
+        child: Text('AppBar leading:null'),
+      ),
+    );
+  }
+}
+            </code></pre>
+            <img src="imgs/material_widgets/appbar_leadingnotnull.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        <span class="text-danger">leading: const Icon(Icons.menu)</span>,
+        title: const Text('AppBar leading:not null'),
+      ),
+      body: const Center(
+        child: Text('AppBar leading:null'),
+      ),
+    );
+  }
+}
+            </code></pre>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">title</span>：用於設定標題列，一般為Text widget。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">actions</span>：用於設定Widget清單，一般用於擺放動作按鈕如IconButton widget(圖示按鈕)。
+            </li>
+            <img src="imgs/material_widgets/appbar_actions.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading:null,
+        title: const Text('AppBar actions'),
+        <span class="text-danger">actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.home)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+        ]</span>,
+
+      ),
+      body: const Center(
+        child: Text('AppBar leading:null'),
+      ),
+    );
+  }
+}
+            </code></pre>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">bottom</span>：一般用於設定TabBar widget，下列程式範例說明在AppBar widget中bottom屬性設定兩個選項的TabBar widget。
+            </li>
+            <img src="imgs/material_widgets/appbar_bottom.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        initialIndex: 0,
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+              title: const Text('AppBar bottom屬性'),
+              <span class="text-danger">bottom: const TabBar(tabs: [
+                Tab(icon: Icon(Icons.home), text: '首頁'),
+                Tab(
+                  icon: Icon(Icons.car_rental),
+                  text: '交通',
+                )
+              ]))</span>,
+          body: const Center(
+            child: Text('AppBar widget bottom屬性'),
+          ),
+        ));
+  }
+}
+            </code></pre>            
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">centerTitle</span>：用於設定標題列是否置中。
+            </li>
+          </ul>
+          <h4 class="text-danger">Widget- FloatingActionButton(浮動動作按鈕)</h4>
+          <p>
+            FloatingActionButton widget常用於Scaffold widget，除了預設FloatingActionButton widget，也包含其他三種FloatingActionButton.extended、FloatingActionButton.large、FloatingActionButton.small widgets，widget定義僅列出FloatingActionButton，其他widgets定義請參考<a href="https://api.flutter.dev/flutter/material/FloatingActionButton-class.html" target="_blank">官網</a>，使用者如果要個別修改按鈕顏色可使用<span class="text-danger">Color或Colors</span>物件。
+          </p>
+          <pre><code>
+FloatingActionButton(
+  {Key? key,
+  Widget? child,
+  String? tooltip,
+  Color? foregroundColor,
+  Color? backgroundColor,
+  Color? focusColor,
+  Color? hoverColor,
+  Color? splashColor,
+  Object? heroTag = const _DefaultHeroTag(),
+  double? elevation,
+  double? focusElevation,
+  double? hoverElevation,
+  double? highlightElevation,
+  double? disabledElevation,
+  required VoidCallback? onPressed,
+  MouseCursor? mouseCursor,
+  bool mini = false,
+  ShapeBorder? shape,
+  Clip clipBehavior = Clip.none,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  MaterialTapTargetSize? materialTapTargetSize,
+  bool isExtended = false,
+  bool? enableFeedback}
+)     
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">onPressed</span>：為必要(required)屬性，用於設定使用者點選後執行函數，執行函數為<span class="text-danger">null、(){}</span>，執行函數設定為<span class="text-danger">null</span>則按鈕無作用。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">child</span>：設定按鈕要包含widget，一般為Icon widget(圖示)。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">tooltip</span>：設定按鈕按下時說明文字。
+            </li style="margin-bottom:0.5ex;">
+            <img src="imgs/material_widgets/floatingactionbutton.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('FloatingActionButton'),
+      ),
+      body: const Center(
+        child: Text('FloatingActionButton onPressed:null'),
+      ),
+      <span class="text-danger">floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: '浮動按鈕',
+        child: const Icon(Icons.home),
+      )</span>,
+    );
+  }
+}
+            </code></pre> 
+          </ul>
+          <p class="text-success">練習：請利用上述程式並設定<span class="text-danger">FloatingActionButton</span> widget按鈕背景顏色改為紅色。</p>
+          <p class="text-success">練習：請利用<span class="text-danger">FloatingActionButton.extended</span> widget並使用Icon(Icons.thumb_up)製作下列輸出結果。</p>
+          <img src="imgs/material_widgets/floatingactionbutton_extend_exer.png"/><p></p>
+          <h4 class="text-danger">Widget- Drawer(側邊選單)</h4>
+          <p>
+            Drawer用於設定側邊選單，側邊選單內容顯示一般使用<span class="text-danger">ListView</span> widget，<span class="text-danger">DrawerHeader</span> widget可用於設定Drawer檔頭內容，Flutter預設會在AppBar顯示選單開啟/關閉按鈕。
+          </p>
+          <pre><code>
+Drawer(
+  {Key? key,
+    Color? backgroundColor,
+    double? elevation,
+    ShapeBorder? shape,
+    double? width,
+    Widget? child,
+    String? semanticLabel}
+)
+DrawerHeader(
+  {Key? key,
+  Decoration? decoration,
+  EdgeInsetsGeometry? margin = const EdgeInsets.only(bottom: 8.0),
+  EdgeInsetsGeometry padding = const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+  Duration duration = const Duration(milliseconds: 250),
+  Curve curve = Curves.fastOutSlowIn,
+  required Widget? child}
+)   
+          </code></pre>
+          <img src="imgs/material_widgets/drawer_1.png"/>
+            <img src="imgs/material_widgets/drawer_2.png"/>
+             <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('Drawer'),
+      ),
+      body: const Center(
+        child: Text('Drawer'),
+      ),
+    <span class="text-danger">drawer:
+        const Drawer(
+          child: Text('側邊選單項目')
+        ),</span>
+    );
+  }
+}   
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">backgroundColor</span>：用於設定側邊選單背景顏色。
+            </li>
+            <p class="text-success">
+              練習：請練習更新側邊選單背景顏色。
+            </p>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">child</span>：用於設定側邊內容，最常使用<span class="text-danger">ListView</span> widget搭配<span class="text-danger">DrawerHeader</span> widget。
+            </li>
+            <img src="imgs/material_widgets/drawer_3.png"/>
+             <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('Drawer'),
+      ),
+      body: const Center(
+        child: Text('Drawer'),
+      ),
+      <span class="text-danger">drawer: Drawer(
+          child: ListView(children: const [
+        DrawerHeader(child: Text('側邊選單抬頭')),
+        ListTile(
+          title: Text('側邊選項'),
+        )
+      ]))</span>,
+    );
+  }
+}   
+          </code></pre>
+          </ul>
+
+          <h4 class="text-danger">Widget- BottomNavigationBar(底部導覽列)</h4>
+          <p>
+            BottomNavigationBar widget常用於Scaffold widget設定底部導覽列，底部導覽列<span class="text-danger">最少要包含2個項目</span>，項目內容會使用<span class="text-danger">ButtonNavigationBarItem</span> widget，<span class="text-danger">ButtonNavigationBarItem</span> widget中<span class="text-danger">icon、label</span>屬性不可為空值。
+          </p>
+          <pre><code>
+BottomNavigationBar(
+  {Key? key,
+    required List<BottomNavigationBarItem> items,
+    ValueChanged<int>? onTap,
+    int currentIndex = 0,
+    double? elevation,
+    BottomNavigationBarType? type,
+    Color? fixedColor,
+    Color? backgroundColor,
+    double iconSize = 24.0,
+    Color? selectedItemColor,
+    Color? unselectedItemColor,
+    IconThemeData? selectedIconTheme,
+    IconThemeData? unselectedIconTheme,
+    double selectedFontSize = 14.0,
+    double unselectedFontSize = 12.0,
+    TextStyle? selectedLabelStyle,
+    TextStyle? unselectedLabelStyle,
+    bool? showSelectedLabels,
+    bool? showUnselectedLabels,
+    MouseCursor? mouseCursor,
+    bool? enableFeedback,
+    BottomNavigationBarLandscapeLayout? landscapeLayout}
+)
+BottomNavigationBarItem(
+  {required Widget icon,
+  String? label,
+  Widget? activeIcon,
+  Color? backgroundColor,
+  String? tooltip}
+)   
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">items</span>：為必要(required)屬性，用於設定底部導覽列項目。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">onTap</span>：為一代入整數值函數，用於代入使用者點選項目索引值，並執行設計的動作。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">currentIndex</span>：用於設定正在作用的項目索引值，當使用者點選新項目時，可在<span class="text-danger">onTap</span>屬性透過狀態更新<span class="text-danger">setState((){});</span>更新正在作用項目狀態。
+            </li>
+            <img src="imgs/material_widgets/bottomnavigationbar.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('FloatingActionButton'),
+      ),
+      body: const Center(
+        child: Text('FloatingActionButton onPressed:null'),
+      ),
+      <span class="text-danger">bottomNavigationBar: BottomNavigationBar(
+        items: const &lt;BottomNavigationBarItem&gt;[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '首頁',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: '商業',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: '學校',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.amber[800],
+        onTap: (int i) {},
+      )</span>,
+    );
+  }
+}
+            </code></pre> 
+          </ul>
+
+          <h4 class="text-danger">Widgets- Column(欄)、Row(列)</h4>
+          <p>
+            Column(欄)、Row(列)widget為版面widgets，用於呈現縱向或橫向內容，欄與列預設大小為父widget的大小，如果內容超過父widget的大小，會造成如下圖溢位情況，溢位處理會在後續單元說明。
+          </p>
+          <img src="imgs/material_widgets/row_overflow.png"/><p></p>
+          <pre><code>
+Column(
+  {Key key, 
+  MainAxisAlignment mainAxisAlignment: MainAxisAlignment.start,
+  MainAxisSize mainAxisSize: MainAxisSize.max,
+  CrossAxisAlignment crossAxisAlignment: CrossAxisAlignment.center,
+  TextDirection textDirection,
+  VerticalDirection verticalDirection: VerticalDirection.down,
+  TextBaseline textBaseline,
+  List children: const [] }
+)
+
+Row(
+  {Key key,
+  MainAxisAlignment mainAxisAlignment: MainAxisAlignment.start,
+  MainAxisSize mainAxisSize: MainAxisSize.max,
+  CrossAxisAlignment crossAxisAlignment: CrossAxisAlignment.center,
+  TextDirection textDirection,
+  VerticalDirection verticalDirection: VerticalDirection.down,
+  TextBaseline textBaseline,
+  List children: const [] }
+  )     
+          </code></pre>
+          <ul>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">mainAxisAlignment</span>：設定放置區域主要坐標軸對齊方式(列為橫，欄為直)，使用MainAxisAlignment列舉類別。包含center(置中)、end(列靠右、欄靠下)、spaceAround(項目中間先平均空間，剩下再平均)、spaceBetween(項目中間平均空間)、spaceEvenly(全部平均空間)與start(列靠左、欄靠上)，預設為start。程式片段僅顯示MainAxisAlignment.start設定。
+            </li>
+            <img src="imgs/material_widgets/row_mainaxisalignment_start.png"/>
+            <img src="imgs/material_widgets/row_mainaxisalignment_center.png"/><p></p>
+            <img src="imgs/material_widgets/row_mainaxisalignment_end.png"/>
+            <img src="imgs/material_widgets/row_mainaxisalignment_spacearound.png"/><p></p>
+            <img src="imgs/material_widgets/row_mainaxisalignment_spacebetween.png"/>
+            <img src="imgs/material_widgets/row_mainaxisalignment_spaceevenly.png"/>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('Row-MainAxisAlignment.start'),
+      ),
+      body: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [Text('How'), Text('are'), Text('you?')]),
+    );
+  }
+}
+            </code></pre> 
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">mainAxisSize</span>：設定放置區域主要坐標軸方向的大小，Column為縱向，Row為橫向，MainAxisSize列舉類別。包含max(最大)與min(最小)，預設為max(最大)。
+            </li>
+            <p class="text-success">
+              練習：請設定Row widget主要坐標軸方向的大小為min，搭配<span class="text-danger">mainAxisAlignment</span>，解釋為何結果與前項結果不同。
+            </p>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">crossAxisAlignment</span>：設定Column或Row次要坐標軸方向對齊方式(Row為縱向直，Column為橫向)，使用CrossAxisAlignment列舉類別。包含baseline(基線)、center(置中)、end(列靠下、欄靠右)。<span class="text-danger">思考下列程式結果並加修改</span>。
+            </li>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('Row-MainAxisAlignment.start'),
+      ),
+      body: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [Text('How'), Text('are'), Text('you?')]),
+    );
+  }
+}
+            </code></pre>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">textDirection</span>：設定文字方向，使用TextDirection列舉類別。包含TextDirection.ltr(左到右)與TextDirection.rtl(右到左)，預設為ltr。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">verticalDirection</span>：設定垂直的擺放方向(欄)，使用VerticalDirection列舉類別。包含VerticalDirection.down(由上往下擺放)與VerticalDirection.up(由下往上擺放)。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">textBaseline</span>：設定文字對齊基礎線(baseline)，使用TextBaseline列舉類別。包含TextBaseline.alphabetic(用於設定文字)與TextBaseline.ideographic(用於設定示意圖)。
+            </li>
+            
+          </ul>
+          <h4 class="text-danger">Widget- Center(置中)</h4>
+          <p>
+            Center widget相對於父widget大小將內容置中，Center widget置中取決於父widget是否為限制大小，會於後續單元說明。
+          </p>
+          <pre><code>
+Center(
+{Key? key,
+double? widthFactor,
+double? heightFactor,
+Widget? child}
+)  
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">child</span>：欲置中的內容。
+            </li>
+            <pre><code>
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        title: const Text('Center'),
+      ),
+      body: const <span class="text-danger">Center(
+        child: Text('Center'),
+      )</span>,
+    );
+  }
+}
+            </code></pre> 
+          </ul>
+          <h4 class="text-danger">基本Widgets- Text(文字)</h4>
+          <p>
+            Text widget用於顯示文字。Text widgets包含Text與Text.rich widgets，Text widget所有的文字套用相同文字樣式，而Text.rich widget可對部分文字設定不同樣式。請注意設定文字可包含特殊符號如<span class="text-danger">\n(強迫跳行)、\t(跳格)</span>等。
+          </p>
+          <pre><code>
+Text(String data,
+  { Key key,
+    TextStyle style,
+    TextAlign textAlign,
+    TextDirection textDirection,
+    Locale locale,
+    bool softWrap,
+    TextOverflow overflow,
+    double textScaleFactor,
+    int maxLines, 
+    String semanticsLabel })   
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">String data</span>：欲顯示的文字，置於單括號或雙括內。
+            </li>
+            <li>
+              <span class="text-danger">textAlign</span>：使用TextAlign列舉類別包含center(置中)、end(文字方向左到右則靠右，文字方向又到左則靠左)、justify(分散對其)、left(靠左)、right(靠右)、start((文字方向左到右則靠左，文字方向又到左則靠右)。
+            </li>
+            <li>
+              <span class="text-danger">textDirection</span>：利用TextDirection列舉類別，包含ltr(文字左到右)與rtl(文字右到左)。
+            </li>
+            <li>
+              <span class="text-danger">locale</span>：在地化設定，用於設定語言及國家。
+            </li>
+            <li>
+              <span class="text-danger">softWrap</span>：布林值用於設定是否自動跳行。
+            </li>
+            <li>
+              <span class="text-danger">style</span>：利用TextStyle類別來設定文字樣式包含color(顏色)、fontSize(字體大小)、fontWeight(字體粗細)、fontStyle(字體樣式如斜體)、letterSpaceing(字母間距)、wordSpacing(字間距)、textBaseline(文字對齊基準線)、height(行高)、locale(設定本地化語言)、foreground(前景樣式)、background(背景樣式)、decoration(設定底線或刪除線等裝飾)、decorationColor(設定裝飾線顏色)、decorationStyle(設定裝飾線樣式)、debugLabel(除錯狀態樣式說明文字)、fontFamily(字型)與package(套件名稱)。
+            </li>
+            <pre><code>
+  TextStyle({bool inherit: true,
+    Color color,
+    double fontSize,
+    FontWeight fontWeight,
+    FontStyle fontStyle,
+    double letterSpacing,
+    double wordSpacing,
+    TextBaseline textBaseline,
+    double height,
+    Locale locale,
+    Paint foreground,
+    Paint background,
+    TextDecoration decoration,
+    Color decorationColor,
+    TextDecorationStyle decorationStyle,
+    String debugLabel,
+    String fontFamily,
+    String package })
+            </code></pre>
+            <ul>
+              <li>
+                <span class="text-danger">color</span>：用於設定顏色，使用Colors或Color類別。Colors藉由選擇顏色並套用顏色樣本值來設定顏色強度，顏色強度值在0到900之間，例如Colors.green代表預設強度為500的綠色(Colors.green[500])。Color類別則是代入透明度及紅綠藍的16進位值如Color(0xAARRGGBB)，其中AA,RR,GG,BB為16進位數字從00到ff，分別代表透明度與紅綠藍的值(例如Color(0xffff0000)為紅色完全不透明)。使用者也可使用Color.fromARGB(AA,RR,GG,BB)代入透明度與紅綠藍的值，代入值可以是16進位或10進位值。Color.fromRGBO(RR,GG,BB,O)，其中O為透明度，值從0.0到1.0，分別代表完全透明到完全不透明。
+                <p class="text-success">練習：請使用Colors與Color類別練習不同顏色與透明度設定。</p>
+              </li>
+              <li>
+                <span class="text-danger">fontWeight</span>：FontWeight類別用於設定字體粗細，可用normal、bold或w100到w900等常數來設定字體粗細。
+              </li>
+              <li>
+                <span class="text-danger">fontStyle</span>：FontStyle類別，使用normal或italic常數設定正常字體或斜體。
+              </li>
+              <li>
+                <span class="text-danger">textBaseline</span>：TextBaseline類別，用於設定底線對齊，包含alphabetic(文字)與ideographic(表意圖示)兩個常數值。
+              </li>
+              <li>
+                <span class="text-danger">decoration</span>：TextDecoration類別，用於設定lineThrough(刪除線)、overline(上標線)與underline(底線)。
+              </li>
+              <li>
+                <span class="text-danger">decorationStyle</span>：TextDecorationStyle類別，用於設定decoration樣式包含常數dashed(虛線)、dotted(點線)、double(雙線)、solid(實線)與wavy(波浪線)。
+              </li>
+            </ul>
+          </ul>
+          <p>
+            當設計者希望將不同的樣式套用於一段文字，則需使用Text.rich widget，Text.rich widget使用TextSpan widget來包含多段不同樣式的文字，TextSpan widget又可包含多個TextSpan widgets，而每個TextSpan均可設定樣式。
+          </p>
+          <pre><code>
+Text.rich(TextSpan textSpan,
+{ Key key,
+  TextStyle style,
+  TextAlign textAlign,
+  TextDirection textDirection,
+  Locale locale,
+  bool softWrap,
+  TextOverflow overflow,
+  double textScaleFactor,
+  int maxLines, 
+  String semanticsLabel })
+  
+TextSpan({TextStyle style,
+  String text,
+  List children,
+  GestureRecognizer recognizer })
+          </code></pre>
+
+
+        </div>
+
+
+
+
+
+        <div class="p-3">
+          <h3 class="text-danger">基本Widgets- Scaffold(鷹架)</h3>
+          <p>
+            Scaffold Widget為Android material design最常用頁面widget並涵蓋不同版面設計如appBar、BottomappBar、Drawer或BottomSheet等widgets版面，Scafold widget讓設計者能快速地進行頁面設計。Scaffold widget屬性如下，置於大括符中屬性並不是都必須設定，接下來我們將對基礎屬性進行說明。
+          </p>
+          <pre><code>
+Scaffold({Key key,
+  PreferredSizeWidget appBar, 
+  Widget body,
+  Widget floatingActionButton,
+  FloatingActionButtonLocation floatingActionButtonLocation,
+  FloatingActionButtonAnimator floatingActionButtonAnimator,
+  List persistentFooterButtons,
+  Widget drawer,
+  Widget endDrawer,
+  Widget bottomNavigationBar,
+  Widget bottomSheet,
+  Color backgroundColor,
+  bool resizeToAvoidBottomPadding: true,
+  bool primary: true })     
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">body</span>：用於設定Scaffold widget顯示內容位置，Scaffold widget先以body屬性介紹其他widgets，之後再詳細敘述其他屬性。
+            </li>
+            <pre><code>
+Scaffold(
+  body: Text('您好嗎'),
+);
+            </code></pre>
+          </ul>       
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
