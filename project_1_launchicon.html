@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+        <ul class="nav flex-column text-white w-100">
+          <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+            <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="state_management.html">狀態管理</a></span>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+              <span class="mx-2">專案開發</span>
+              <i class="fas fa-angle-right"></i>
+            </div>
+            <div class="collapse" id="topic2">
+              <ul>
+                <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+                <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+              </ul>
+            </div>
+          </li>
+             
+        </ul>
+      </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">專案開發- Launch icons</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>Launch icons套件</li>
+          </ul>
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">Launch icons</h3>
+          <p>
+            專案系列將由專案Launch icon開始，主程式<span class="text-danger">main.dart</span>僅負責導向首頁，Launch icons用於設定App顯示圖示，本單元將使用<span class="text-danger">flutter_launcher_icons</span>套件設定Android與iOS App圖示。
+          </p>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">Launch icons套件- flutter_launcher_icons</h3>
+          <p>
+            <span class="text-danger">flutter_launcher_icons</span>透過<span class="text-danger">flutter_launcher_icons.yaml</span>檔案執行來設定原生iOS與Android的launch icons，設定步驟如下：
+          </p>
+          <ol>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">套件安裝</span>：請依照套件<a href="https://pub.dev/packages/flutter_launcher_icons" target="_blank">flutter_launcher_icons</a>連結位址中Installing選項，在專案設定檔<span class="text-danger">pubspec.yaml</span>中<span class="text-danger">depencies:</span>設定套件，並執行<span class="text-danger">pub get</span>下載套件。(VS code預設會執行pub get動作)
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">建立套件設定檔案</span>：請在專案的跟目錄建立名稱為<span class="text-danger">flutter_launcher_icons.yaml</span>檔案並將下列設定複製貼至設定檔。下列設定Android與iOS平台App圖示，<span class="text-danger">image_path</span>用於設定圖示在專案中路徑。
+            </li>
+            <pre><code>
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "圖示路徑"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+            </code></pre>
+            <li style="margin-bottom:0.5ex;">
+              <span class="text-danger">套件執行</span>：請開啟命令提示字元視窗並進入project目錄後執行下列命令來產生對應平台App圖示：
+              <ul>
+                <li>
+                  <span class="text-danger">flutter pub run flutter_launcher_icons:main</span>
+                </li>
+              </ul>
+            </li>            
+          </ol>
+          <p class="text-success">練習：請建立專案範本project並使用flutter_launcher_icons套件及Logo建立如下圖Android及iOS App圖示。</p>
+          <p>
+          <img src="imgs/toyo_project/android_launchicon.png"/>
+           <img src="imgs/toyo_project/ios_launchicon.png" class="align-top"/>
+          </p>
+        </div>
+        
+        
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="state_management.html">狀態管理</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+            <span class="mx-2">專案開發</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic2">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+            </ul>
+          </div>
+        </li>
+            
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">狀態管理</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>區域狀態設定- setState</li>
+            <li>全域狀態設定- Provider</li>
+          </ul>         
+        </p>
+        <p class="px-3">
+          <span class="text-danger">使用者介面(UI)=f(狀態)</span>為Flutter狀態與介面之間的關係，當狀態改變時，相關於這些狀態的使用者介面widgets會重新建立來反映最新的狀態，最簡單的狀態管理是透過區域狀態設定<span class="text-danger">setState((){})</span>的方法，<span class="text-danger">setState((){})</span>可以說是最簡單管理頁面狀態的方法，但是如果需要跨頁面狀態管理，就需要透過全域狀態設定<span class="text-danger">Provider</span>。<span class="text-danger">請注意：要使用狀態設定，widgets必須為具狀態(stateful)。</span>
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">區域狀態設定- setState</h3>
+          <p>
+            區域狀態設定-setState為最常用的單一頁面狀態設定方法，如下列專案程式，具狀態類別(<span class="text-danger">MyHomePage</span>)的狀態類別(<span class="text-danger">_MyHomePageState</span>)中<span class="text-danger">Text widget</span>內嵌顯示變數<span class="text-danger">_counter</span>，當使用者點選浮動動作按鈕(<span class="text-danger">FloatingActionButton widget</span>)時，程式執行<span class="text-danger">_incrementCounter</span>函數，<span class="text-danger">_incrementCounter</span>函數透過<span class="text-danger">setState((){})</span>增加變數<span class="text-danger">_counter</span>值並設定變數<span class="text-danger">_counter</span>狀態改變，讓專案呈現變數<span class="text-danger">_counter</span>最新狀態。
+          </p>
+          <pre><code>
+//匯入預設material模組
+import 'package:flutter/material.dart';
+
+//主程式
+void main() {
+  runApp(const MyApp());
+}
+//主程式傳回MaterialApp widget
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  //Widget build方法用於顯示Widget內容
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      //定義APP層級場景
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+//定義StatefulWidget
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+//定義StatefulWidget State類別
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    <span class="text-danger">setState(() {
+      _counter++;
+    });</span>
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: &lt;Widget&gt;[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            <span class="text-danger">Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            )</span>,
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+          </code></pre>
+          <p>
+            <span class="text-danger">setState((){})</span>注意事項：
+            <ul>
+              <li>
+                狀態影響widgets範圍儘量小：因為<span class="text-danger">setState((){})</span>會重建在widgets tree中包含自己及以下widgets，因此在設計時儘量不要包含不須影響對象。以下列程式片段為例：
+              </li>
+              <pre><code>
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Home&gt; createState() => _State();
+}
+
+class _State extends State&lt;Home&gt; {
+  bool _switch1 = false;
+  bool _switch2 = false;
+  bool _switch3 = false;
+
+  @override
+  Widget build(BuildContext context) {
+    print("Home built method");
+    return Scaffold(
+        body: Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              SwitchListTile(
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.red,
+                title: Text("Switch is ${_switch1 ? "開" : "關"}"),
+                value: _switch1,
+                onChanged: (_) {
+                  setState(() {
+                    _switch1 = !_switch1;
+                  });
+                }),
+              SwitchListTile(
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.red,
+                title: Text("Switch is ${_switch2 ? "開" : "關"}"),
+                value: _switch2,
+                onChanged: (_) {
+                  setState(() {
+                    _switch2 = !_switch2;
+                  });
+                }),
+              SwitchListTile(
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.red,
+                title: Text("Switch is ${_switch3 ? "開" : "關"}"),
+                value: _switch3,
+                onChanged: (_) {
+                  setState(() {
+                    _switch3 = !_switch3;
+                  });
+                }),
+            ])
+        )
+    );
+  }
+}             
+              </code></pre>
+              <p class="text-success">練習：請利用StatefuleWidget類別改寫上述程式片段中<span class="text-danger">SwitchListTiule</span>。</p>
+            </ul>
+          </p>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">全域狀態設定- Provider</h3>
+          <p>
+            
+          </p>
+          
+            
+        </div>
+        
+        
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

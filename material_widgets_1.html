@@ -32,6 +32,21 @@
         <li class="mx-2">
           <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
         </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="state_management.html">狀態管理</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+            <span class="mx-2">專案開發</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic2">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+            </ul>
+          </div>
+        </li>
             
       </ul>
     </div>
@@ -144,7 +159,7 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
           </code></pre>
           <h4 class="text-danger">Widget- MaterialApp</h4>
           <p>
-            Android App使用Material設計，Flutter Android App通常以MaterialApp widget為起始，MaterialApp widget定義如下：
+            Flutter App由widgets組成，Flutter widget使用宣告模式，widget定義類似下列MaterialApp widget，每個Widget有自己的屬性，使用者只需在widget屬性宣告對應類型，即可使用該widget。Android App使用Material設計，Flutter Android App通常以MaterialApp widget為起始，MaterialApp widget定義如下：
           </p>
           <pre><code>
 MaterialApp(
@@ -207,29 +222,21 @@ MaterialApp(
             <li style="margin-bottom:0.5ex;">
               <span class="text-danger">theme</span>：用於設定App階層場景，可設定整個App層級場景，例如<span class="text-danger">ThemeData.light()</span>(淺色模式)、<span class="text-danger">ThemeData.dark()</span>(深色模式)，程式片段<span class="text-danger">primarySwatch</span>用於設定版面主題色調。       
             </li>
-            <p class="text-success">練習：請改變預設程式主要色調、並嘗試設定單色與深色場景。</p>
+            <p class="text-success">練習：請改變專案範本主要色調為紅色，之後嘗試設定淺色與深色場景。</p>
             <li style="margin-bottom:0.5ex;">
               <span class="text-danger">darkTheme</span>：用於設定App暗色場景。       
-            </li>           
+            </li>
+            <p class="text-success">練習：請開啟模擬器深色主題並將專案範本darkTheme設定為<span class="text-danger">ThemeData.dark()</span>(深色模式)。</p>           
             <li style="margin-bottom:0.5ex;">
               <span class="text-danger">debugShowCheckedModeBanner</span>：用於設定顯示 Debug 橫幅，預設為true。
             </li>
             <p class="text-success">
-              練習：請取消顯示 Debug 橫幅。
+              練習：請取消專案範本顯示Debug橫幅。
             </p>            
-            <pre><code>
-MaterialApp(
-  title: 'Flutter Demo',
-  theme: ThemeData(
-    primarySwatch: Colors.blue,
-  ),
-  home: const MyHomePage(title: 'Flutter Demo Home Page'),
-);
-            </code></pre>
           </ul>
           <h4 class="text-danger">Widget- Scaffold(鷹架)</h4>
           <p>
-            Scaffold Widget為Material設計最常用版面規劃widget定義如下，Scaffold Widget除了頁面內容body屬性，包含AppBar、FloatingActionButton、Drawer、BottomNavigationBar等widgets，因此說明Scaffold widget之前將對前項widgets先進行說明。
+            Scaffold Widget為Material設計最常用版面規劃widget，Scaffold Widget除了頁面內容body屬性，包含AppBar、FloatingActionButton、Drawer、BottomNavigationBar等widgets，在說明Scaffold widget之前，將先對前項widgets進行說明。
           </p>
           <pre><code>
 Scaffold({
@@ -290,7 +297,7 @@ AppBar({Key key,
           </code></pre>
           <ul>
             <li style="margin-bottom:0.5ex;">
-              <span class="text-danger">leading</span>：用於設定標題列之前的widget，當屬性automaticallyImplyLeading為false而leading為null時，標題列會占用leading位置，當屬性automaticallyImplyLeading為true而leading為null時，系統會自動設定對應leading widget，如跳頁時會於下一頁leading位置自動加入回上頁圖示按鈕或在Scaffold設定drawer時自動加入menu圖示按鈕。下列程式片段設定leading屬性為空值(null)與非空值(Icon widget)。
+              <span class="text-danger">leading</span>：用於設定標題列之前的widget，當屬性automaticallyImplyLeading為false而leading為null時，標題列會占用leading位置，當屬性automaticallyImplyLeading為true而leading為null時，系統會自動設定對應leading widget，如跳頁時會於下一頁leading位置自動加入回上頁圖示按鈕或在Scaffold設定drawer時自動加入menu圖示按鈕。下列程式片段設定leading屬性為空值(null)與非空值(Icon widget)。Material圖示請參照<a href="https://fonts.google.com/icons?selected=Material+Icons" target="_blank">Material Icons</a>。
             </li>
             <img src="imgs/material_widgets/appbar_leadingnull.png"/>
             <pre><code>
@@ -357,6 +364,7 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
   }
 }
             </code></pre>
+            <p class="text-success">練習：請設定圖示按鈕並使用圖示<span class="text-danger">person</span>。</p>
             <li style="margin-bottom:0.5ex;">
               <span class="text-danger">bottom</span>：一般用於設定TabBar widget，下列程式範例說明在AppBar widget中bottom屬性設定兩個選項的TabBar widget。
             </li>
@@ -856,36 +864,14 @@ TextSpan({TextStyle style,
 
 
         <div class="p-3">
-          <h3 class="text-danger">基本Widgets- Scaffold(鷹架)</h3>
+          <h3 class="text-danger">Widget-重新審視</h3>
           <p>
-            Scaffold Widget為Android material design最常用頁面widget並涵蓋不同版面設計如appBar、BottomappBar、Drawer或BottomSheet等widgets版面，Scafold widget讓設計者能快速地進行頁面設計。Scaffold widget屬性如下，置於大括符中屬性並不是都必須設定，接下來我們將對基礎屬性進行說明。
+            Widgets可以透過宣告方式來進行設定，也可以透過<span class="text-danger">函數傳回widget或宣告具狀態/不具狀態類別完成</span>。
           </p>
-          <pre><code>
-Scaffold({Key key,
-  PreferredSizeWidget appBar, 
-  Widget body,
-  Widget floatingActionButton,
-  FloatingActionButtonLocation floatingActionButtonLocation,
-  FloatingActionButtonAnimator floatingActionButtonAnimator,
-  List persistentFooterButtons,
-  Widget drawer,
-  Widget endDrawer,
-  Widget bottomNavigationBar,
-  Widget bottomSheet,
-  Color backgroundColor,
-  bool resizeToAvoidBottomPadding: true,
-  bool primary: true })     
-          </code></pre>
-          <ul>
-            <li>
-              <span class="text-danger">body</span>：用於設定Scaffold widget顯示內容位置，Scaffold widget先以body屬性介紹其他widgets，之後再詳細敘述其他屬性。
-            </li>
-            <pre><code>
-Scaffold(
-  body: Text('您好嗎'),
-);
-            </code></pre>
-          </ul>       
+          <p class="text-success">練習：請用宣告方式在Scaffold頁面置中顯示一段文字。</p>
+          <p class="text-success">練習：請用函數傳回方式在Scaffold頁面置中顯示一段文字。</p>
+          <p class="text-success">練習：請用不具狀態類別方式在Scaffold頁面置中顯示一段文字。</p>
+          <p class="text-success">練習：請用具狀態類別方式在Scaffold頁面置中顯示一段文字。</p>
         </div>
 
 
@@ -893,8 +879,8 @@ Scaffold(
     </div>
 
     <!-- bootstrap js -->
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>  
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
     
     <!-- custom js -->
     <script>
