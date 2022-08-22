@@ -293,7 +293,7 @@ class MyStatelessClass extends StatelessWidget {
           <p class="text-danger">程式架構說明</p>
           <pre><code>
 class MyStatefulClass extends StatefulWidget {
-  MyStatefulClass({Key key, this.inarg1}) : super(key: key);
+  MyStatefulClass({Key? key, this.inarg1}) : super(key: key);
   final 資料類型 inarg1;
   @override
   _MyStatefulClassState createState() => new _MyStatefulClassState();
