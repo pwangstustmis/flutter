@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_2.html">其他常用widgets</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+            <span class="mx-2">專案開發</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic2">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_3_checklogin.html">是否登入</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_4_login.html">Login頁面</a></li>
+            </ul>
+          </div>
+        </li>
+            
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">其他常用widgets</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>            
+            <li>widgets-TextButton、OutlinedButton、IconButton、ElevatedButton、InkWell、SizedBox、Padding、Icon、Image、TextField、Container、Stack、SingleChildScrollView、ListView、GridView</li>
+            <li>整合練習</li>
+          </ul>
+        </p>
+        <p class="p-3">
+          其他常用widgets包含TextButton(文字按鈕)、OutlinedButton(空心按鈕)、IconButton(圖示按鈕)、ElevatedButton(昇起按鈕)、InkWell(墨水容器)、SizedBox(大小方塊)、Padding(內距)、Icon(圖示)、Image(圖片)、TextField(文字區域)、Container(容器)、Stack(堆疊)、SingleChildScrollView(單一內容捲動檢視)、ListView(清單檢視)、GridView(格式檢視)。
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- TextButton(文字按鈕)</h3>
+          <p>
+            TextButton widget用於設定文字按鈕，包含<span class="text-danger">TextButton、TextButton.icon</span>，屬性定義如下，屬性前<span class="text-danger">required</span>代表<span class="text-danger">必須屬性</span>，<span class="text-danger">onPredded</span>屬性設定為<span class="text-danger">null</span>則按鈕無作用，空按鈕設定為<span class="text-danger">(){}</span>。TextButton.icon widget為圖示文字按鈕，圖示設定請參考Icon widget說明。按鈕樣式可透過<span class="text-danger">style</span>屬性進行設定，例如：<span class="text-danger">ButtonStyle</span>中shape屬性可設定為<span class="text-danger">BeveledRectangleBorder、CircleBorder、ContinuousRectangleBorder、MaterialStateOutlinedBorder、RoundedRectangleBorder、StadiumBorder</span>。
+          </p>
+          <pre><code>
+TextButton(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ValueChanged&lt;bool&gt;? onHover,
+  ValueChanged&lt;bool&gt;? onFocusChange,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  Clip clipBehavior = Clip.none,
+  required Widget child}
+)
+
+TextButton.icon(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ValueChanged&lt;bool&gt;? onHover,
+  ValueChanged&lt;bool&gt;? onFocusChange,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool? autofocus,
+  Clip? clipBehavior,
+  required Widget icon,
+  required Widget label}
+)
+          </code></pre>
+          <p class="text-success">練習：請建立空文字與文字圖示按鈕。</p>    
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- OutlinedButton(空心按鈕)</h3>
+          <p>
+            OutlinedButton widget用於設定空心按鈕，包含<span class="text-danger">OutlinedButtonButton、OutlinedButtonButton.icon</span>。
+          </p>
+          <pre><code>
+OutlinedButton(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ValueChanged&lt;bool&gt;? onHover,
+  ValueChanged&lt;bool&gt;? onFocusChange,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  Clip clipBehavior = Clip.none,
+  required Widget child}
+)
+
+OutlinedButton.icon(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool? autofocus,
+  Clip? clipBehavior,
+  required Widget icon,
+  required Widget label}
+)
+          </code></pre>
+          <p class="text-success">練習：請建立空心與空心圖示按鈕。</p>    
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- IconButton(空心按鈕)</h3>
+          <p>
+            IconButton widget用於設定圖示按鈕。
+          </p>
+          <pre><code>
+IconButton(
+  {Key? key,
+  double? iconSize,
+  VisualDensity? visualDensity,
+  EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+  AlignmentGeometry alignment = Alignment.center,
+  double? splashRadius,
+  Color? color,
+  Color? focusColor,
+  Color? hoverColor,
+  Color? highlightColor,
+  Color? splashColor,
+  Color? disabledColor,
+  required VoidCallback? onPressed,
+  MouseCursor? mouseCursor,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  String? tooltip,
+  bool enableFeedback = true,
+  BoxConstraints? constraints,
+  required Widget icon}
+)
+          </code></pre>
+          <p class="text-success">練習：請建立首頁圖示按鈕。</p>    
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- ElevatedButton(昇起按鈕)</h3>
+          <p>
+            ElevatedButton widget用於設定昇起按鈕。
+          </p>
+          <pre><code>
+ElevatedButton(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ValueChanged&lt;bool&gt;? onHover,
+  ValueChanged&lt;bool&gt;? onFocusChange,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  Clip clipBehavior = Clip.none,
+  required Widget? child}
+)
+
+ElevatedButton.icon(
+  {Key? key,
+  required VoidCallback? onPressed,
+  VoidCallback? onLongPress,
+  ValueChanged&lt;bool&gt;? onHover,
+  ValueChanged&lt;bool&gt;? onFocusChange,
+  ButtonStyle? style,
+  FocusNode? focusNode,
+  bool? autofocus,
+  Clip? clipBehavior,
+  required Widget icon,
+  required Widget label}
+)
+//範例
+ElevatedButton(
+  onPressed:(){},
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromARGB(255, 7, 82, 211),
+    textStyle: const TextStyle(
+      fontSize: 30,
+    ),
+    shape: const StadiumBorder(),
+    fixedSize: const Size.fromWidth(200.0),
+    padding: const EdgeInsets.all(10.0)),
+  ),
+  child:const Text(
+    'Login',
+  ),
+)
+          </code></pre>
+          <p class="text-success">練習：請建立首頁昇起按鈕。</p>    
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- SingleChildScrollView(單一內容捲動頁面)</h3>
+          <p>
+            SingleChildScrollView widget用於包含單一內容捲動版面，預設捲動方向為縱向，使用者可設定<span class="text-danger">scrollDirection</span>屬性來改變捲動方向，<span class="text-danger">padding</span>屬性用於設定捲動版面的內距，透過物件<span class="text-danger">EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only、EdgeInsets.symmetric</span>分別設定<span class="text-danger">四邊內距、個別內距設定、限定某幾邊內距、對稱邊內距</span>。
+          </p>
+          <pre><code>
+SingleChildScrollView(
+  {Key? key,
+  Axis scrollDirection = Axis.vertical,
+  bool reverse = false,
+  EdgeInsetsGeometry? padding,
+  bool? primary,
+  ScrollPhysics? physics,
+  ScrollController? controller,
+  Widget? child,
+  DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+  Clip clipBehavior = Clip.hardEdge,
+  String? restorationId,
+  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual}
+  )     
+          </code></pre>        
+        </div>
+
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Icon(圖示)</h3>
+          <p>
+            用於顯示icon(圖示)，<span class="text-danger">IconData</span>可參考<a href="https://fonts.google.com/icons?selected=Material+Icons" target="_blank">Material icons</a>，並使用<span class="text-danger">Icons.圖示名稱</span>來設定圖示，。
+          </p>
+          <pre><code>
+Icon(IconData icon,
+{ Key key,
+  double size,
+  Color color,
+  String semanticLabel,
+  TextDirection textDirection })    
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">IconData icon</span>：設定顯示圖示，圖示請參照<a href="https://api.flutter.dev/flutter/material/Icons-class.html" target="_blank">官網</a>Icons類型，設定為 Icons.圖示名稱。
+            </li>
+            <li>
+              <span class="text-danger">size</span>：具小數點的數字，設定圖示大小。
+            </li>
+            <li>
+              <span class="text-danger">color</span>：用於設定顏色，可使用Colors或Color類別。
+            </li>
+            <li>
+              <span class="text-danger">textDirection</span>：設定圖示顯示方向，某些圖示資料類型中IconData.matchTextDirection為true，當設定textDirection時會改變圖示顯示方向(如返回箭頭arrow_back)。
+            </li>
+          </ul>
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Image(圖片)</h3>
+          <p>
+            Image widget用於設定顯示圖片，圖片來源包含本地端資源(asset)、檔案(file)、記憶體(memory)與網路(network)，本單元僅說明如何顯示本地端資源與網路圖片，檔案與記憶體圖片會在後續課程說明。<br/><span class="text-danger">所謂本地端資源是指將顯示圖片放置於APP project中，因此顯示本地端圖片資源，必先設定本地端圖片來源位置，首先在project的根目錄新增圖片擺放目錄(假設圖片將置於assets/images目錄中，則在project根目錄新增assets資料夾，之後在assets資料夾中再新增images資料夾來放置本地端圖片檔)，最後project需在pubspec.yaml中設定本地端資源位置如下圖。</span>Image.asset widget會根據設備的device pixel ratio(設備像素比例)自動選取對應比例圖片，使用者可在資源目錄(如assets/images)下新增2.0x或3.0x目錄，目錄名稱2.0x或3.0x代表設備的設備像素比例，例如Samsung s9設備像素比例為4，之後再將對應該解析度並具相同檔名的圖檔放在對應目錄中，則Image.asset widget會根據顯示設備的DPR來選擇對應的檔案。接下來我們將對基礎屬性進行說明。Image.network從網路讀取圖片，只需將圖片位址代入即可。
+          </p>
+          <img src="imgs/basicwidgets/pubspec_assets.png"/>
+          <pre><code>
+Image.asset(String name,
+  { Key key,
+    AssetBundle bundle,
+    String semanticLabel,
+    bool excludeFromSemantics: false,
+    double scale,
+    double width,
+    double height,
+    Color color,
+    BlendMode colorBlendMode,
+    BoxFit fit,
+    AlignmentGeometry alignment: Alignment.center,
+    ImageRepeat repeat: ImageRepeat.noRepeat,
+    Rect centerSlice,
+    bool matchTextDirection: false,
+    bool gaplessPlayback: false,
+    String package }
+)
+
+Image.network(
+  String src,
+  {Key? key,
+  double scale = 1.0,
+  ImageFrameBuilder? frameBuilder,
+  ImageLoadingBuilder? loadingBuilder,
+  ImageErrorWidgetBuilder? errorBuilder,
+  String? semanticLabel,
+  bool excludeFromSemantics = false,
+  double? width,
+  double? height,
+  Color? color,
+  Animation<double>? opacity,
+  BlendMode? colorBlendMode,
+  BoxFit? fit,
+  AlignmentGeometry alignment = Alignment.center,
+  ImageRepeat repeat = ImageRepeat.noRepeat,
+  Rect? centerSlice,
+  bool matchTextDirection = false,
+  bool gaplessPlayback = false,
+  FilterQuality filterQuality = FilterQuality.low,
+  bool isAntiAlias = false,
+  Map<String, String>? headers,
+  int? cacheWidth,
+  int? cacheHeight}
+) 
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">String name</span>：圖片名稱包含檔案位置與名稱，假設圖片檔名為sample.jpg並放在assets/images檔案夾，則輸入'assets/images/sample.jpg'。
+            </li>
+            <li>
+              <span class="text-danger">semanticLabel</span>：當載具輔助功能開啟時，用於設定圖片說明文字。
+            </li>
+            <li>
+              <span class="text-danger">excludeFromSemantics</span>：不設定輔助功能文字說明。
+            </li>
+            <li>
+              <span class="text-danger">scale</span>：用於設定圖片顯示比例。
+            </li>
+            <li>
+              <span class="text-danger">width、height</span>：設定圖片顯示寬與高。
+            </li>
+            <li>
+              <span class="text-danger">color</span>：用於設定與圖片進行混色的顏色，與屬性colorBlendMode搭配使用。
+            </li>
+            <li>
+              <span class="text-danger">colorBlendMode</span>：使用BlendMode列舉類別，藉由不同的混合模式，將圖片與顏色設定進行混合。
+            </li>
+            <li>
+              <span class="text-danger">fit</span>：設定圖片填入方式，使用BoxFit列舉類別。包含BoxFit.contain(可顯示整個圖片的最大狀態，不一定能完全填滿)、BoxFit.cover(包含整個顯示區域的最小大小、不一定顯示全部圖片)、BoxFit.fill(用全部圖形填滿區域，可能會造成變形)、BoxFit.fitHeight(優先填滿區域高度，圖片寬度有可能超過)、BoxFit.fitWidth(ht(優先填滿區域寬度，圖片高度有可能超過)、BoxFit.none(預設置中並切除超過區域部分)、BoxFit.scaleDown(預設置中並縮小到在區域中顯示整張圖)。
+              <p>練習：請使用網路圖片<span class="text-danger">Image.network</span>，設定圖片大小為 100 x 100，並搭配下一個 Container widget(大小設為 200 x 200)，練習不同填滿效果。</p>
+            </li>
+            <li>
+              <span class="text-danger">alignment</span>：用於設定內容對齊方式，使用AlignmentGeometry類別並利用兩種不同座標方式進行對齊：FractionalOffset與Alignment，FractionalOffset以容器的左上角為基準，整個容器水平(x)與垂直(y)大小為1，因此將位置設定於右上角為FractionalOffset(0.0,1.0)、將位置設定於容器中心點為FractionalOffset(0.5,0.5)。不同於FractionalOffset，Aligment以容器中心(0.0,0.0)為基準，整個容器上下左右大小均為1，因此將中心位置設定於右上角為Alignment(1.0,-1.0)，將中心位置設定於容器中心點為Alignment(0.0,0.0)，將中心位置設於左下角為Alignment(-1.0,1.0)。
+            </li>
+            <p>練習：請使用網路圖片<span class="text-danger">Image.network</span>，設定圖片大小為 100 x 100，並搭配下一個 Container widget(大小設為 200 x 200)，練習不同擺放設定FractionalOffset與Alignment的效果。</p>
+            <li>
+              <span class="text-danger">repeat</span>：設定圖片重複填入方式，使用ImageRepeat列舉類別。包含ImageRepeat.noRepeat(不重複)、ImageRepeat.repeat(重複X與Y軸)、ImageRepeat.repeatX(重複X軸)、ImageRepeat.repeatY(重複Y軸)。
+            </li>
+            <li>
+              <span class="text-danger">centerSlice</span>：設定部分圖片填入方式，使用Rect類別。Rect類別定義一個涵蓋原圖的方形區域，包含Rect.fromCircle(涵蓋定義圓形區域的最小方形)、Rect.fromLTRB(定義左上右下位置)、Rect.fromLTWH(定義左上寬高，取得左加寬與上加高位置)。
+            </li>
+            <li>
+              <span class="text-danger">matchTextDirection</span>：布林值，用以設定是否依照文字方向繪製圖片，預設值為false。
+            </li>
+            <li>
+              <span class="text-danger">aplessPlayback</span>：布林值，用以設定圖片切換時是否等到新圖形載入後再進行切換，預設值為false，代表切換圖片時元圖片位置顯示空白。
+            </li>
+            <li>
+              <span class="text-danger">String package</span>：如果圖片來自套件(package)，則須設定套件名稱。
+            </li>
+          </ul>
+          <p class="text-success">練習：請整合Center、SizedBox、SingleChildScrollView widgets在頁面中央橫向顯示可捲動的多個網路圖片。</p>
+          
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Container(容器)</h3>
+          <p>
+            Container widget用於設定一個區塊，widget屬性如屬性名稱:屬性值。例如設定Container寬為200，設定值為width:200.0，因為寬的資料類型為double，因此必須使用200.0。
+          </p>
+          <pre><code>
+Container({Key key,
+  AlignmentGeometry alignment,
+  EdgeInsetsGeometry padding,
+  Color color,
+  Decoration decoration,
+  Decoration foregroundDecoration,
+  double width,
+  double height,
+  BoxConstraints constraints,
+  EdgeInsetsGeometry margin,
+  Matrix4 transform,
+  Widget child })    
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">alignment</span>：用於設定內容對齊方式，使用AlignmentGeometry類別並利用兩種不同座標方式進行對齊：FractionalOffset與Alignment，FractionalOffset以容器的左上角為基準，整個容器水平(x)與垂直(y)大小為1，因此將位置設定於右上角為FractionalOffset(0.0,1.0)、將位置設定於容器中心點為FractionalOffset(0.5,0.5)。不同於FractionalOffset，Aligment以容器中心(0.0,0.0)為基準，整個容器上下左右大小均為1，因此將中心位置設定於右上角為Alignment(1.0,-1.0)，將中心位置設定於容器中心點為Alignment(0.0,0.0)，將中心位置設於左下角為Alignment(-1.0,1.0)。
+            </li>
+            <li>
+              <span class="text-danger">padding</span>：用於設定內容與容器之間的內距，使用EdgeInsetsGeometry類別使用EdgeInsets類別包含EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only與EdgeInsets.symmetric，代表4邊套用相同內距(EdgeInsets.all(20.0))、左上右下分別套用的內距(EdgeInsets.fromLTRB(10.0,20.0,10.0,20.0))、指定位置(left,top,right,bottom)套用內距(EdgeInsets.only(top:20.0,bottom:20.0))及對稱位置(bertical,horizontal)套用內距(EdgeInsets.symmetric(vertical:20.0))。
+              <p class="text-success">請在Container widget中顯示文字「南臺科技大學」，並練習不同內距設定。</p>
+            </li>
+            <li>
+              <span class="text-danger">color</span>：用於設定顏色，使用Colors或Color類別。Colors藉由選擇顏色並套用顏色樣本值來設定顏色強度，顏色強度值在0到900之間，例如Colors.green代表預設強度為500的綠色(Colors.green[500])。Color類別則是代入透明度及紅綠藍的16進位值如Color(0xAARRGGBB)，其中AA,RR,GG,BB為16進位數字從00到ff，分別代表透明度與紅綠藍的值(例如Color(0xffff0000)為紅色完全不透明)。使用者也可使用Color.fromARGB(AA,RR,GG,BB)代入透明度與紅綠藍的值，代入值可以是16進位或10進位值。Color.fromRGBO(RR,GG,BB,O)，其中O為透明度，值從0.0到1.0，分別代表完全透明到完全不透明。
+            </li>
+            <li>
+              <span class="text-danger">decoration</span>：用於設定Container 內容(child widget)之後的裝飾如背景圖片等，在說明Decoration(裝飾)類別時會加以說明，請注意：因為decoration用於繪製child之後內容，以BoxDecoration為例，如果Container有設定顏色屬性，則BoxDecoration不可以設定顏色屬性，否則會導致錯誤。
+              <pre><code>
+BoxDecoration({Color? color, 
+  DecorationImage? image, 
+  BoxBorder? border, 
+  BorderRadiusGeometry? borderRadius
+})
+              </code></pre>
+              <p class="text-success">練習：請設定 200 x 200 Container widget背景圖。
+              </p>
+            </li>
+            <li>
+              <span class="text-danger">foregroundDecoration</span>：用於設定Container內容(child widget)之前的裝飾，與decoration用於繪製child之後內容不同，foregroundDecoration設定child widget之前裝飾。
+            </li>
+            <li>
+              <span class="text-danger">width, height</span>：用於設定Container寬與高，如果沒有設定寬與高，則Container大小將與Container的父(parent)widget大小相同。
+            </li>
+            <li>
+              <span class="text-danger">constraints</span>：用於設定容器寬高的限制條件，使用BoxConstraints類別。由於容器預設毀使用父widget大小，使用者可以利用BoxConstraints設定minWidth、maxWidth、minHeight及maxHeight來限制容器大小。當設定minWidth與maxWidth或minHeight與maxHeight相同，大小為tight(緊緻)。
+            </li>
+            <li>
+              <span class="text-danger">margin</span>：用於設定容器邊界，與padding相同，使用EdgeInsetsGeometry類別，不同的是padding用於設定方框內部距離，而邊界設定方框外部距離。設定方式使用EdgeInsets類別包含EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only與EdgeInsets.symmetric，分別代表4邊套用邊界(EdgeInsets.all(20.0))、左上右下套用的邊界(EdgeInsets.fromLTRB(10.0,20.0,10.0,20.0))、指定位置(left,top,right,bottom)套用邊界(EdgeInsets.only(top:20.0,bottom:20.0))及對稱位置(bertical,horizontal)套用邊界(EdgeInsets.symmetric(vertical:20.0))。
+            </li>
+          </ul>
+          
+        </div>
+        
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Expanded(擴展)</h3>
+          <p>
+            Expanded(擴展)會用於Row(列)、Column(欄) widget，其目的是希望能彈性處理版面的空間。
+          </p>
+          <pre><code>
+Expanded({Key? key, 
+  int flex = 1, 
+  required Widget child})     
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">flex</span>：用於設定彈性空間比例，舉例來說：Column(欄)widget有三個內容widgets，個別置於Expanded(擴展)widget中並設定<span class="text-danger">flex</span>為1，則顯示會將整個頁面平均切成三等份。
+            </li>
+          </ul>
+          
+        </div>
+        
+        
+        
+        
+
+
+
+
+
+        
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

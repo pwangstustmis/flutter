@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+        <ul class="nav flex-column text-white w-100">
+          <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+            <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+          </li>
+          <li class="mx-2">
+            <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+              <span class="mx-2">專案開發</span>
+              <i class="fas fa-angle-right"></i>
+            </div>
+            <div class="collapse" id="topic2">
+              <ul>
+                <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+                <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+                <li class="menuitem"><a class="nav-link" href="project_3_checklogin.html">是否登入</a></li>
+                <li class="menuitem"><a class="nav-link" href="project_4_login.html">Login頁面</a></li>
+              </ul>
+            </div>
+          </li>
+             
+        </ul>
+      </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">是否登入</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>flutter_secure_storage套件</li>
+          </ul>
+          主程式將檢查使用者是否已經登入，登入資料儲存將使用<span class="text-danger">flutter_secure_storage</span>套件進行本地端加密資料存取。
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">flutter_secure_storage套件</h3>
+          <p>
+            <span class="text-danger">flutter_secure_storage</span>套件用於將資料加密後進行儲存，設定步驟如下：
+          </p>
+          <ol>
+            <li style="margin-bottom:0.5ex;">
+              <p>
+              <span class="text-danger">套件安裝</span>：請依照套件<a href="https://pub.dev/packages/flutter_secure_storage" target="_blank">flutter_secure_storage</a>連結位址中Installing選項，在專案設定檔<span class="text-danger">pubspec.yaml</span>中<span class="text-danger">depencies:</span>設定套件，並執行<span class="text-danger">pub get</span>下載套件。(VS code預設會執行pub get動作)
+            </p>
+            </li>
+            <li>
+              修改<span class="text-danger">專案根目錄-android-app-build.gradle</span>檔<span class="text-danger">defaultConfig</span>中<span class="text-danger">minSdkVersion flutter.minSdkVersion</span>為<span class="text-danger">minSdkVersion 18</span>。
+            </li>
+            <li style="margin-bottom:0.5ex;">
+              在程式匯入flutter_secure_storage模組：<span class="text-danger">import 'package:flutter_secure_storage/flutter_secure_storage.dart';</span>，。
+            </li>
+            <li>
+              建立flutter_secure_storage物件。
+              <pre><code>
+final 物件變數名稱 = FlutterSecureStorage();
+
+//範例
+final storage = FlutterSecureStorage();
+              </code></pre>
+            </li>
+            <li>
+              使用下列<span class="text-danger">write、read、readAll、delete、deleteAll</span>方法執行<span class="text-danger">寫入、讀取、讀取全部、刪除、刪除全部</span>動作。
+              <pre><code>
+final _storage = FlutterSecureStorage();
+
+//寫入傳回 Future&lt;void&gt;
+await _storage.write(
+  key: key,
+  value: value,
+  iOptions: _getIOSOptions(),
+  aOptions: _getAndroidOptions(),
+);
+
+//讀取傳回 Future&lt;String?&gt;
+await _storage.read(
+  key: key,
+  iOptions: _getIOSOptions(),
+  aOptions: _getAndroidOptions(),
+);
+
+//讀取全部傳回 Future&lt;Map&lt;String,String&gt;&gt;
+await _storage.readAll(
+  iOptions: _getIOSOptions(),
+  aOptions: _getAndroidOptions(),
+);
+//刪除傳回 Future&lt;void&gt;
+await _storage.delete(
+  key: key,
+  iOptions: _getIOSOptions(),
+  aOptions: _getAndroidOptions(),
+);
+//刪除傳回 Future&lt;void&gt;
+await _storage.deleteAll(
+  iOptions: _getIOSOptions(),
+  aOptions: _getAndroidOptions(),
+);
+//iOS選項設定
+IOSOptions _getIOSOptions() => IOSOptions(
+  accessibility: KeychainAccessibility.first_unlock,
+);
+//Android選項設定
+AndroidOptions _getAndroidOptions() => const AndroidOptions(
+  encryptedSharedPreferences: true,
+);
+              </code></pre>
+            </li>
+            <p class="text-success">練習：請利用Android Studio模擬器及<span class="text-danger">flutter_secure_storage</span>套件寫入測試鍵與值，儲存資料請利用模擬器檔案總管檢查資料夾<span class="text-danger">Data/Data/應用程式package/shared_prefs</span>。</p>       
+          </ol>    
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">登入檢查</h3>
+          <p>
+            請依照下列步驟修改範本專案：
+          </p>
+          <ol>
+            <li class="text-success">
+              請練習建立兩個不具狀態/具狀態頁面檔，檔名分別為loginpage.dart及homepage.dart，並修改範本專案main.dart，確定執行main.dart時，可成功開啟個別檔案，兩個頁面分別致中顯示文字Login與Home。
+            </li>
+            <li class="text-success">
+              請修改main.dart，當使用者未登出時，開啟App會開啟homepage.dart頁面，如果未登入或已登出，開啟App會開啟loginpage.dart頁面。
+            </li>
+          </ol>
+        </div>
+        
+        
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

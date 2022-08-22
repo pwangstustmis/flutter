@@ -33,7 +33,7 @@
           <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
         </li>
         <li class="mx-2">
-          <span class="menuitem"><a class="nav-link" href="state_management.html">狀態管理</a></span>
+          <span class="menuitem"><a class="nav-link" href="material_widgets_2.html">其他常用widgets</a></span>
         </li>
         <li class="nav-item">
           <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
@@ -44,6 +44,8 @@
             <ul>
               <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
               <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_3_checklogin.html">是否登入</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_4_login.html">Login頁面</a></li>
             </ul>
           </div>
         </li>
@@ -273,7 +275,7 @@ Flutter專案傳回MaterialApp widget，因此頁面Widgets樹的樹根為 <span
           <pre><code>
 //不具狀態widget設定格式
 class MyStatelessClass extends StatelessWidget {
-  const MyStatelessClass({Key key,this.inarg1}) : super(key: key);
+  const MyStatelessClass({Key? key,this.inarg1}) : super(key: key);
   final 資料類型 inarg1;
               
   @override
@@ -297,7 +299,7 @@ class MyStatefulClass extends StatefulWidget {
   _MyStatefulClassState createState() => new _MyStatefulClassState();
 }
             
-class _MyStatefulClasstState extends State<MyStatefulClass> {
+class _MyStatefulClasstState extends State&lt;MyStatefulClass&gt; {
   資料類型 attr1;
             
   @override
