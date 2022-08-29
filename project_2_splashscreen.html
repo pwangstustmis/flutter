@@ -163,25 +163,12 @@ flutter_native_splash:
               </ul>
             </li>
             <li style="margin-bottom:0.5ex;">
-              請在<span class="text-danger">main.dart</span>中，依照下列程式片段匯入flutter_native_splash模組，並設定splash screen在首頁起始後才移除。
+              splash screen會在首頁仔入後自動移除，如需在runApp前呼叫原生程式，請依照下列程式片段在runApp前執行<span class="text-danger">WidgetsFlutterBinding.ensureInitialized();</span>。
             </li>
             <pre><code>
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
-}
-
-//在起始頁面狀態類別設定如下目的移除splash screen
-@override
-void initState() {
-  super.initState();
-  removeSplash();
-}
-
-void removeSplash() async {
-  FlutterNativeSplash.remove();
 }
             </code></pre>
           </ol>

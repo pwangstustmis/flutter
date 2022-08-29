@@ -146,7 +146,7 @@ OutlinedButton.icon(
           <p class="text-success">練習：請建立空心與空心圖示按鈕。</p>    
         </div>
         <div class="p-3">
-          <h3 class="text-danger">常用Widgets- IconButton(空心按鈕)</h3>
+          <h3 class="text-danger">常用Widgets- IconButton(圖示按鈕)</h3>
           <p>
             IconButton widget用於設定圖示按鈕。
           </p>
@@ -228,56 +228,131 @@ ElevatedButton(
           <p class="text-success">練習：請建立首頁昇起按鈕。</p>    
         </div>
         <div class="p-3">
-          <h3 class="text-danger">常用Widgets- SingleChildScrollView(單一內容捲動頁面)</h3>
+          <h3 class="text-danger">常用Widgets- TextField(文字區域)</h3>
           <p>
-            SingleChildScrollView widget用於包含單一內容捲動版面，預設捲動方向為縱向，使用者可設定<span class="text-danger">scrollDirection</span>屬性來改變捲動方向，<span class="text-danger">padding</span>屬性用於設定捲動版面的內距，透過物件<span class="text-danger">EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only、EdgeInsets.symmetric</span>分別設定<span class="text-danger">四邊內距、個別內距設定、限定某幾邊內距、對稱邊內距</span>。
+            用於設定文字輸入區域，透過<span class="text-danger">TextEditingController</span>物件控制文字區域，例如<span class="text-danger">controller.text</span>可取得文字區域輸入值，<span class="text-danger">InputDecoration</span>用於設定輸入裝飾設定，<span class="text-danger">labelText、labelStyle、errorText、errorStyle</span>用於設定文字方塊預設顯示文字、錯誤文字及其對應樣式，<span class="text-danger">obscureText</span>用於設定使用<span class="text-danger">obscuringCharacter</span>顯示輸入文字。
           </p>
           <pre><code>
-SingleChildScrollView(
+TextField(
   {Key? key,
-  Axis scrollDirection = Axis.vertical,
-  bool reverse = false,
-  EdgeInsetsGeometry? padding,
-  bool? primary,
-  ScrollPhysics? physics,
-  ScrollController? controller,
-  Widget? child,
+  TextEditingController? controller,
+  FocusNode? focusNode,
+  InputDecoration? decoration = const InputDecoration(),
+  TextInputType? keyboardType,
+  TextInputAction? textInputAction,
+  TextCapitalization textCapitalization = TextCapitalization.none,
+  TextStyle? style,
+  StrutStyle? strutStyle,
+  TextAlign textAlign = TextAlign.start,
+  TextAlignVertical? textAlignVertical,
+  TextDirection? textDirection,
+  bool readOnly = false,
+  ToolbarOptions? toolbarOptions,
+  bool? showCursor,
+  bool autofocus = false,
+  String obscuringCharacter = '•',
+  bool obscureText = false,
+  bool autocorrect = true,
+  SmartDashesType? smartDashesType,
+  SmartQuotesType? smartQuotesType,
+  bool enableSuggestions = true,
+  int? maxLines = 1,
+  int? minLines,
+  bool expands = false,
+  int? maxLength,
+  MaxLengthEnforcement? maxLengthEnforcement,
+  ValueChanged&lt;String&gt;? onChanged,
+  VoidCallback? onEditingComplete,
+  ValueChanged&lt;String&gt;? onSubmitted,
+  AppPrivateCommandCallback? onAppPrivateCommand,
+  List&lt;TextInputFormatter&gt;? inputFormatters,
+  bool? enabled,
+  double cursorWidth = 2.0,
+  double? cursorHeight,
+  Radius? cursorRadius,
+  Color? cursorColor,
+  BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
+  BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
+  Brightness? keyboardAppearance,
+  EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
   DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+  bool? enableInteractiveSelection,
+  TextSelectionControls? selectionControls,
+  GestureTapCallback? onTap,
+  MouseCursor? mouseCursor,
+  InputCounterWidgetBuilder? buildCounter,
+  ScrollController? scrollController,
+  ScrollPhysics? scrollPhysics,
+  Iterable&lt;String&gt;? autofillHints = const &lt;String&gt;[],
   Clip clipBehavior = Clip.hardEdge,
   String? restorationId,
-  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual}
-  )     
-          </code></pre>        
+  bool scribbleEnabled = true,
+  bool enableIMEPersonalizedLearning = true}
+)
+
+InputDecoration(
+  {Widget? icon,
+  Color? iconColor,
+  Widget? label,
+  String? labelText,
+  TextStyle? labelStyle,
+  TextStyle? floatingLabelStyle,
+  String? helperText,
+  TextStyle? helperStyle,
+  int? helperMaxLines,
+  String? hintText,
+  TextStyle? hintStyle,
+  TextDirection? hintTextDirection,
+  int? hintMaxLines,
+  String? errorText,
+  TextStyle? errorStyle,
+  int? errorMaxLines,
+  FloatingLabelBehavior? floatingLabelBehavior,
+  FloatingLabelAlignment? floatingLabelAlignment,
+  bool isCollapsed = false,
+  bool? isDense,
+  EdgeInsetsGeometry? contentPadding,
+  Widget? prefixIcon,
+  BoxConstraints? prefixIconConstraints,
+  Widget? prefix,
+  String? prefixText,
+  TextStyle? prefixStyle,
+  Color? prefixIconColor,
+  Widget? suffixIcon,
+  Widget? suffix,
+  String? suffixText,
+  TextStyle? suffixStyle,
+  Color? suffixIconColor,
+  BoxConstraints? suffixIconConstraints,
+  Widget? counter,
+  String? counterText,
+  TextStyle? counterStyle,
+  bool? filled,
+  Color? fillColor,
+  Color? focusColor,
+  Color? hoverColor,
+  InputBorder? errorBorder,
+  InputBorder? focusedBorder,
+  InputBorder? focusedErrorBorder,
+  InputBorder? disabledBorder,
+  InputBorder? enabledBorder,
+  InputBorder? border,
+  bool enabled = true,
+  String? semanticCounterText,
+  bool? alignLabelWithHint,
+  BoxConstraints? constraints}
+)
+//範例
+late TextEditingController _controller;
+
+TextField(
+  controller:_controller,
+)
+          </code></pre>
+          <p class="text-success">練習：請利用TextField與ElevatedButton widgets，當點選按鈕時在按鈕下方顯示輸入文字。</p>
+          <p class="text-success">練習：請利用TextField、ElevatedButton、InputDecoration widgets，預設顯示文字區域輸入帳號，當使用者送出空值時，文字方塊邊框顯示紅色餅顯示不可為空白的錯誤訊息。</p>  
         </div>
 
-        <div class="p-3">
-          <h3 class="text-danger">常用Widgets- Icon(圖示)</h3>
-          <p>
-            用於顯示icon(圖示)，<span class="text-danger">IconData</span>可參考<a href="https://fonts.google.com/icons?selected=Material+Icons" target="_blank">Material icons</a>，並使用<span class="text-danger">Icons.圖示名稱</span>來設定圖示，。
-          </p>
-          <pre><code>
-Icon(IconData icon,
-{ Key key,
-  double size,
-  Color color,
-  String semanticLabel,
-  TextDirection textDirection })    
-          </code></pre>
-          <ul>
-            <li>
-              <span class="text-danger">IconData icon</span>：設定顯示圖示，圖示請參照<a href="https://api.flutter.dev/flutter/material/Icons-class.html" target="_blank">官網</a>Icons類型，設定為 Icons.圖示名稱。
-            </li>
-            <li>
-              <span class="text-danger">size</span>：具小數點的數字，設定圖示大小。
-            </li>
-            <li>
-              <span class="text-danger">color</span>：用於設定顏色，可使用Colors或Color類別。
-            </li>
-            <li>
-              <span class="text-danger">textDirection</span>：設定圖示顯示方向，某些圖示資料類型中IconData.matchTextDirection為true，當設定textDirection時會改變圖示顯示方向(如返回箭頭arrow_back)。
-            </li>
-          </ul>
-        </div>
         <div class="p-3">
           <h3 class="text-danger">常用Widgets- Image(圖片)</h3>
           <p>
@@ -381,6 +456,88 @@ Image.network(
           
         </div>
         <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Stack(堆疊)</h3>
+          <p>
+            <span class="text-danger">Stack</span> widget用於擺放擺放多個內容，每個內容會依照位置進行堆疊式(後面內容會放在前面內容之上)擺放，屬性<span class="text-danger">alignment</span>用於沒有設定位置內容，如需設定內容在屬性<span class="text-danger">Stack</span> widget的位置，可使用<span class="text-danger">Positioned</span> widget，<span class="text-danger">請注意：Positioned widget僅包含於Stack widget</span>。
+          </p>
+          <pre><code>
+Stack(
+{Key? key,
+AlignmentGeometry alignment = AlignmentDirectional.topStart,
+TextDirection? textDirection,
+StackFit fit = StackFit.loose,
+Clip clipBehavior = Clip.hardEdge,
+List&lt;Widget&gt; children = const &lt;Widget&gt;[]}
+)
+
+Positioned(
+  {Key? key,
+  double? left,
+  double? top,
+  double? right,
+  double? bottom,
+  double? width,
+  double? height,
+  required Widget child}
+)
+          </code></pre>
+          <p class="text-success">練習：請利用Stack widget將Image與Text widgets進行堆疊。</p>
+          <p class="text-success">練習：請利用Stack widget將Image與Text widgets進行堆疊，並設定文字距圖片底部60點。</p>  
+        </div>
+
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- SingleChildScrollView(單一內容捲動頁面)</h3>
+          <p>
+            SingleChildScrollView widget用於包含單一內容捲動版面，預設捲動方向為縱向，使用者可設定<span class="text-danger">scrollDirection</span>屬性來改變捲動方向，<span class="text-danger">padding</span>屬性用於設定捲動版面的內距，透過物件<span class="text-danger">EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only、EdgeInsets.symmetric</span>分別設定<span class="text-danger">四邊內距、個別內距設定、限定某幾邊內距、對稱邊內距</span>。
+          </p>
+          <pre><code>
+SingleChildScrollView(
+  {Key? key,
+  Axis scrollDirection = Axis.vertical,
+  bool reverse = false,
+  EdgeInsetsGeometry? padding,
+  bool? primary,
+  ScrollPhysics? physics,
+  ScrollController? controller,
+  Widget? child,
+  DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+  Clip clipBehavior = Clip.hardEdge,
+  String? restorationId,
+  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual}
+  )     
+          </code></pre>        
+        </div>
+
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- Icon(圖示)</h3>
+          <p>
+            用於顯示icon(圖示)，<span class="text-danger">IconData</span>可參考<a href="https://fonts.google.com/icons?selected=Material+Icons" target="_blank">Material icons</a>，並使用<span class="text-danger">Icons.圖示名稱</span>來設定圖示，。
+          </p>
+          <pre><code>
+Icon(IconData icon,
+{ Key key,
+  double size,
+  Color color,
+  String semanticLabel,
+  TextDirection textDirection })    
+          </code></pre>
+          <ul>
+            <li>
+              <span class="text-danger">IconData icon</span>：設定顯示圖示，圖示請參照<a href="https://api.flutter.dev/flutter/material/Icons-class.html" target="_blank">官網</a>Icons類型，設定為 Icons.圖示名稱。
+            </li>
+            <li>
+              <span class="text-danger">size</span>：具小數點的數字，設定圖示大小。
+            </li>
+            <li>
+              <span class="text-danger">color</span>：用於設定顏色，可使用Colors或Color類別。
+            </li>
+            <li>
+              <span class="text-danger">textDirection</span>：設定圖示顯示方向，某些圖示資料類型中IconData.matchTextDirection為true，當設定textDirection時會改變圖示顯示方向(如返回箭頭arrow_back)。
+            </li>
+          </ul>
+        </div>
+        
+        <div class="p-3">
           <h3 class="text-danger">常用Widgets- Container(容器)</h3>
           <p>
             Container widget用於設定一個區塊，widget屬性如屬性名稱:屬性值。例如設定Container寬為200，設定值為width:200.0，因為寬的資料類型為double，因此必須使用200.0。
@@ -435,6 +592,94 @@ BoxDecoration({Color? color,
               <span class="text-danger">margin</span>：用於設定容器邊界，與padding相同，使用EdgeInsetsGeometry類別，不同的是padding用於設定方框內部距離，而邊界設定方框外部距離。設定方式使用EdgeInsets類別包含EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only與EdgeInsets.symmetric，分別代表4邊套用邊界(EdgeInsets.all(20.0))、左上右下套用的邊界(EdgeInsets.fromLTRB(10.0,20.0,10.0,20.0))、指定位置(left,top,right,bottom)套用邊界(EdgeInsets.only(top:20.0,bottom:20.0))及對稱位置(bertical,horizontal)套用邊界(EdgeInsets.symmetric(vertical:20.0))。
             </li>
           </ul>
+          
+        </div>
+        <div class="p-3">
+          <h3 class="text-danger">常用Widgets- GridView(方格檢視)</h3>
+          <p>
+            <span class="text-danger">GridView</span>用於呈現方格顯示，常用包含<span class="text-danger">GridView.count、GridView.builder</span>。
+          </p>
+          <pre><code>
+//已知個數
+GridView.count(
+  {Key? key,
+  Axis scrollDirection = Axis.vertical,
+  bool reverse = false,
+  ScrollController? controller,
+  bool? primary,
+  ScrollPhysics? physics,
+  bool shrinkWrap = false,
+  EdgeInsetsGeometry? padding,
+  required int crossAxisCount,
+  double mainAxisSpacing = 0.0,
+  double crossAxisSpacing = 0.0,
+  double childAspectRatio = 1.0,
+  bool addAutomaticKeepAlives = true,
+  bool addRepaintBoundaries = true,
+  bool addSemanticIndexes = true,
+  double? cacheExtent,
+  List&lt;Widget&gt; children = const &lt;Widget&gt;[],
+  int? semanticChildCount,
+  DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+  String? restorationId,
+  Clip clipBehavior = Clip.hardEdge}
+)
+//範例
+GridView.count(
+  crossAxisCount: 3,
+  shrinkWrap: true,
+  padding: EdgeInsets.only(left: 24, right: 24),
+  children: [
+
+  ],
+)
+
+//個數未知
+GridView.builder(
+  {Key? key,
+  Axis scrollDirection = Axis.vertical,
+  bool reverse = false,
+  ScrollController? controller,
+  bool? primary,
+  ScrollPhysics? physics,
+  bool shrinkWrap = false,
+  EdgeInsetsGeometry? padding,
+  required SliverGridDelegate gridDelegate,
+  required IndexedWidgetBuilder itemBuilder,
+  ChildIndexGetter? findChildIndexCallback,
+  int? itemCount,
+  bool addAutomaticKeepAlives = true,
+  bool addRepaintBoundaries = true,
+  bool addSemanticIndexes = true,
+  double? cacheExtent,
+  int? semanticChildCount,
+  DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+  String? restorationId,
+  Clip clipBehavior = Clip.hardEdge}
+)
+//範例
+GridView.builder(
+  primary: false,
+  padding: const EdgeInsets.all(30),
+  itemCount: entryList.length,
+  itemBuilder: (BuildContext context, int index) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: Text(entryList[index]),
+      color: Colors.amber[colorList[index]],
+    );
+  },
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3,
+    crossAxisSpacing: 10,
+    mainAxisSpacing: 5,
+  ),
+)
+          </code></pre>
+          <p class="text-success">練習：請用<span class="text-danger">InkWell、GridView.count</span> widgets並搭配任意網路圖片，製作一列3格方格檢視。</p>
+          <p class="text-success">練習：請用<span class="text-danger">InkWell、GridView.builder</span> widgets並搭配一意網路圖片清單，製作一列3格方格檢視，僅顯示偶數位置圖片。</p>
           
         </div>
         
