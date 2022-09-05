@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flutter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">Flutter<br/>跨平台行動程式進階應用開發</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="project_structire.html">專案檔案架構</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="dart.html">Dart語言</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="first_project.html">第一個專案</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_1.html">專案範本widgets</a></span>
+        </li>        
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="material_widgets_2.html">其他常用widgets</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a class="nav-link" href="navigator_route.html">頁面路由</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic2" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic2">
+            <span class="mx-2">專案開發</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic2">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="project_1_launchicon.html">Launch icons</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_2_splashscreen.html">Splash screen</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_3_checklogin.html">是否登入</a></li>
+              <li class="menuitem"><a class="nav-link" href="project_4_login.html">Login頁面</a></li>
+            </ul>
+          </div>
+        </li>
+            
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">導覽與路由</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li>頁面導覽跳頁(Navigator)</li>
+          </ul>
+          <ul>
+            <li>頁面導覽跳頁(Navigator)並傳送與回傳資料</li>
+          </ul>
+          <ul>
+            <li>頁面路由導覽(route)</li>
+          </ul>
+          <ul>
+            <li>頁面路由跳頁(Navigator)並傳送與回傳資料</li>
+          </ul>
+        </p>
+        <div class="p-3">
+          <h3 class="text-danger">頁面導覽跳頁(Navigator)</h3>
+          <p>
+            使用<span class="text-danger">Navigator</span>類別中<span class="text-danger">Navigator.push()、Navigator.pop()</span>來執行跳頁與回上頁，執行步驟如下：
+            <ul>
+                <li>建立兩個頁面</li>
+                <li>利用<span class="text-danger">Navigator.push()、MaterialPageRoute</span>進行跳頁</li>
+                <li>利用<span class="text-danger">Navigator.pop()回上頁</span></li>
+                <pre><code>
+import 'package:flutter/material.dart';
+import 'package:navapp/page2.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("第一頁"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, 
+              MaterialPageRoute(builder: (context) => const Page2())
+          );
+        },
+        child: const Icon(Icons.arrow_right_outlined),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+                </code></pre>
+                <pre><code>
+import 'package:flutter/material.dart';
+
+class Page2 extends StatefulWidget {
+  const Page2({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Page2&gt; createState() => _Page2State();
+}
+
+class _Page2State extends State&lt;Page2&gt; {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("第二頁"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.arrow_left_outlined),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+                </code></pre>
+            </ul>
+          </p>          
+        </div>
+        <div class="p-3">
+            <h3 class="text-danger">頁面導覽跳頁(Navigator)並傳送與回傳資料</h3>
+            <p>
+              使用<span class="text-danger">Navigator</span>類別中<span class="text-danger">Navigator.push()、Navigator.pop()</span>來執行頁面導覽跳頁(Navigator)並傳送與回傳資料，執行步驟如下：
+              <ul>
+                  <li>建立兩個頁面，在第一頁透過參數傳遞宣告參數名稱及代入值，同時在第二頁宣告接收參數</li>
+                  <li>利用<span class="text-danger">Navigator.push()、MaterialPageRoute</span>進行跳頁，並將資料代入路由</li>
+                  <li>利用<span class="text-danger">Navigator.pop(context,傳回值)</span>將值回上頁，請注意：在第一頁必需使用 <span class="text-danger">async await</span>來等待使用者傳回值，同時使用<span class="text-danger">setstate</span>來設定傳回值狀態。</li>
+                  <pre><code>
+  import 'package:flutter/material.dart';
+  import 'package:navapp/page2.dart';
+  import 'dart:async';
+  
+  void main() {
+    runApp(const MyApp());
+  }
+  
+  class MyApp extends StatelessWidget {
+    const MyApp({Key? key}) : super(key: key);
+  
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
+      );
+    }
+  }
+  
+  class MyHomePage extends StatefulWidget {
+    const MyHomePage({Key? key}) : super(key: key);
+  
+    @override
+    State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+  }
+  
+  class _MyHomePageState extends State&lt;MyHomePage&gt; {
+    String retstr="";
+  
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("第一頁"),
+        ),
+        body:Center(
+            child:Text(retstr,style:TextStyle(fontSize: 40))
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async{
+            String rstr=await Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Page2(arg:"From Page 1"))
+            );
+            setState(() {
+              retstr=rstr;
+            });
+          },
+          child: const Icon(Icons.arrow_right_outlined),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      );
+    }
+  }
+                  </code></pre>
+                  <pre><code>
+  import 'package:flutter/material.dart';
+  
+  class Page2 extends StatefulWidget {
+    const Page2({Key? key,required this.arg}) : super(key: key);
+    final String arg;
+  
+    @override
+    State&lt;Page2&gt; createState() => _Page2State();
+  }
+  
+  class _Page2State extends State&lt;Page2&gt; {
+  
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("第二頁"),
+        ),
+        body:Center(
+          child:Text(widget.arg,style:TextStyle(fontSize: 40))
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.pop(context,"From Page 2");
+          },
+          child: const Icon(Icons.arrow_left_outlined),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      );
+    }
+  }
+                  </code></pre>
+              </ul>
+            </p>           
+          </div>
+          <div class="p-3">
+            <h3 class="text-danger">頁面路由導覽(route)</h3>
+            <p>
+              不同於上述方法使用<span class="text-danger">Navigator.push()</span>來進行跳頁，本節內容將使用路由名稱並藉由<span class="text-danger">Navigator.pushNamed()、Navigator.pop()</span>來執行頁面導覽跳頁(Navigator)，執行步驟如下：
+              <ul>
+                  <li>建立兩個頁面，在第一頁<span class="text-danger">MaterialApp widget</span>設定路由資訊<span class="text-danger">initialRoute，routes</span>，請注意：使用路由<span class="text-danger">initialRoute</span>，<span class="text-danger">MaterialApp widget</span>不可設定home屬性。</li>
+                  <li>利用<span class="text-danger">Navigator.pushNamed()</span>進行跳頁，並將資料代入路由</li>
+                  <li>利用<span class="text-danger">Navigator.pop(context)</span>回上頁。</li>
+                  <pre><code>
+import 'package:flutter/material.dart';
+import 'package:navapp/page2.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: "/",
+      routes: {
+        "/":(context)=>const MyHomePage(),
+        "/Page2":(context)=>const Page2()
+      },
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("第一頁"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async{
+          Navigator.pushNamed(context, "/Page2");
+        },
+        child: const Icon(Icons.arrow_right_outlined),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+                  </code></pre>
+                  <pre><code>
+import 'package:flutter/material.dart';
+
+class Page2 extends StatefulWidget {
+  const Page2({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Page2&gt; createState() => _Page2State();
+}
+
+class _Page2State extends State&lt;Page2&gt; {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("第二頁"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.arrow_left_outlined),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+                  </code></pre>
+              </ul>
+            </p>            
+          </div>
+          <div class="p-3">
+            <h3 class="text-danger">頁面路由跳頁(Navigator)並傳送與回傳資料</h3>
+            <p>
+              前一項頁面路由<span class="text-danger">routes</span>定義靜態路由，無法傳送資料，透過<span class="text-danger">MaterialApp</span> widget的<span class="text-danger">onGenerateRoute</span>動態取得路由資訊再進行跳頁，<span class="text-danger">onGenerateRoute</span>會傳回<span class="text-danger">RouteSetting</span>物件包含路由名稱(name)與代入參數arguments，利用<span class="text-danger">Navigator.pushNamed()</span>進行跳頁時代入參數。
+              <pre><code>
+import 'package:flutter/material.dart';
+import 'homepage.dart';
+import 'page2.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) =>const HomePage(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/page2') {
+          final args = settings.arguments as Map&lt;String, String&gt;;
+          return MaterialPageRoute(
+              builder: (context) => Page2(title: args['title']));
+        }
+      },
+    );
+  }
+}
+              </code></pre>
+            </p>           
+          </div>
+        
+          <div class="p-3">
+            <h3 class="text-danger">底部導覽列與頁面導覽</h3>
+            <p>
+              使用下列程式設定底部導覽列頁面切換
+            </p>
+            <pre><code>
+//主程式main.dart
+import 'package:flutter/material.dart';
+import 'homepage.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+//homepage.dart
+import 'package:flutter/material.dart';
+import 'page2.dart';
+import 'page3.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State&lt;HomePage&gt; createState() => _HomePageState();
+}
+
+class _HomePageState extends State&lt;HomePage&gt; {
+  int _currentIdx = 0;
+  List&lt;Widget&gt; pages = [Page2(), Page3()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: pages[_currentIdx],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIdx,
+          onTap: (int idx) {
+            setState(() {
+              _currentIdx = idx;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.assignment_outlined), label: 'Sign'),
+          ]),
+    );
+  }
+}
+
+//page2.dart
+import 'package:flutter/material.dart';
+import 'page3.dart';
+
+class Page2 extends StatefulWidget {
+  const Page2({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Page2&gt; createState() => _Page2State();
+}
+
+class _Page2State extends State&lt;Page2&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Page2'),
+        ),
+        body: Center(
+            child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Page3(),
+                ));
+          },
+          child: const Text('To Page3'),
+        )) // This trailing comma makes auto-formatting nicer for build methods.
+        );
+  }
+}
+
+//page3.dart
+import 'package:flutter/material.dart';
+
+class Page3 extends StatefulWidget {
+  const Page3({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Page3&gt; createState() => _Page3State();
+}
+
+class _Page3State extends State&lt;Page3&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Page3'),
+        ),
+        body: const Center(
+          child: Text('Page3'),
+        ) // This trailing comma makes auto-formatting nicer for build methods.
+        );
+  }
+}
+              </code></pre>
+              <p class="text-danger">問題：當Page2.dart導覽至Page3時，底部導覽列消失，因為導覽堆疊(Navigator Stack)只有一個，新的頁面會堆在先前頁面之上，未了避免這個問題，我們就必須對每個底部導覽選項建立一個導覽堆疊</p>
+          </div>
+          <div class="p-3">
+            <h3 class="text-danger">底部導覽列與導覽堆疊</h3>
+            <p>
+              在主頁面(homepag.dart)使用<span class="text-danger">GlobalKey&lt;NavigatorState&gt;()</span>產生全域導覽根狀態鍵值
+            </p>
+            <pre><code>
+//主程式homepage.dart
+import 'package:flutter/material.dart';
+import 'page2.dart';
+import 'page3.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State&lt;HomePage&gt; createState() => _HomePageState();
+}
+
+Navigator generateStack(GlobalKey&lt;NavigatorState&gt; _key, String _page) {
+  late Widget child;
+  if (_page == 'p2') {
+    child = Page2();
+  } else if (_page == 'p3') {
+    child = Page3();
+  }
+  return Navigator(
+      key: _key,
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (context) => child);
+      });
+}
+
+class _HomePageState extends State&lt;HomePage&gt; {
+  int _currentIdx = 0;
+  List&lt;GlobalKey&lt;NavigatorState&gt;&gt; keys = [
+    GlobalKey&lt;NavigatorState&gt;(),
+    GlobalKey&lt;NavigatorState&gt;()
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(index: _currentIdx, children: [
+        generateStack(keys[0], 'p2'),
+        generateStack(keys[1], 'p3'),
+      ]),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIdx,
+          onTap: (int idx) {
+            if (idx == _currentIdx) {
+              keys[idx].currentState!.popUntil((route) => route.isFirst);
+            }
+            setState(() {
+              _currentIdx = idx;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.assignment_outlined), label: 'Sign'),
+          ]),
+    );
+  }
+}
+              </code></pre>
+              <p class="text-danger">問題：當Page2.dart導覽至Page3時，底部導覽列消失，因為導覽堆疊(Navigator Stack)只有一個，新的頁面會堆在先前頁面之上，未了避免這個問題，我們就必須對每個底部導覽選項建立一個導覽堆疊</p>
+          </div>
+          <div class="p-3">
+            <h3 class="text-danger">底部導覽列、導覽堆疊與跳出視窗</h3>
+            <p>
+              在主頁面(homepag.dart)使用<span class="text-danger">GlobalKey&lt;ScaffoldState&gt;()</span>產生鷹架頁面全域狀態鍵值，並使用鷹架頁面全域狀態鍵值中<span class="text-danger">currentState?.openDrawer()、currentState?.closeDrawer();</span>來開啟或關閉跳出視窗，進行頁面導覽時可利用全域導覽根狀態鍵值中<span class="text-danger">currentState!
+                .push(MaterialPageRoute(builder: (context) => Page3()));</span>來進行跳頁。
+            </p>
+            <pre><code>
+//主程式homepage.dart
+import 'package:flutter/material.dart';
+import 'page2.dart';
+import 'page3.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State&lt;HomePage&gt; createState() => _HomePageState();
+}
+
+Navigator generateStack(GlobalKey&lt;NavigatorState&gt; _key, String _page) {
+  late Widget child;
+  if (_page == 'p2') {
+    child = Page2();
+  } else if (_page == 'p3') {
+    child = Page3();
+  }
+  return Navigator(
+      key: _key,
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (context) => child);
+      });
+}
+
+class _HomePageState extends State&lt;HomePage&gt; {
+  int _currentIdx = 0;
+  GlobalKey&lt;ScaffoldState&gt; scaffoldKey = GlobalKey&lt;ScaffoldState&gt;();
+  List&lt;GlobalKey&lt;NavigatorState&gt;&gt; keys = [
+    GlobalKey&lt;NavigatorState&gt;(),
+    GlobalKey&lt;NavigatorState&gt;()
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(),
+      body: IndexedStack(index: _currentIdx, children: [
+        generateStack(keys[0], 'p2'),
+        generateStack(keys[1], 'p3'),
+      ]),
+      drawer: Drawer(
+          child: ListView(children: [
+        DrawerHeader(
+          child: SizedBox(height: 50),
+        ),
+        ListTile(
+          title: Text('Page 3'),
+          onTap: () {
+            keys[_currentIdx]
+                .currentState!
+                .push(MaterialPageRoute(builder: (context) => Page3()));
+            scaffoldKey.currentState?.closeDrawer();
+          },
+        )
+      ])),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIdx,
+          onTap: (int idx) {
+            if (idx == _currentIdx) {
+              keys[idx].currentState!.popUntil((route) => route.isFirst);
+            }
+            setState(() {
+              _currentIdx = idx;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.assignment_outlined), label: 'Sign'),
+          ]),
+    );
+  }
+}
+              </code></pre>
+          </div>
+        
+
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
