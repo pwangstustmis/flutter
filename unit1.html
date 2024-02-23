@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>簡介與軟體安裝</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>簡介</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>Windows系統軟體安裝</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>漸進式網頁應用建立/測試/發布</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>行動專案建立/測試/發布</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+                <div>Mac系統軟體安裝</div>                                                              
+            </div>
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">簡介</div>
+                    <p>
+                        <a href="https://flutter.io/">Flutter</a>為一開發套件用於開發混合式行動應用程式(Hybrid APP)。所謂的混合式行動應用程式是讓設計者使用相同的程式開發不同平台應用(Android、iOS、Web APP、Mac OS與Windows)。本課程將利用Flutter來進行跨平台行動應用設計，教授如何開發漸進式網頁應用(Progressive Web Application)，並使用相同專案發布行動應用(Android、iOS)。
+                      </p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">Windows系統安裝</div>
+                    <p>軟體安裝步驟分為 <span class="text-danger">工具軟體Git、Flutter SDK、程式編輯軟體Visual Studio Code、Android Studio、Android Studio模擬器、Android版權確認與Flutter doctor</span>，所需作業系統為Windows 10(64位元)、硬碟需1.64GB以上硬碟空間。</p>
+          <ul>
+            <li>
+              安裝Git：請下載最新版本<a href="https://git-scm.com/">Git</a>，安裝過程請持續點選下一步，安裝完畢後，請至 <span class="text-danger">控制台-系統及安全-系統-進階系統設定-環境變數-使用者變數-Path</span> 中新增 Git\bin位置(預設會在 <span class="text-danger">C:\Program Files\Git\bin</span>)。安裝完畢後請開啟命令提示字元視窗並執行下列設定命令：
+              <p class="codeblock">
+        git config --global user.name "自己英文姓名"
+        git config --global user.email 自己的email帳號
+              </p>
+            </li>
+            <li>
+              安裝Flutter SDK：下載<a href="https://docs.flutter.dev/get-started/install/windows" target="_blank">Flutter SDK</a>，網頁點選 <span class="text-danger">Mobile - Install the Flutter SDK - Download and install</span> 下載Flutter SDK zip檔，下載後請解壓縮下載檔案，並將解壓縮後flutter檔案夾放置於使用者自定的檔案夾(如c:\fluttersdk)，請注意：檔案夾名稱不可為中文，名稱不可包含空白或特殊字元，同時勿將flutter檔案夾至於Program Files檔案夾中，因為Program Files檔案夾需要設定權限才能執行，之後將設定檔案夾中<span class="text-danger"> flutter\bin路徑 加入環境變數參數 Path中</span>。
+            </li>
+            <li>
+              程式編輯軟體Visual Studio Code：請下載並安裝<a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a>，安裝後，在延伸模組安裝Flutter模組，模組搜尋文字方塊輸入 chinese 可安裝繁體中文顯示介面。
+            </li>
+            <img src="imgs/unit1/vscode1.png">
+            <li>
+              安裝Android Studio：如果要建立行動專案，則需安裝Android Studio，請下載最新版本並安裝<a href="https://developer.android.com/studio" target="_blank">Windows 64-bit Android Studio</a>，安裝完畢後，請至SDK Manager中SDK Tools安裝Android SDK Command-line Tools、Google USB Driver與Intel x86 Emulator Accelerator如下圖，並不定期更新Android SDK。<p></p>
+            </li>
+            <img src="imgs/unit1/androidsdktools.png" width="90%">
+            <li>
+              安裝模擬器：模擬器只需設定一次，除非想要將project執行於不同的模擬器，才需設定多個模擬器。請使用Android Studio中AVD Manager來設定模擬器(選擇 Tools - Android - AVD Manager)，選擇Create Virtual Device並選擇安裝模擬器。<p></p>
+            </li>
+            <li>
+              Android版權確認與Flutter doctor：請開啟命令提示字元視窗並輸入
+              <p class="codeblock">
+      flutter doctor --android-licenses
+              </p>
+              Android版權確認請依照問題回答yes，之後在命令提示字元視窗輸入下方命令確認所有安裝都正確。
+              <p class="codeblock">
+      flutter doctor
+              </p>             
+            </li>          
+          </ul>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">漸進式網頁應用建立/測試/發布</div>
+                    <p>
+                        漸進式網頁應用(Progressive Web Application, PWA)利用網頁建構的應用程式，可提供與行動應用程式相似的體驗，並提供行動裝置類似的功能如離線運作及傳送通知。Flutter漸進式網頁應用專案與行動專案建立方式相同。建立專案方式如下：
+                      </p>
+                      <ul>
+                        <li>
+                          開啟命令提示字元視窗並進入專案放置目錄，下列命令所有專案放置目錄為C:\projects，命令 cd 執行切換目錄動作，<span class="texthl">練習：請先使用檔案總管在 C磁碟機建立 projects目錄，並使用下列命令進入 C:\projects</span>
+                          <p class="codeblock">
+              cd c:\projects
+                          </p>
+                        </li>
+                        <li>
+                          輸入下列命令建立漸進式網頁應用專案，org設定用於設定行動應用專案封裝名稱(package name)，<span class="texthl">練習：請建立名稱為 pwaproject 漸進式網頁應用專案</span>
+                          <p class="codeblock">
+              flutter create --org tw.edu.stust.mis 專案名稱
+                          </p>
+                        </li>
+                      </ul>
+                      <p>
+                        Flutter漸進式網頁應用專案本地端測試方式如下：
+                      </p>
+                      <ul>
+                        <li>
+                          開啟 VS Code，選擇<span class="texthl">檔案-開啟資料夾</span>，並選擇專案資料夾，之後選擇<span class="texthl">終端機-新增終端機</span>，在終端機視窗輸入下列命令，將專案執行於本地端 Chrome 瀏覽器
+                          <p class="codeblock">
+              flutter run -d chrome
+                          </p>
+                        </li>
+                      </ul>
+                      <p>
+                        佈署漸進式網頁應用操作包含<span class="texthl">GitHub網站註冊、建立GitHub儲存庫、設定GitHub Pages、專案發布與上載發佈檔案
+                      </p>
+                      <ul>
+                        <li>
+                          請進入<span class="texthl">Github(https://github.com)</span>網站，註冊並選擇GitHub Free服務。
+                        </li>
+                        <li>
+                          登入後在 Dashboard 選擇 New 建立新儲存庫(repository)，輸入新儲存庫名稱(repository name)，勾選 Add a README file後，點選建立儲存庫(create repository)。<span class="texthl">練習：請建立新儲存庫 pwaproject</span>
+                          <p>
+                            <img src="imgs/unit1/github1.png" width="400px"/>
+                          </p>
+                        </li>
+                        <li>
+                          在儲存庫中點選設定(Settings)-頁面(Pages)，在 Build and Deployment 中Branch選擇 main後，點選旁邊Save按鈕(如下圖)
+                          <p>
+                            <img src="imgs/unit1/github2.png" width="500px"/>
+                          </p>
+                        </li>
+                        <li>
+                          VS code終端機視窗輸入下列命令進行發布漸進式網頁專案，發布操作會在專案目錄產生 build-web 資料夾，<span class="texthl">專案發布後，請使用 VS Code開啟 build-web 資料夾index.html檔，並將檔案中 &lt;base href="/"&gt;刪除後儲存</span>
+                          <p class="codeblock">
+              flutter build web
+                          </p>
+                        </li>
+                        <li>
+                          GitHub點選左上方儲存庫名稱跳至儲存庫位置後，點選 Go To file按鈕，在Add file下拉式選單選擇 Upload files，再將要上載檔案拉至GitHub頁面即可上載檔案，檔案上載完畢請點選下方<span class="texthl">commit changes</span>，等待1至2分鐘，輸入下列命令即可顯示專案，要安裝專案請點選下圖紅色方框按鈕
+                          <p class="codeblock">
+              https://帳號暱稱.github.io/儲存庫名稱
+                          </p>
+                          <img src="imgs/unit1/github4.png" width="500px"/>
+                        </li>
+                      </ul>                         
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">行動專案建立/測試/發布</div>
+                    <p>Flutter行動專案建立與建立漸進式網頁應用相同，要將專案發布於Android手機，請先開啟Android手機<span class="texthl">開發人員選項</span>，並於選項中開啟<span class="texthl">USB偵錯</span>後，將手機接上電腦後，並在專案發布設備清單中選擇該Android手機並按下執行即可，<span class="texthl">請注意：在Android Studio SDK Manager一定要安裝Google USB Driver，否則無法發布於手機</span></p>                       
+                </div>
+                <div class="slide" id="slide-5">
+                    <div class="unittitle">Mac系統軟體安裝</div>
+                    <p>Mac系統軟體安裝分為Flutter SDK安裝、安裝Xcode、模擬器安裝、Android版權確認與Flutter doctor，作業系統為Mac OS、硬碟需2.8GB以上硬碟空間。</p>
+          <ul>
+            <li>
+              安裝Flutter SDK：
+              <ol>
+                <li>
+                  下載<a href="https://docs.flutter.dev/get-started/install/macos" target="_blank">Flutter iOS</a>。
+                </li>
+                <li>
+                  開啟terminal應用程式，並利用mkdir來建立flutter SDK放置的目錄(如mkdir development)。
+                </li>
+                <li>
+                  在terminal中輸入flutter SDK檔案夾(如cd development)，接著輸入<text class="text-danger">cp -r ~/Downloads/flutter .</text>，它會將整個下載flutter檔案夾複製至flutter SDK檔案夾。之後輸入<text class="text-danger">cd</text>並按下輸入鍵回到根目錄。
+                </li>
+                <li>
+                  在terminal中輸入<span class="text-danger">nano .bash_profile</span>，接下來在.bsah_profile中輸入<span class="text-danger">export PATH="$PATH:/Users/使用者帳號/flutter SDK目錄/flutter/bin"</span>後，按下 Ctrl+O儲存檔案，按下Ctrl+X離開nano編輯器。
+                </li>
+                <li>
+                  在terminal中輸入<span class="text-danger">chmod 700 .bash_profile</span>後按下輸入鍵，同時關閉並重新開啟terminal後，輸入<span class="text-danger">echo $PATH</span>來確認flutter/bin路徑在PATH中。
+                </li>
+              </ol>
+            </li>
+            <li>
+              安裝Xcode：
+              <ol>
+                <li>下載並安裝Xcode，安裝完畢後請在terminal應用程式中輸入下列命令：</li>
+                <li>
+                  <span class="text-danger">sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer</span>
+                </li>
+                <li>
+                  <span class="text-danger">sudo xcodebuild -runFirstLaunch</span>
+                </li>
+                <li>
+                  <span class="text-danger">sudo xcodebuild -license</span>
+                </li>
+              </ol>
+            </li>
+            <li>
+              安裝cocoapods用於取的iOS平台Flutter套件，請在terminal應用程式中輸入<br/>sudo gem install cocoapods
+            </li>
+            <li>
+              安裝完畢後，請在terminal應用程式中輸入<span class="text-danger">flutter doctor</span>來檢查Flutter的開發設定，同時請不定期在terminal應用程式中輸入<span class="text-danger">flutter upgrade</span>來升級Flutter SDK。
+            </li>
+          </ul>                       
+                </div>
+                
+            </div>
+            <!--課程單元按鈕-->
+            <div class="backbtn">
+                <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+            </div>
+        </div>   
+        
+    </div>
+</body>
+
+</html>

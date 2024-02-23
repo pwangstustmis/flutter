@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>HTML標籤</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid" >
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>網頁檔架構</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>標籤- h,p, br</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>圖片標籤- img</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>連結標籤- a</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+                <div>表格標籤- table, tr, th, td</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">網頁檔架構與標籤介紹</div>
+                    <p>要設計PHP網頁首先要了解基本HTML標籤(tag)及其對應屬性應用，本單元僅介紹常用HTML標籤及其屬性，詳細的介紹，請參考<a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML</a>。</p>
+                    <p>網頁檔案副檔名為 <em>.htm 或 .html</em>，基本網頁檔案如下：</p>
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+        &lt;script&gt;
+            &lt;!-- 內嵌JavaScript位置 --&gt;
+        &lt;/script&gt;
+        &lt;!-- 內嵌CSS樣式位置 --&gt;
+        &lt;style&gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- 網頁內容位置 --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                    <p>檔頭區塊(head)用於設定詮釋資料包含編碼設定(charset)、抬頭設定(title)、JavaScript設定與樣式CSS設定等，所有的顯示內容請至於body區塊。如同檔案內容架構所示，HTML標籤格式為 <em>&lt;標籤名稱&gt;</em>，顯示內容至於開始標籤與結束標籤之間，結束標籤為<em>&lt;/標籤名稱&gt;</em>，但是也有少數標籤為自我結束標籤(self closing tag)其格式為<em>&gt;標籤名稱/&gt;</em>。標籤名稱一般為英文縮寫，例如標題英文為(heading)，因此HTML的六種預設標題標籤名稱為h1到h6。</p>
+                    <p>HTML標籤除了標籤名稱之外，最重要的是標籤屬性(attribute)設定，網頁內容利用標籤名稱指定內容的類別，之後利用標籤屬性來設定內容的細項，標籤屬性格式為 <em>&lt;籤名稱 屬性名稱="屬性值"&gt;</em>，以常用自我結束圖片標籤img為例，<em>&lt;img src="圖片檔案位置"&gt;</em>中屬性src用於設定圖片檔案位置，了解HTML標籤格式後，接下來介紹常用HTML標籤。</p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">請在網站根目錄建立一個檔案名稱為myname網頁，網頁內容顯示學號與姓名。</p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">標籤- h, p, br</div>
+                    <p>標籤 <em>h</em> 預設用於設定標題，有六種預設大小(h1到h6)，標題標籤預設會跳行，使用者可以搭配CSS改變標題樣式。標籤 <em>p</em> 用於設定段落內容，每個段落有預設間距，使用者可以搭配CSS改變段落樣式。段落內跳行請使用分行 <em>&lt;br/&gt;</em> 標籤。</p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">請利用標籤 <em>h, p, br</em> 製作出如下結果：</p>
+                    <h1 style="display:inline-block">h1, </h1>
+                    <h2 style="display:inline-block">h2, </h1>
+                    <h3 style="display:inline-block">h3</h1>
+                    <p>第一段</p>
+                    <p>第二段</p>
+                    <p>第三段<br/>分行</p>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">圖片標籤- img</div>
+                    <p>標籤 <em>img</em> 用於網頁圖片，常用屬性包含 <em>src與alt</em>，<em>src</em>用於設定圖片檔案名稱，圖片檔位置則相對網頁本身，當無法取得圖片時，<em>alt</em>用於設定顯示文字，<em>img</em>標籤雖可使用<em>width(寬)或height(高)</em>來設定圖片大小，一般仍建議使用CSS樣式來進行設定。</p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">請利用標籤 <em>img</em> 顯示本地端與遠端圖片。</p>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">連結標籤- a</div>
+                    <p>標籤 <em>a</em> 用於設定超連結，常用屬性包含 <em>href與target</em>，<em>href</em>用於設定連結對象，如果連結對象為網站內的資源，請使用相對檔案位置，如果連結對象為網站外部資源，請使用絕對位置(必須指定全部網址)，<em>href</em>值如果設為 <em>#名稱</em> 則會連結至網頁 <em>id為名稱的位置</em>，<em>href</em>值如果設為 <em>#</em>代表空連結。<em>target</em>用於設定連結內容顯示頁面，當設定為 <em>_blank</em> 時，瀏覽器會開新的頁面顯示連結內容，不設定則內容會顯示在現有的頁面。</p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">請在網站根目錄建立兩個網頁檔p1.html與p2.html，利用標籤 <em>a</em> 串聯網頁檔p1.html與p2.html，同時在p2.html中設定段落標籤 <em>id="myp2"</em> 後，在p1.html加入連結至南台首頁的外部連結與連結至p2.html段落標籤<em>id="myp2"</em>。</p>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>

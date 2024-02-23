@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PHP語法與敘述命令</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>PHP標籤、變數與資料類型</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>條件敘述</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>迴圈敘述</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>自訂函數</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+                <div>PHP基本語法練習</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">PHP標籤、變數與資料類型</div>
+                    <p>PHP網頁附檔名為 <em>.php</em>，必須置於網站根目錄並藉由網頁伺服器解析才能執行，PHP執行命令須置於標籤 <em>&lt;?php ?&gt;</em> 並內嵌於網頁檔，接下來我們將說明 PHP基本語法、變數、資料類型與命令。</p>
+                    <em>
+                        <ul>
+                            <li>
+                                PHP每個執行命令必須以「;」結束。變數名稱分大小寫、並且以$開始，不須事先定義資料類型。註解使用「//」雙斜線。
+                            </li>
+                            <li>
+                                基本運算符號包含 +, -, *, /, %(求餘數)。
+                            </li>
+                            <li>
+                                條件比較包含 &gt;, &gt;=, ==, !=(不等於), &lt;=, &lt;, &&(且), ||(或), ~(否定)。
+                            </li>
+                            <li>
+                                多個字串串接使用「.」符號，例如 "abc"."def" 會將字串 "abc" 與 字串 "def" 進行串接。
+                            </li>
+                            <li>
+                                資料類型包含文字(包含於雙引號或單引號中)、整數、浮點數(有小數)、布林值(true或false)、陣列、物件與空值(null)。
+                            </li>
+                        </ul>
+                    </em>
+                    <p>PHP命令 <em>echo</em> 用於執行輸出，<em>echo</em>命令使用方式如下：</p>
+                    <em>
+                        <ul>
+                            <li>
+                                echo '文字'; //文字輸出可包含於單引號或雙引號<br/>
+                                echo "文字";<br/>
+                                echo "&lt;HTML標籤&gt;文字&lt;/HTML標籤&gt;"; //文字輸出可加註HTML標籤
+                            </li>
+                            <li>
+                                echo PHP_變數; //輸出變數值
+                            </li>
+                            <li>
+                                echo "文字".PHP_變數; //輸出文字串接變數值
+                            </li>
+                            <li>
+                                echo "PHP_變數"; //雙引號具PHP變數解析功能
+                            </li>
+                        </ul>
+                    </em>
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+        //輸出數字文字，文字可包含於單引號或雙引號
+        echo 1;
+        echo "STUST";
+        //輸出值可結合HTML標籤
+        echo "&lt;h1&gt;STUST&lt;/h1&gt;";
+        //輸出字串串接使用句點符號(.)
+        echo "abc".'def';
+        //輸出直接運算
+        echo 1+2+3;
+        //輸出字串與運算串接，運算必須置於括號內
+        echo "答案".(1+2+3);
+        //輸出變數
+        $a="南臺";
+        $b='科技大學';
+        echo ""&lt;h1&gt;".$a.$b.""&lt;/h1&gt;"
+        //變數解析
+        $a="南臺科技大學";
+        $b="資訊管理系";
+        echo "$a $b"; //變數至於雙引號內，執行echo輸出時會將變數值解析，輸出 南臺科技大學 資訊管理系
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                    <p>長字串變數是用於儲存多行文字，設定長字串變數在等號之後加上 <em>&lt;&lt;&lt;</em>並設定 <em>標示名稱</em>，長字串結束加上 <em>標示名稱;</em> ，長字串為一個多行的雙引號變數，因此在長字串變數中可以進行變數解析，下列PHP程式碼定義長字串變數。</p>
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+        //3個&lt;之後的為長字串變數名稱，長字串結束使用長字串變數名稱加上;
+        //請注意長字串變數名稱之後不可加上空白
+        $b="南臺科技大學";
+        $a=&lt;&lt;&lt;myVar
+        --------------------&lt;br/&gt;
+        &lt;h1&gt;$b&lt;/h1&gt;
+        --------------------&lt;br/&gt;
+        myVar;
+        echo $a;
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">條件敘述</div>
+                    <p>PHP條件命令包含<em> if, if else, if elseif else及switch</em>，下列PHP程式碼說明不同類型條件敘述。</p>
+ <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+        //if
+        if (1==1) {
+            echo "1==1";
+        }
+        //if else
+        if (1&gt;1) {
+            echo "1&gt;1";
+        } esle {
+            echo "1不大於1";
+        }
+        //if elseif else
+        if (2&lt;1) {
+            echo "2&lt;1";
+        } elseif (2&lt;2) {
+            echo "2&lt;2";
+        } else {
+            echo "2不小於2";
+        }
+        //switch
+        $a=4;
+        switch ($a) {
+            case 1:
+                echo 1;
+                break;
+            case 2:
+                echo 2;
+                break;
+            default:
+                echo "前面條件都不對時";
+        }
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</p>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">迴圈敘述</div>
+                    <p>PHP迴圈包含<em> for, while, foreach</em>，<em>foreach</em>搭配陣列使用，PHP陣列使用<em> array() </em>函數來產生陣列，當使用者使用forach命令，如果想要取得元素在陣列的對應位置，可以另用將利用 <em> foreach (陣列變數 as 位置變數=>元素值變數)</em>，下列PHP程式碼進行說明。</p>
+<p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+        //for迴圈(變數=起始值;終止條件;每次增加值)
+        for ($i=1;$i&lt;=10;$i++) {
+            echo "$i, ";
+        }
+        echo "&lt;br/&gt;";
+        $i=1;
+        //while迴圈
+        while ($i&lt;=10) {
+            echo "$i, ";
+        }
+        echo "&lt;br/&gt;";
+        //利用array函數產生10元素陣列
+        $i=array(1,2,3,4,5,6,7,8,9,10);
+        //foreach (陣列變數 as 元素值變數)
+        foreach ($i as $j) {
+            echo "$j, ";
+        }
+        //利用array函數產生關聯式陣列
+        $k=array("台南"=&gt;1,"高雄"=&gt;2,"屏東"=&gt;3);
+        //foreach (陣列變數 as 元素值變數)
+        foreach ($k as $idx=&gt;$j) {
+            echo "$idx:值 $j, ";
+        }
+        //foreach (陣列變數 as 位置變數=>元素值變數)
+        foreach ($i as $idx=&gt;$j) {
+            echo "第 $idx 個變數值為 $j, ";
+        }
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</p>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">自訂函數</div>
+                    <p>PHP函數定義可設定代入值，如有回傳值則使用 return命令，將利用下列PHP程式碼進行說明。</p>
+<p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+        //定義函數mysum代入兩個數並傳回兩數加總
+        function mysum($i,$j) {
+            return $i+$j;
+        }
+        echo mysum(10,20);
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</p>
+                </div>
+                <div class="slide" id="slide-5">
+                    <div class="unittitle">PHP基本語法練習</div>
+                    <p class="codeblock">
+1. 請設定兩個數字變數並輸出4行結果，分別是這兩個變數的 +, -, &, /的結果，輸出格式如 數字1 + 數字2 = 結果。
+2. 根據變數 $day 值(1~7)輸出星期一到星期日，請使用 if 與 switch命令。
+3. 請利用迴圈印出(同一行) 1,2,3,4,5,6,7,8,9,10。請利用迴圈印出(不同行) 1,2,3,4,5,6,7,8,9,10。
+4. 請利用迴圈印出陣列變數 $a=array(1,2,3,4,5,6,7,8,9,10)和。請使用 for 與 foreach 迴圈，陣列長度可藉由 count(陣列變數) 取得。
+5. 表格HTML標籤 table，列標籤 tr，每一欄 td。請利用 &lt;td style="height:35px;width:30px;background-color:#fff;"&gt;&lt;/td&gt; 與 &lt;td style="height:35px;width:30px;background-color:#000;"&gt;&lt;/td&gt; 印出 5 x 5棋盤。
+6. 請將上一題棋盤輸出設為函數 chess(代入變數)，函數代入值為棋盤大小，呼叫chess函數，印出 3 x 3 及 7 x 7棋盤。</p>
+                </div>
+
+                <div class="backbtn">
+                    <a href="#" type="button" class="btn btn-primary btn-lg">返回單元</a>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>
