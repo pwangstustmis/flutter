@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>頁面程式與架構</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid" >
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>頁面架構與Widgets樹</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>主程式-main.dart</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>StatelessWidget-不具狀態widget</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>StatelfulWidget-具狀態widget</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">頁面架構與Widgets樹</div>
+                    <p>
+                        Flutter使用Dart語言進行設計，而flutter頁面由許多widgets所構成，widget為Dart類別(class)，Flutter藉由組合不同的widgets來建立頁面布局。依據狀態(State)來設定，widget可為具狀態(stateful)或不具狀態(stateless)兩種。<br/>
+                        具狀態widget允許動態重新顯示widget內容值，也就是說widget內容是可以動態變動。不具狀態(stateless)widget顯示後就部會改變。每個widget一定會有一個build函數，用於將現在的widget加入project widgets架構中。<br/>
+                        Flutter頁面由許多不同的widgets(程式片段)組合而成，我們可以將頁面widgets分解成widgets tree，以下圖為例：頁面以縱向來呈現，整個版面由上而下包含一張圖片；橫排字、橫排圖示按鈕與文字；一排按鈕與一塊文字。<br/>這樣的頁面架構可由欄(Column)widget包含四個小孩(children)，欄(Column)widget內容呈現為縱向，第一個小孩為圖片，第二個小孩為橫向列(row)包含3個小孩，而橫向的第一個小孩為縱向欄(column)包含兩個小孩。如此類推我們將頁面分解為如圖的widgets樹。
+                      </p>
+                      <p><img src="imgs/unit3/firstapp_3-1.jpg"></p>
+                      <p><img src="imgs/unit3/firstapp_3-2.png"></p> 
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">主程式-main.dart</div>
+                    <p>
+                        利用Android Studio開啟第一個專案testapp，刪除所有註解並合併類別(class)程式區塊，結果如下圖。
+                      </p>
+                      <p><img src="imgs/unit3/firstapp_2-1.png"></p>
+                      <p class="text-danger">程式架構說明</p>
+                      <pre><code>
+            1. Flutter預設使用Android Material設計，所以利用 <span class="text-danger">import</span> 匯入material套件material.dart
+            2. 主程式main執行runApp，runApp<a href="https://api.flutter.dev/flutter/widgets/runApp.html" target="_blank">語法</a>為 <span class="text-danger">runApp(const MyApp)</span>，MyApp為一不具狀態Widget，Flutter頁面均由 Widgets 所組成，Widget 為程式類別(class)，具狀態或不具狀態Widget稍後將進行說明。
+            3. MyApp Widget透過Widget build方法傳回MaterialApp widget，而MaterialApp widget的 <span class="text-danger">home</span> 屬性設定MyHomePage widget為預設頁面
+                      </code></pre>
+                      <p><img src="imgs/unit3/firstapp_2-2.png"></p>
+                      <p class="text-danger">程式架構說明</p>
+                      <pre><code>
+            1. MyHomePage widget為一具狀態widget，宣告具狀態widget一定包含兩個類別，第一個類建立具狀態widget(<span class="text-danger">class MyHomePage extends StatefulWidget</span>)，在這個類別中僅利用createState()來建立狀態類別如_MyHomePageState。第二個類別 <span class="text-danger">_MyHomePageState</span> 為第一個類別 <span class="text-danger">MyHomePage</span> 的狀態類別
+                      </code></pre>
+                      <p><img src="imgs/unit3/firstapp_2-3.png"></p>
+                      <p class="text-danger">程式架構說明</p>
+                      <pre><code>
+            1. 狀態類別 <span class="text-danger">_MyHomePageState</span> 利用 Widget build方法來顯示頁面內容。請注意：每個Flutter頁面都是由 Widgets樹所建構而成。
+                      </code></pre>
+                      <p><img src="imgs/unit3/firstapp_2-4.png"></p>
+                      <p class="text-danger">頁面Widgets樹</p>
+                      <pre><code>
+            1. Flutter專案傳回MaterialApp widget，因此頁面Widgets樹的樹根為 <span class="text-danger">MaterialApp widget</span>，頁面使用 <span class="text-danger">Scaffold widget</span> 版面，在Scaffold widget中設定 AppBar widget,頁面內容 body,FloaringActionButton(浮動按鈕)。頁面內容 body則設定 Center widget(水平垂直置中)，置中內容使用 Column(欄版面)，欄版面包含兩個文字，因此整個Widgets樹如上圖。
+                      </code></pre>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">StatelessWidget-不具狀態widget</div>
+                    <p>
+                        當widgets內容為靜態(固定不變)則Widget可設定為Stateless(不具狀態)widgets，Stateless(不具狀態)widget，首先定義不具狀態widget的類別名稱如MyStatelessClass，之後在類別建構式中如有代入參數，則需定義代入參數，最後複寫(override)build函數來建立顯示內容。
+                      </p>
+                      <p class="text-danger">程式架構說明</p>
+                      <pre><code>
+            //不具狀態widget設定格式
+            class MyStatelessClass extends StatelessWidget {
+              const MyStatelessClass({Key key,this.inarg1}) : super(key: key);
+              final 資料類型 inarg1;
+                          
+              @override
+              Widget build(BuildContext context) {
+                return 使用者設定widget;
+              }
+            }
+                      </code></pre>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">StatelfulWidget-具狀態widget</div>
+                    <p>
+                        Stateful(具狀態)widget一定包含兩個類別，第一個類建立使用者設定類別名稱如StatefulClass來定義具狀態類別StatefulWidget，建構式與代入參數同不具狀態widget，在這個類別中僅利用createState()來建立狀態類別如_MyStatefulClassState。第二個類別為使用者在第一個類別中設定的狀態類別，用widget(build)建立widget並使用、initState設定類別起始動作與setState來觸發狀態事件。
+                      </p>
+                      <p class="text-danger">程式架構說明</p>
+                      <pre><code>
+            class MyStatefulClass extends StatefulWidget {
+              MyStatefulClass({Key key, this.inarg1}) : super(key: key);
+              final 資料類型 inarg1;
+              @override
+              _MyStatefulClassState createState() => new _MyStatefulClassState();
+            }
+                        
+            class _MyStatefulClasstState extends State<MyStatefulClass> {
+              資料類型 attr1;
+                        
+              @override
+              initState() {
+                super.initState();
+                起始動作;
+              }
+              //setState用於改變狀態，會讓widget傳回build方法來反映變化
+              void myfunction1() {
+                setState((){
+                  發布狀態更新;
+                });
+              }
+                        
+              @override
+              Widget build(BuildContext context) {
+                return 使用者設定widget;
+              }
+            }
+                      </code></pre>
+                </div>
+                
+                
+                
+                
+            </div>
+            <!--課程單元按鈕-->
+            <div class="backbtn">
+                <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>HTML標籤</title>
+    <title>Dart簡介</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="scripts/myscript.js"></script>
@@ -17,81 +17,282 @@
         <div class="sidenav">
             <div class="unititem">
                 <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
-                <div>網頁檔架構</div>                                              
+                <div>語法、資料類型</div>                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
-                <div>標籤- h,p, br</div>                                                              
+                <div>運算子(operator)</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
-                <div>圖片標籤- img</div>                                                              
+                <div>條件- if, switch case</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
-                <div>連結標籤- a</div>                                                              
+                <div>迴圈</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
-                <div>表格標籤- table, tr, th, td</div>                                                              
+                <div>函數</div>                                                              
             </div>
+            <div class="unititem">
+                <div><a href="#slide-6" class="itembutton" onclick="nextSlide(6);">6</a></div>
+                <div>物件導向概念實作</div>                                                              
+            </div>
+            
 
         </div>
         <div class="main">
             <div class="slides">
                 <!--單元內容-->
                 <div class="slide" id="slide-1">
-                    <div class="unittitle">網頁檔架構與標籤介紹</div>
-                    <p>要設計PHP網頁首先要了解基本HTML標籤(tag)及其對應屬性應用，本單元僅介紹常用HTML標籤及其屬性，詳細的介紹，請參考<a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML</a>。</p>
-                    <p>網頁檔案副檔名為 <em>.htm 或 .html</em>，基本網頁檔案如下：</p>
-                    <p class="codeblock">
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;!-- 設定utf-8編碼 --&gt;
-        &lt;meta charset="utf-8"&gt;       
-        &lt;script&gt;
-            &lt;!-- 內嵌JavaScript位置 --&gt;
-        &lt;/script&gt;
-        &lt;!-- 內嵌CSS樣式位置 --&gt;
-        &lt;style&gt;
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;!-- 網頁內容位置 --&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-                    </p>
-                    <p>檔頭區塊(head)用於設定詮釋資料包含編碼設定(charset)、抬頭設定(title)、JavaScript設定與樣式CSS設定等，所有的顯示內容請至於body區塊。如同檔案內容架構所示，HTML標籤格式為 <em>&lt;標籤名稱&gt;</em>，顯示內容至於開始標籤與結束標籤之間，結束標籤為<em>&lt;/標籤名稱&gt;</em>，但是也有少數標籤為自我結束標籤(self closing tag)其格式為<em>&gt;標籤名稱/&gt;</em>。標籤名稱一般為英文縮寫，例如標題英文為(heading)，因此HTML的六種預設標題標籤名稱為h1到h6。</p>
-                    <p>HTML標籤除了標籤名稱之外，最重要的是標籤屬性(attribute)設定，網頁內容利用標籤名稱指定內容的類別，之後利用標籤屬性來設定內容的細項，標籤屬性格式為 <em>&lt;籤名稱 屬性名稱="屬性值"&gt;</em>，以常用自我結束圖片標籤img為例，<em>&lt;img src="圖片檔案位置"&gt;</em>中屬性src用於設定圖片檔案位置，了解HTML標籤格式後，接下來介紹常用HTML標籤。</p>
-                    <div class="unittitle">練習</div>
-                    <p class="codeblock">請在網站根目錄建立一個檔案名稱為myname網頁，網頁內容顯示學號與姓名。</p>
+                    <div class="unittitle">語法、資料類型</div>
+                    <p>
+                        Flutter使用Dart語言作為開發語言，Dart為Google開發前端物件導向語言，使用者可以利用線上練習工具<a href="https://dartpad.dev/?" target="_blank">DartPad</a>在線上練習Dart語言。Dart程式語法類似Java，變數大小寫不同，資料類型包含<span class="texthl">var(變數宣告)、int(整數)、double(有小數)、num(包含int與double)、String(字串)、bool(布林值)、dynamic(動態)、List(陣列)、Set(集合)、Map(對應)</span>。Dart不允許變數為空值(null)，如果使用者在宣告變數允許變數為空值時，必須在資料類型後加上<span class="texthl">?</span>，例如<span class="texthl">int? a;</span>
+                        <ul>
+                          <li>
+                            <span class="texthl">var</span>：變數會依照設定資料自動判斷型態，可以設定新值，但是資料類型要與原先設定相同。
+                            <p class="codeblock">
+              var a="123";
+              a="book";
+                            </p>           
+                          </li>
+                          <li>
+                            <span class="texthl">int(整數)、double(有小數)、num(包含int與double)</span>：用於設定數字變數，num資料類型可用於儲存整數或小數值。文字性數字可藉由int.parse()或double.parse()轉為數字。
+                            <p class="codeblock">
+              int a=1;
+              double b=1.1;
+              num c=1;
+              num d=1.1;
+                            </p>             
+                          </li>
+                          <li>
+                            <span class="texthl">String(字串)</span>：字串至於單引號或雙引號中，其他類型變數可使用toString()函數將值轉為字串，字串提供內插功能可將變數或運算式至於字串中。
+                            <p class="codeblock">
+              num b=1;
+              print(b.toString());
+              //內插變數加上$ 內插運算置於{}中
+              num a=1;
+              print('$a+5=${a+5}');
+                            </p>             
+                          </li>
+                          <li>
+                            <span class="texthl">bool(布林值)</span>：設定值為true與false。            
+                          </li>
+                          <li>
+                            <span class="texthl">dynamic</span>：動態類型，不同於<span class="texthl">var</span>資料類型，變數可以設定新值或不同資料類型值。
+                            <p class="codeblock">
+              dynamic a=123;
+              a="book";
+                            </p>         
+                          </li>
+                          <li>
+                            <span class="texthl">List&lt;資料類型&gt;</span>：清單類型，清單類型設定分為兩種：<span class="texthl">固定大小與變動大小</span>。固定大小清單在程式執行時不能改變清單大小。
+                            <p class="codeblock">
+              var a=new List&lt;int&gt;.filled(5,0); //產生5個值為0的固定大小清單
+              print(a);
+              var b=&lt;int&gt;[]; //產生變動大小清單，藉由add新增元素
+              b.add(1);
+              print(b);
+                            </p>         
+                          </li>
+                          <li>
+                            <span class="texthl">Set</span>：集合類型，集合值包含於大括符中，集合可使用<span class="texthl">in</span>運算子判斷元素是否在集合中。
+                            <p class="codeblock">
+              var a=&lt;int&gt;{}; //整數類型集合
+              a.add(1);
+              print(a);
+                            </p>         
+                          </li>
+                          <li>
+                            <span class="texthl">Map(對應)</span>，對應資料類型為一物件定義鍵(key)與值(value)對應。
+                          </li>
+                          <p class="codeblock">
+              void main() {
+                var map1={'name':'甲','phone':'1234567'};
+                print(map1['name']);
+                var map2=new Map&lt;String,dynamic&gt;();
+                map2['id']=1;
+                map2['address']='南台街1號';
+                print(map2);
+              }
+                          </p>
+                        </ul>
+                      </p>
                 </div>
                 <div class="slide" id="slide-2">
-                    <div class="unittitle">標籤- h, p, br</div>
-                    <p>標籤 <em>h</em> 預設用於設定標題，有六種預設大小(h1到h6)，標題標籤預設會跳行，使用者可以搭配CSS改變標題樣式。標籤 <em>p</em> 用於設定段落內容，每個段落有預設間距，使用者可以搭配CSS改變段落樣式。段落內跳行請使用分行 <em>&lt;br/&gt;</em> 標籤。</p>
-                    <div class="unittitle">練習</div>
-                    <p class="codeblock">請利用標籤 <em>h, p, br</em> 製作出如下結果：</p>
-                    <h1 style="display:inline-block">h1, </h1>
-                    <h2 style="display:inline-block">h2, </h1>
-                    <h3 style="display:inline-block">h3</h1>
-                    <p>第一段</p>
-                    <p>第二段</p>
-                    <p>第三段<br/>分行</p>
+                    <div class="unittitle">運算子 (operator)</div>
+                    <p>
+                        運算子(operator)用於變數與值的運算，常用運算子包含計算、設定、比較、邏輯、隸屬等，接下來每個類別進行介紹。
+                      </p>
+                      <ul>
+                        <li>
+                          計算運算子 <span class="texthl">+、-、*、/、%、++、--</span> ，除了加、減、乘、除之外， % 代表求餘數， ++ 代表增加1簡寫，-- 代表減少1簡寫。
+                        </li>
+                        <li>
+                          設定運算子 <span class="texthl">=、+=、-=、*=、/=、%=、??=</span> ，用於變數設定表示，以 x+=5為例，他代表 x=x+5，<span class="texthl">??=</span>會檢查變數是否為<span class="texthl">null</span>，如果是會進行設定。
+                          <p class="codeblock">
+              var a;
+              a??=1;
+              print(a); //印出1
+            
+              var b=10;
+              b??=1;
+              print(b); //印出10
+                          </p>
+                        </li>
+                        <li>
+                          比較運算子 <span class="texthl">==、!=、&gt;、&gt;=、&lt;、&lt;=</span> ，用於條件比較分別為 等於、不等於、大於、大於等於、小於、小於等於。
+                        </li>
+                        <li>
+                          邏輯運算子 <span class="texthl">&&、||、!</span> ，用於串接多個條件比較分別為 且、或、否定。
+                        </li>
+                      </ul> 
                 </div>
                 <div class="slide" id="slide-3">
-                    <div class="unittitle">圖片標籤- img</div>
-                    <p>標籤 <em>img</em> 用於網頁圖片，常用屬性包含 <em>src與alt</em>，<em>src</em>用於設定圖片檔案名稱，圖片檔位置則相對網頁本身，當無法取得圖片時，<em>alt</em>用於設定顯示文字，<em>img</em>標籤雖可使用<em>width(寬)或height(高)</em>來設定圖片大小，一般仍建議使用CSS樣式來進行設定。</p>
-                    <div class="unittitle">練習</div>
-                    <p class="codeblock">請利用標籤 <em>img</em> 顯示本地端與遠端圖片。</p>
+                    <div class="unittitle">條件- if, switch case</div>
+                    <p>
+                        if條件命令包含 <span class="texthl">if、if else、if ... else if ... else</span>，下列程式分別為一個條件動作、兩個條件動作、多個條件動作與switch命令。
+                      </p>
+                      <p class="codeblock">
+              //if
+              if (1&lt;2) {
+                print("1小於2");
+              }
+              //if else
+              if (1&lt;2) {
+                print("1小於2");
+              } else {
+                print("1不小於2");
+              }
+              //if else if else
+              if (1&gt;2) {
+                print("1大於2");
+              } else if (1==2) {
+                print("1等於2");
+              } else {
+                print("1小於2");
+              }
+            
+              //swicth 每個值至於 case之後，default為所有條件不滿足，每個動作需加break
+              int x=1;
+              switch (x) {
+                case 3:
+                  print("x為3");
+                  break;
+                case 2:
+                  print("x為2");
+                  break;
+                default:
+                  print("x不為2或3");
+                  break;
+              }
+                      </p>
                 </div>
                 <div class="slide" id="slide-4">
-                    <div class="unittitle">連結標籤- a</div>
-                    <p>標籤 <em>a</em> 用於設定超連結，常用屬性包含 <em>href與target</em>，<em>href</em>用於設定連結對象，如果連結對象為網站內的資源，請使用相對檔案位置，如果連結對象為網站外部資源，請使用絕對位置(必須指定全部網址)，<em>href</em>值如果設為 <em>#名稱</em> 則會連結至網頁 <em>id為名稱的位置</em>，<em>href</em>值如果設為 <em>#</em>代表空連結。<em>target</em>用於設定連結內容顯示頁面，當設定為 <em>_blank</em> 時，瀏覽器會開新的頁面顯示連結內容，不設定則內容會顯示在現有的頁面。</p>
-                    <div class="unittitle">練習</div>
-                    <p class="codeblock">請在網站根目錄建立兩個網頁檔p1.html與p2.html，利用標籤 <em>a</em> 串聯網頁檔p1.html與p2.html，同時在p2.html中設定段落標籤 <em>id="myp2"</em> 後，在p1.html加入連結至南台首頁的外部連結與連結至p2.html段落標籤<em>id="myp2"</em>。</p>
+                    <div class="unittitle">迴圈</div>
+                    <p>
+                        迴圈命令包含 <span class="texthl">while、do while、for、for ... in、forEach</span>，while、do while差別 <span class="texthl">結束條件在一開始或結束條件在最後</span>，for迴圈使用方式 <span class="texthl">for (資料類型 變數=起始值;變數結束條件設定;變數增加值設定)</span>，<span class="texthl">for (資料類型 變數 in 清單或集合變數)</span>，forEach用於清單或集合，<span class="texthl">清單或集合變數.forEach((變數類型 元素變數){})</span>。
+                    </p>
+                    <p class="codeblock">
+              //while印出1到10數字
+              int i=1;
+              while (i&lt;=10) {
+                print(i);
+                i=i+1;
+              }
+            
+              //do while印出1到10數字
+              i=1;
+              do {
+                print(i);
+                i=i+1;
+              } while (i&lt;=10);
+            
+              //for印出1到10數字
+              for (i=1;i&lt;=10;i++) {
+                print(i);
+              }
+            
+              //foreach印出陣列包含1到10元素
+              var j=[1,2,3,4,5,6,7,8,9,10];
+              j.forEach((int k) {
+                print(k);
+              });
+                      </p>
+                </div>
+                <div class="slide" id="slide5">
+                    <div class="unittitle">函數</div>
+                    <p>
+                        函數定義為 <span class="texthl">函數傳回資料類型 函數名稱(資料類型 代入變數)</span>，函數可以有許多代入值，如果有傳回值則使用 <span class="texthl">return 傳回值</span>，如果沒有傳回值，函數傳回資料類型請設為，<span class="texthl">void</span>，Dart允許選擇性代入參數，選擇性代入參數會放在非選擇性代入參數之後，用方括號括起，如果沒有代入值，變數值為null。
+                      </p>
+                      <p class="codeblock">
+              //函數func1 1個代入值、兩個選擇代入值
+              void func1(int a,[int? b,int? c]) {
+                print(a);
+                print(b);
+                print(c);
+              }
+              void main() {
+                func1(10); //印出 10 null null
+              }
+                      </p> 
+                </div>
+                <div class="slide" id="slide6">
+                    <div class="unittitle">物件導向概念實作</div>
+                    <p>
+                        物件導向程式利用物件來解決問題，而<span class="texthl">類別(class)</span>為物件的抽象描述，他描述並定義物件的屬性與方法，使用者可以想像<span class="texthl">類別為物件的定義，而物件為類別的實現</span>，另外使用者可以想像：類別就像建造房屋的藍圖，而房屋就是藍圖的實現。類別定義包含<span class="texthl">類別名稱、屬性、方法</span>，屬性是用於描述對應類別特性，而方法是定義類別可執行的動作，可透過<span class="texthl">get、set</span>取得或設定屬性值。
+                      </p>
+                      <p class="codeblock">
+              //下列定義2D空間 點 類別，並包含兩點距離方法
+              import 'dart:math';    
+              class Point {
+                final double x;  //屬性
+                final double y;
+                        
+                Point(this.x, this.y); //建構式       
+                double distanceTo(Point other) {  //方法
+                  var dx = x - other.x;
+                  var dy = y - other.y;
+                  return sqrt(dx * dx + dy * dy);
+                }
+              }
+                
+              class Television {
+                void turnOn() {
+                  _illuminateDisplay();
+                  _activateIrSensor();
+                }
+                void set contrast(int value) {...} //設定屬性值
+              }
+              class SmartTelevision extends Television { //使用extends繼承Television類別
+                void turnOn() { //方法隱藏並使用super呼叫父類別Television中turnOn方法
+                  super.turnOn();
+                  _bootNetworkInterface();
+                  _initializeMemory();
+                  _upgradeApps();
+                }
+                @override
+                void set contrast(num value) {...} //覆寫父類別Televison屬性contrast設定
+              }
+                    
+              abstract class Doer { //定義抽象類別    
+                void doSomething(); 
+              }
+                
+              class EffectiveDoer extends Doer { //繼承抽象類別並實作方法
+                void doSomething() {
+                    
+                }
+              }
+                      </p> 
                 </div>
                 
                 
+            </div>
+            <!--課程單元按鈕-->
+            <div class="backbtn">
+                <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
             </div>
         </div>      
     </div>
