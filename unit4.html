@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>專案範本與版面Widgets</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>首頁範本</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>單一內容版面</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>多個內容版面</div>                                                              
+            </div>
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">首頁範本</div>
+                    <p>
+                      建立專案後請使用下列程式區塊內容取代main.dart內容。
+                    </p>
+                    <p class="codeblock">
+  import 'package:flutter/material.dart';
+
+  void main() {
+    runApp(const MyApp());
+  }
+
+  class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(),
+      );
+    }
+  }
+
+  class MyHomePage extends StatefulWidget {
+    const MyHomePage({super.key});
+
+    @override
+    State<MyHomePage> createState() => _MyHomePageState();
+  }
+
+  class _MyHomePageState extends State<MyHomePage> {
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(''),
+        ),
+        body: Center(
+          child: Text('首頁範本')
+        ),
+      );
+    }
+  }
+                    </p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">單一內容版面</div>
+                    <p>
+                      版面內容將以圖片作為顯示對象，簡單顯示圖片請依照下列步驟進行設定：
+                      <ol>
+                        <li>
+                          請在專案根目錄新增一檔案夾名稱為 assets
+                        </li>
+                        <li>
+                          請在專案pubspec.yaml檔案中外部資源設定如下
+                          <p class="codeblock">
+  assets:
+    - assets/
+                          </p>
+                        </li>
+                        <li>
+                          利用 Image.asset('assets/圖片檔案名稱') 顯示圖片
+                        </li>
+                      </ol>
+                    </p>
+                    <p>
+                      單一容器版面包含 <span class="text-danger">Container、FittedBox、SizedBox、Center</span>。</p>
+          <ul>
+            <li>
+              Container：Container widget為一容器，用於設定一個方形區域，利用<span class='text-danger'>屬性 width、height 設定容器寬與高，如未設定寬與高，則容器會佔整個父容器大小</span>，設定屬性如下：
+              <p class="codeblock">
+  Container({Key? key, AlignmentGeometry? alignment, EdgeInsetsGeometry? padding, Color? color, Decoration? decoration, Decoration? foregroundDecoration, double? width, double? height, BoxConstraints? constraints, EdgeInsetsGeometry? margin, Matrix4? transform, AlignmentGeometry? transformAlignment, Widget? child})
+              </p>
+              <p>
+                  <span class="text-danger">alignment</span>：用於設定內容對齊方式，使用AlignmentGeometry類別並利用兩種不同座標方式進行對齊：FractionalOffset與Alignment，FractionalOffset以容器的左上角為基準，整個容器水平(x)與垂直(y)大小為1，因此將位置設定於右上角為FractionalOffset(0.0,1.0)、將位置設定於容器中心點為FractionalOffset(0.5,0.5)。不同於FractionalOffset，Aligment以容器中心(0.0,0.0)為基準，整個容器上下左右大小均為1，因此將中心位置設定於右上角為Alignment(1.0,-1.0)，將中心位置設定於容器中心點為Alignment(0.0,0.0)，將中心位置設於左下角為Alignment(-1.0,1.0)。
+              </p>
+              <p>
+                  <span class="text-danger">padding</span>：用於設定內容與容器之間的內距，使用EdgeInsetsGeometry類別使用EdgeInsets類別包含EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only與EdgeInsets.symmetric，代表4邊套用相同內距(EdgeInsets.all(20.0))、左上右下分別套用的內距(EdgeInsets.fromLTRB(10.0,20.0,10.0,20.0))、指定位置(left,top,right,bottom)套用內距(EdgeInsets.only(top:20.0,bottom:20.0))及對稱位置(bertical,horizontal)套用內距(EdgeInsets.symmetric(vertical:20.0))。
+                </p>
+                  <p>
+                    <span class="text-danger">color</span>：用於設定顏色，使用Colors或Color類別。Colors藉由選擇顏色並套用顏色樣本值來設定顏色強度，顏色強度值在0到900之間，例如Colors.green代表預設強度為500的綠色(Colors.green[500])。Color類別則是代入透明度及紅綠藍的16進位值如Color(0xAARRGGBB)，其中AA,RR,GG,BB為16進位數字從00到ff，分別代表透明度與紅綠藍的值(例如Color(0xffff0000)為紅色完全不透明)。使用者也可使用Color.fromARGB(AA,RR,GG,BB)代入透明度與紅綠藍的值，代入值可以是16進位或10進位值。Color.fromRGBO(RR,GG,BB,O)，其中O為透明度，值從0.0到1.0，分別代表完全透明到完全不透明。
+                  </p>
+                  <p>
+                    <span class="text-danger">decoration</span>：用於設定Container 內容(child widget)之後的裝飾如背景圖片等，在說明Decoration(裝飾)類別時會加以說明，請注意：因為decoration用於繪製child之後內容，以BoxDecoration為例，如果Container有設定顏色屬性，則BoxDecoration不可以設定顏色屬性，否則會導致錯誤。
+                  </p>
+                    <p class="codeblock">
+      BoxDecoration({Color? color, 
+        DecorationImage? image, 
+        BoxBorder? border, 
+        BorderRadiusGeometry? borderRadius
+      })
+                    </p>
+                  <p>
+                    <span class="text-danger">foregroundDecoration</span>：用於設定Container內容(child widget)之前的裝飾，與decoration用於繪製child之後內容不同，foregroundDecoration設定child widget之前裝飾。
+                  </p>
+                  <p>
+                    <span class="text-danger">width, height</span>：用於設定Container寬與高，如果沒有設定寬與高，則Container大小將與Container的父(parent)widget大小相同。
+                  </p>
+                  <p>
+                    <span class="text-danger">constraints</span>：用於設定容器寬高的限制條件，使用BoxConstraints類別。由於容器預設毀使用父widget大小，使用者可以利用BoxConstraints設定minWidth、maxWidth、minHeight及maxHeight來限制容器大小。當設定minWidth與maxWidth或minHeight與maxHeight相同，大小為tight(緊緻)。
+                  </p>
+                  <p>
+                    <span class="text-danger">margin</span>：用於設定容器邊界，與padding相同，使用EdgeInsetsGeometry類別，不同的是padding用於設定方框內部距離，而邊界設定方框外部距離。設定方式使用EdgeInsets類別包含EdgeInsets.all、EdgeInsets.fromLTRB、EdgeInsets.only與EdgeInsets.symmetric，分別代表4邊套用邊界(EdgeInsets.all(20.0))、左上右下套用的邊界(EdgeInsets.fromLTRB(10.0,20.0,10.0,20.0))、指定位置(left,top,right,bottom)套用邊界(EdgeInsets.only(top:20.0,bottom:20.0))及對稱位置(bertical,horizontal)套用邊界(EdgeInsets.symmetric(vertical:20.0))。
+                  </p>
+                  <p class="codeblock">
+  //class _MyHomePageState Widget build
+  //無大小容器
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                  )
+            );
+  }
+
+  ------------------------
+  //class _MyHomePageState Widget build
+  //無大小容器
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                  )
+            );
+  }
+  ------------------------
+  //class _MyHomePageState Widget build
+  //無大小容器
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                    child:Image.asset('assets/school.jpg')
+                  )
+            );
+  }
+                  </p>
+            </li>
+            <li>
+              FittedBox：FittedBox widget根據 fit 設定改變內容大小，設定屬性如下：
+              <p class="codeblock">
+  FittedBox({Key? key, BoxFit fit = BoxFit.contain, AlignmentGeometry alignment = Alignment.center, Clip clipBehavior = Clip.none, Widget? child})
+              </p>
+            <p>
+              <span class="text-danger">fit</span>：包含 BoxFit.fill(填滿)、BoxFit.contain(包含)、BoxFit.cover(涵蓋)、BoxFit.fitWidth、BoxFit.fitHeight、BoxFit.ScaleDown(縮小)。填滿與包含均包含原先內容，涵蓋不一定會顯示原來全部內容。
+            </p>
+            <p class="codeblock">
+  //class _MyHomePageState Widget build
+  //FittedBox
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                    child:FittedBox(
+                      fit:BoxFit.cover,
+                      Image.asset('assets/school.jpg')
+                    )
+                  )
+            );
+  }
+                  </p>
+            </li>
+            <li>
+              SizedBox：SizedBox widget用於設已知大小區域，設定屬性如下：
+              <p class="codeblock">
+  SizedBox({Key? key, double? width, double? height, Widget? child})
+              </p>
+              <p class="codeblock">
+  //class _MyHomePageState Widget build
+  //SizedBox,Container需設定對齊 alignment 
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                    alignment:Alignment.topLeft,
+                    child:SizedBox(
+                      width:100,
+                      height:100,
+                      Image.asset('assets/school.jpg')
+                    )
+                  )
+            );
+  }
+                  </p>
+            </li>
+            <li>
+              Center：Center widget用於將內容水平與垂直置中，widthFactor與heightFactor用於設定Center widget寬與高為內容大小倍率，未設定屬性 widthFactor與heightFactor，Center widget將與其父容器一樣大，設定屬性如下：
+              <p class="codeblock">
+  Center({Key? key, double? widthFactor, double? heightFactor, Widget? child})
+              </p>
+              <p class="codeblock">
+  //class _MyHomePageState Widget build
+  //SizedBox,Container需設定對齊 alignment 
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                    alignment:Alignment.topLeft,
+                    child:SizedBox(
+                      width:100,
+                      height:100,
+                      Image.asset('assets/school.jpg')
+                    )
+                  )
+            );
+  }
+                  </p>
+            </li>
+          </ul>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">多個內容版面</div>
+                    <p>
+                        常用多個版面內容包含 Row、Column、ListView、GridView：
+                      </p>
+                      <ul>
+                        <li>
+                          Row, Column:用於設定多個內容以水平或垂直方向擺放，Row與Column版面無捲動設定，因此容易造成溢位狀況，因此內容常設訂於 Expanded widget中，請注意：Expanded widget中flex值用於設定內容佔寬比例。
+                          <p class="codeblock">
+  Row({Key? key, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, MainAxisSize mainAxisSize = MainAxisSize.max, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, TextDirection? textDirection, VerticalDirection verticalDirection = VerticalDirection.down, TextBaseline? textBaseline, List<Widget> children = const <Widget>[]})
+
+  Column({Key? key, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, MainAxisSize mainAxisSize = MainAxisSize.max, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, TextDirection? textDirection, VerticalDirection verticalDirection = VerticalDirection.down, TextBaseline? textBaseline, List<Widget> children = const <Widget>[]})
+
+  Expanded({Key? key, int flex = 1, required Widget child})
+                          </p>
+                          <p>
+                            <span class="text-danger">mainAxisAlignment</span>：設定放置區域主要坐標軸對齊方式(列為橫，欄為直)，使用MainAxisAlignment列舉類別。包含center(置中)、end(列靠右、欄靠下)、spaceAround(項目中間先平均空間，剩下再平均)、spaceBetween(項目中間平均空間)、spaceEvenly(全部平均空間)與start(列靠左、欄靠上)，預設為start。範例包含一列3個大小為50x50的Container，之後設定spaceEvenly對齊方式。
+                          </p>
+                          <p>
+                            <span class="text-danger">mainAxisSize</span>：設定放置區域主要坐標軸(橫)的大小，使用MainAxisSize列舉類別。包含max(最大)與min(最小)，預設為max(最大)。
+                          </p>
+                          <p>
+                            <span class="text-danger">crossAxisAlignment</span>：設定放置區域次要坐標軸對齊方式(列為直，欄為橫)，使用CrossAxisAlignment列舉類別。包含baseline(基線)、center(置中)、end(列靠下、欄靠右)，範例為一欄包含3行文字，行mainAxisAlignment預設靠上對齊，corssAxisAlignment預設置中對齊，藉由設定欄的CrossAxisAlignment.start讓3行文字靠左對齊。
+                          </p>
+                          <p>
+                            <span class="text-danger">textDirection</span>：設定文字方向，使用TextDirection列舉類別。包含TextDirection.ltr(左到右)與TextDirection.rtl(又到左)，預設為ltr。
+                          </p>
+                          <p>
+                            <span class="text-danger">verticalDirection</span>：設定垂直的擺放方向(例如欄)，使用VerticalDirection列舉類別。包含VerticalDirection.down(由上往下擺放)與TextDirection.up(由下往上擺放)。
+                          </p>
+                          <p>
+                            <span class="text-danger">textBaseline</span>：設定文字對齊基礎線(baseline)，使用TextBaseline列舉類別。包含TextBaseline.alphabetic(用於設定文字)與TextBaseline.ideographic(用於設定示意圖)。
+                          </p>
+                          <p class="codeblock">
+  //如果圖片過大會有溢位問題
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(''),
+        ),
+        body: Row(children: [Image.asset('assets/school.jpg')]));
+  }
+  //解決方式 Expanded widget
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(''),
+        ),
+        body: Row(children: [
+        Expanded(child:Image.asset('assets/school.jpg'))
+        ]));
+  }
+                          </p>                          
+                        </li>
+                        <li>
+                          ListView:用於設定可捲動清單
+                          <p class="codeblock">
+  ListView({Key? key, Axis scrollDirection = Axis.vertical, bool reverse = false, ScrollController? controller, bool? primary, ScrollPhysics? physics, bool shrinkWrap = false, EdgeInsetsGeometry? padding, double? itemExtent, ItemExtentBuilder? itemExtentBuilder, Widget? prototypeItem, bool addAutomaticKeepAlives = true, bool addRepaintBoundaries = true, bool addSemanticIndexes = true, double? cacheExtent, List<Widget> children = const <Widget>[], int? semanticChildCount, DragStartBehavior dragStartBehavior = DragStartBehavior.start, ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual, String? restorationId, Clip clipBehavior = Clip.hardEdge})
+                          </p>
+                          <p>
+                            <span class="text-danger">scrollDirection</span>：設定捲動方向 horizontal(水平)、vertial(垂直)。
+                          </p>
+                          <p class="codeblock">
+  //建立橫向捲動圖片清單
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(''),
+        ),
+        body: ListView(scrollDirection: Axis.horizontal, children: [
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+          Image.asset('assets/school.jpg', width: 200, height: 200),
+        ]));
+  }
+                          </p>
+
+                        </li>
+                      </ul>
+                                               
+                </div>
+                
+                
+                
+            </div>
+            <!--課程單元按鈕-->
+            <div class="backbtn">
+                <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+            </div>
+        </div>   
+        
+    </div>
+</body>
+
+</html>
