@@ -27,6 +27,10 @@
                 <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
                 <div>多個內容版面</div>                                                              
             </div>
+            <div class="unititem">
+              <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+              <div>版面練習</div>                                                              
+          </div>
         </div>
         <div class="main">
             <div class="slides">
@@ -86,7 +90,10 @@
                 <div class="slide" id="slide-2">
                     <div class="unittitle">單一內容版面</div>
                     <p>
-                      版面內容將以圖片作為顯示對象，簡單顯示圖片請依照下列步驟進行設定：
+                      版面設計依據 <span class='text-danger'>限制向下、大小向上</span> 規則，也就是內容widgets的實際大小是取決於父容器的限制，一開始父容器將限制往下傳遞至子widgets，子widgets根據父容器限制，取得實際大小。
+                    </p>
+                    <p>
+                      版面練習將使用圖片作為顯示對象，圖片為外部資源，Flutter圖片顯示請依照下列步驟進行設定：
                       <ol>
                         <li>
                           請在專案根目錄新增一檔案夾名稱為 assets
@@ -104,10 +111,10 @@
                       </ol>
                     </p>
                     <p>
-                      單一容器版面包含 <span class="text-danger">Container、FittedBox、SizedBox、Center</span>。</p>
+                      單一容器版面包含 <span class="text-danger">Container、Center、FittedBox、SizedBox、FractionallySizedBox</span>。</p>
           <ul>
             <li>
-              Container：Container widget為一容器，用於設定一個方形區域，利用<span class='text-danger'>屬性 width、height 設定容器寬與高，如未設定寬與高，則容器會佔整個父容器大小</span>，設定屬性如下：
+              Container：Container widget為一容器，用於設定一個方形區域，利用<span class='text-danger'>屬性 width、height 設定容器寬與高，如未設定寬與高，則容器會佔整個父容器大小，容器中圖片如大小小於容器大小，容器須設定對齊屬性，否則圖片會佔整個容器</span>，設定屬性如下：
               <p class="codeblock">
   Container({Key? key, AlignmentGeometry? alignment, EdgeInsetsGeometry? padding, Color? color, Decoration? decoration, Decoration? foregroundDecoration, double? width, double? height, BoxConstraints? constraints, EdgeInsetsGeometry? margin, Matrix4? transform, AlignmentGeometry? transformAlignment, Widget? child})
               </p>
@@ -159,7 +166,7 @@
 
   ------------------------
   //class _MyHomePageState Widget build
-  //無大小容器
+  //具大小容器
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
@@ -175,7 +182,7 @@
   }
   ------------------------
   //class _MyHomePageState Widget build
-  //無大小容器
+  //具大小容器、未設定對齊方式、顯示圖片
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
@@ -187,6 +194,57 @@
                     width:200,
                     height:200,
                     child:Image.asset('assets/school.jpg')
+                  )
+            );
+  }
+  --------------------------
+  //class _MyHomePageState Widget build
+  //設定容器背景圖片
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(''),
+        ),
+        body: Container(
+            width: 200,
+            height: 200,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill, image: AssetImage('assets/school.jpg'))),
+            child: Text(
+              'STUST',
+              style: TextStyle(
+                  fontSize: 40, color: Color.fromARGB(255, 203, 15, 15)),
+            )));
+  }
+                  </p>
+            </li>
+            <li>
+              Center：Center widget用於將內容水平與垂直置中，widthFactor與heightFactor用於設定Center widget寬與高為內容大小倍率，<span class='text-danger'>與 Container widget相同，未設定屬性 widthFactor與heightFactor，Center widget將與其父容器一樣大</span>，設定屬性如下：
+              <p class="codeblock">
+  Center({Key? key, double? widthFactor, double? heightFactor, Widget? child})
+              </p>
+              <p class="codeblock">
+  //class _MyHomePageState Widget build
+  //SizedBox,Container需設定對齊 alignment 
+  Widget build(BuildContext context) {
+    return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text('Container設定'),
+            ),
+            body: Container(
+                    color: Color.fromARGB(255, 130, 130, 130),
+                    width:200,
+                    height:200,
+                    alignment:Alignment.topLeft,
+                    child:SizedBox(
+                      width:100,
+                      height:100,
+                      Image.asset('assets/school.jpg')
+                    )
                   )
             );
   }
@@ -223,7 +281,7 @@
                   </p>
             </li>
             <li>
-              SizedBox：SizedBox widget用於設已知大小區域，設定屬性如下：
+              SizedBox：SizedBox widget用於設已知大小區域，<span class='text-danger'>另一 SizedBox.expand widget 用於設定取得所有可用空間</span>，設定屬性如下：
               <p class="codeblock">
   SizedBox({Key? key, double? width, double? height, Widget? child})
               </p>
@@ -252,13 +310,13 @@
                   </p>
             </li>
             <li>
-              Center：Center widget用於將內容水平與垂直置中，widthFactor與heightFactor用於設定Center widget寬與高為內容大小倍率，未設定屬性 widthFactor與heightFactor，Center widget將與其父容器一樣大，設定屬性如下：
+              FractionallySizedBox：FractionallySizedBox widget用於設比例大小區域，<span class='text-danger'>widthFactor與heightFactor用於設定比例百分比大小，值為0到1之間</span>，設定屬性如下：
               <p class="codeblock">
-  Center({Key? key, double? widthFactor, double? heightFactor, Widget? child})
+  FractionallySizedBox({Key? key, AlignmentGeometry alignment = Alignment.center, double? widthFactor, double? heightFactor, Widget? child})
               </p>
               <p class="codeblock">
   //class _MyHomePageState Widget build
-  //SizedBox,Container需設定對齊 alignment 
+  //FractionallySizedBox 
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
@@ -267,12 +325,10 @@
             ),
             body: Container(
                     color: Color.fromARGB(255, 130, 130, 130),
-                    width:200,
-                    height:200,
-                    alignment:Alignment.topLeft,
-                    child:SizedBox(
-                      width:100,
-                      height:100,
+                    alignment:Alignment.topCenter,
+                    child:FractionallySizedBox(
+                      widthFactor:0.5,
+                      heightFactor:0.5,
                       Image.asset('assets/school.jpg')
                     )
                   )
@@ -280,6 +336,7 @@
   }
                   </p>
             </li>
+            
           </ul>
                 </div>
                 <div class="slide" id="slide-3">
@@ -289,13 +346,15 @@
                       </p>
                       <ul>
                         <li>
-                          Row, Column:用於設定多個內容以水平或垂直方向擺放，Row與Column版面無捲動設定，因此容易造成溢位狀況，因此內容常設訂於 Expanded widget中，請注意：Expanded widget中flex值用於設定內容佔寬比例。
+                          Row, Column:用於設定多個內容以水平或垂直方向擺放，<span class='text-danger'>Row與Column版面無捲動設定，因此容易造成溢位狀況，因此內容常設定於 Expanded widget或Flexible widget中，Expanded widget會佔具所有剩餘空間而Flexible widget則不會</span>，請注意：Expanded Flexible widgets中flex值用於設定內容佔寬比例。
                           <p class="codeblock">
   Row({Key? key, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, MainAxisSize mainAxisSize = MainAxisSize.max, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, TextDirection? textDirection, VerticalDirection verticalDirection = VerticalDirection.down, TextBaseline? textBaseline, List<Widget> children = const <Widget>[]})
 
   Column({Key? key, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, MainAxisSize mainAxisSize = MainAxisSize.max, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, TextDirection? textDirection, VerticalDirection verticalDirection = VerticalDirection.down, TextBaseline? textBaseline, List<Widget> children = const <Widget>[]})
 
   Expanded({Key? key, int flex = 1, required Widget child})
+
+  Flexible({Key? key, int flex = 1, FlexFit fit = FlexFit.loose, required Widget child})
                           </p>
                           <p>
                             <span class="text-danger">mainAxisAlignment</span>：設定放置區域主要坐標軸對齊方式(列為橫，欄為直)，使用MainAxisAlignment列舉類別。包含center(置中)、end(列靠右、欄靠下)、spaceAround(項目中間先平均空間，剩下再平均)、spaceBetween(項目中間平均空間)、spaceEvenly(全部平均空間)與start(列靠左、欄靠上)，預設為start。範例包含一列3個大小為50x50的Container，之後設定spaceEvenly對齊方式。
@@ -369,6 +428,21 @@
                       </ul>
                                                
                 </div>
+                <div class="slide" id="slide-4">
+                  <div class="unittitle">版面練習</div>
+                  <ol>
+                    <li>
+                      請用 Container、Row、Column、Expanded widgets 製作出如下版面
+                      <p>
+                        <img src="imgs/unit4/exer-1.png" width="60%"/>
+                      </p>
+                    </li>
+                    <li>
+                      Google Play應用程式中FoodPanda App版面練習
+                    </li>
+                  </ol>
+                  
+              </div>
                 
                 
                 
