@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>雲端簡訊</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>執行步驟</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>套件安裝</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>確保套件服務已經起始</div>                                                              
+            </div>
+            <div class="unititem">
+              <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+              <div>狀態類別設定相機</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+                <div>完整程式</div>                                                              
+            </div>
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                  <div class="unittitle">執行步驟</div>
+                  <p class="codeblock">
+  1. 安裝雲端簡訊套件
+  2. 設定雲端簡訊service worker程式
+  3. 載入雲端簡訊服務程式
+  4. 雲端簡訊接收與傳送
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">套件安裝</div>
+                    <p>
+                      Flutter Firebase雲端簡訊套件請參照套件網站(https://pub.dev/packages/firebase_messaging)，安裝雲端簡訊套件，請在專案目錄下執行下列命令。安裝完畢請在主程式main.dart匯入雲端簡訊模組。
+                    </p>
+                    <p class="codeblock">
+    flutter pub add firebase_messaging
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">確保套件服務已經起始</div>
+                    <p>
+                      在主程式main.dart中main方法設定 WidgetsFlutterBinding.ensureInitialized();
+                    </p>
+                    <p class="codeblock">
+    main() {
+      //確保套件服務已經起始
+      WidgetsFlutterBinding.ensureInitialized();
+      runApp(const MyApp());
+    }
+                    </p>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">狀態類別設定相機</div>
+                    <p>
+                        首先宣告三個變數<span class='text-danger'>cameras、_controller、isInit</span>，cameras用於儲存所有可用相機，_controller為相機控制物件，isInit用於偵測相機控制物件_controller是否已經起始。<span class='text-danger'>late</span>宣告用於設定該變數將會在後續步驟起始。
+                    </p>
+                    <p>
+                      <span class="text-danger">iniState()</span>函數用於設定widget起始時執行步驟，由於取用相機需要時間，因此函數 cameraInit 需設定為非同步 <span class="text-danger">async</span>，函數內部才能使用<span class="text-danger">await</span>，函數 cameraInit 首先取得可用相機，之後使用第一個可用相機(cameras.first)產生相機控制物件，之後起始相機控制物件，當相機控制物件起始後，將isInit直設為true。
+                    </p>                    
+                      <p class="codeblock">
+    // 狀態類別
+    class _MyHomePageState extends State<MyHomePage> {
+      //宣告可用相機,相機控制物件,控制物件是否起始 變數
+      late dynamic cameras;
+      late CameraController _controller;
+      bool isInit = false;
+    
+      @override
+      void initState() {
+        super.initState();
+        //相機起始設定
+        cameraInit();
+      }
+    
+      void cameraInit() async {
+        //取得所有可用相機
+        cameras = await availableCameras();
+        //設定相機控制物件
+        _controller = CameraController(cameras[0], ResolutionPreset.high);
+        //當控制物件啟示後
+        _controller.initialize().then((_) {
+          //mounted用於檢查widget是否在widget樹並正在顯示
+          if (!mounted) {
+            return;
+          }
+          //控制物件啟示後將變數isInit設為true
+          setState(() {
+            isInit = true;
+          });
+        }).catchError((Object e) {
+          if (e is CameraException) {
+            switch (e.code) {
+              case 'CameraAccessDenied':
+                //相機取得失敗錯誤設定
+                break;
+              default:
+                //其他錯誤設定
+                break;
+            }
+          }
+        });
+      }
+    
+      @override
+      void dispose() {
+        //當widget從widget樹移除時，移除控制物件
+        _controller.dispose();
+        super.dispose();
+      }
+                      </p>                         
+                </div>
+                <div class="slide" id="slide-5">
+                  <div class="unittitle">完整程式</div>
+                  <p class="codeblock">
+      import 'package:flutter/cupertino.dart';
+      import 'package:flutter/foundation.dart';
+      import 'package:flutter/material.dart';
+      import 'dart:io';
+      //匯入相機套件模組
+      import 'package:camera/camera.dart';
+      
+      main() {
+        //確保套件已經起始
+        WidgetsFlutterBinding.ensureInitialized();
+        runApp(const MyApp());
+      }
+      
+      class MyApp extends StatelessWidget {
+        const MyApp({super.key});
+      
+        @override
+        Widget build(BuildContext context) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: const MyHomePage(),
+            debugShowCheckedModeBanner: false,
+          );
+        }
+      }
+      
+      class MyHomePage extends StatefulWidget {
+        const MyHomePage({super.key});
+      
+        @override
+        State&lt;MyHomePage&gt; createState() => _MyHomePageState();
+      }
+      
+      class _MyHomePageState extends State&lt;MyHomePage&gt; {
+        late dynamic cameras;
+        late CameraController _controller;
+        bool isInit = false;
+        var image;
+      
+        @override
+        void initState() {
+          //相機起始設定
+          super.initState();
+          cameraInit();
+        }
+      
+        void cameraInit() async {
+          //取得所有可用相機
+          cameras = await availableCameras();
+          //設定相機控制物件
+          _controller = CameraController(cameras[0], ResolutionPreset.high);
+      
+          _controller.initialize().then((_) {
+            //mounted用於檢查widget是否在widget樹並正在顯示
+            if (!mounted) {
+              return;
+            }
+            //控制物件啟示後將變數isInit設為true
+            setState(() {
+              isInit = true;
+            });
+          }).catchError((Object e) {
+            if (e is CameraException) {
+              switch (e.code) {
+                case 'CameraAccessDenied':
+                  //相機取得失敗錯誤設定
+                  break;
+                default:
+                  //其他錯誤設定
+                  break;
+              }
+            }
+          });
+        }
+      
+        @override
+        void dispose() {
+          // Dispose of the controller when the widget is disposed.
+          _controller.dispose();
+          super.dispose();
+        }
+        //相機控制物件拍照傳回照片檔XFile格式
+        //由於照相需要時間因此函數傳回類型為 Future&lt;XFile?&gt;
+        Future&lt;XFile?&gt; takePic() async {
+          if (_controller.value.isTakingPicture) {
+            return null;
+          }
+          try {
+            XFile file = await _controller.takePicture();
+      
+            return file;
+          } on CameraException catch (e) {
+            print('拍照錯誤: $e');
+            return null;
+          }
+        }
+      
+        @override
+        Widget build(BuildContext context) {
+          return Scaffold(
+              body: Container(
+                  child: Column(
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.black,
+                  )),
+              Expanded(
+                  flex: 6,
+                  child: Container(
+                      color: Colors.white,
+                      child: !isInit
+                          ? const Center(child: CircularProgressIndicator())
+                          : CameraPreview(_controller))),
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                      color: Colors.black,
+                      child: Row(children: [
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Container(
+                                height: MediaQuery.of(context).size.height * 0.8,
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white)),
+                                child: image == null
+                                    ? null
+                                    : kIsWeb //web不支援Image.file
+                                        ? Image.network(image.path, fit: BoxFit.cover)
+                                        : Image.file(File(image.path)))),
+                        IconButton(
+                            onPressed: () async {
+                              if (isInit) {
+                                image = await takePic();
+                                setState(() {});
+                              }
+                            },
+                            icon: Icon(CupertinoIcons.largecircle_fill_circle,
+                                color: Colors.white, size: 60)),
+                      ]))),
+            ],
+          )));
+        }
+      }    
+                  </p>
+              </div>
+              
+            
+                
+                
+                
+            </div>
+            <!--課程單元按鈕-->
+            <div class="backbtn">
+                <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+            </div>
+        </div>   
+        
+    </div>
+</body>
+
+</html>
