@@ -20,20 +20,24 @@
                 <div>執行步驟</div>                                              
             </div>
             <div class="unititem">
-                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+              <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+              <div>建立FireBase專案並設定身分驗證</div>                                                              
+          </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
                 <div>安裝Node.js與Firebase CLI</div>                                                              
             </div>
             <div class="unititem">
-                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
                 <div>建立專案、安裝身分驗證套件套件、設定flutterfire組態</div>                                                              
             </div>
             <div class="unititem">
-              <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
-              <div>狀態類別設定相機</div>                                                              
+              <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+              <div>設定登入註冊頁面</div>                                                              
             </div>
             <div class="unititem">
-                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
-                <div>完整程式</div>                                                              
+                <div><a href="#slide-6" class="itembutton" onclick="nextSlide(6);">6</a></div>
+                <div>設定雲端簡訊service worker程式</div>                                                              
             </div>
         </div>
         <div class="main">
@@ -51,7 +55,7 @@
   4. 雲端簡訊接收與傳送
                 </div>
                 <div class="slide" id="slide-2">
-                  <div class="unittitle">建立FireBase專案</div>
+                  <div class="unittitle">建立FireBase專案並設定身分驗證</div>
                   網頁雲端簡訊必須有使用者權杖(token)才能進行簡訊傳送，因此需要設定身分驗證來儲存對應使用者的權杖。
                   <ul>
                     <li>
@@ -147,21 +151,61 @@ npm install -g firebase-tools
                 </div>
                 <div class="slide" id="slide-5">
                   <div class="unittitle">設定註冊登入頁面</div>
-                  <ul>
-                    <li>
-                      請開啟 Node.js command prompt，進入專案目錄
-                    </li>
-                    <li>
-                      選擇 Firebase專案 專案設定-一般設定，選擇應用程式 F
-                    </li>
-                    <li>
-                      在 Node.js command prompt 中輸入，請注意：會要求輸入 Google帳號及密碼
-                      <p class="codeblock">
-  firebase login
-                      </p>
-                      之後在Firebase專案應用程式中選擇下一步，在 Node.js command prompt 中執行Firebase啟動及產生組態檔(請選擇web)
-                    </li>
-                  </ul>
+                  <p>
+                    設定註冊頁面需使用 <span class="text-danger">TextField</span> widget，要取得<span class="text-danger">TextField</span> widget輸入內容須透過 <span class="text-danger">TextEditController</span> widget，下列程式使用文字方塊、文字方塊控制與AuthHelper類別進行註冊、登入與登出的動作。
+                  </p>
+                  <p class="codeblock">
+  //登入頁面程式
+  class _MyHomePageState extends State&lt;MyHomePage&gt; {
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          body: Center(
+        child: Card(
+          margin: EdgeInsets.all(20.0),
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: email,
+                  decoration: InputDecoration(labelText: 'Email'),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: password,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    AuthHelper()
+                        .signUp(email: email.text, password: password.text)
+                        .then((result) {
+                      if (result == null) {
+                        print('success');
+                      } else {
+                        print(result);
+                      }
+                    });
+                  },
+                  child: Text('登入'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      )
+          // This trailing comma makes auto-formatting nicer for build methods.
+          );
+    }
+  }
+                  </p>
+                  
               </div>
                 
                 <div class="slide" id="slide-6">
@@ -191,222 +235,7 @@ npm install -g firebase-tools
   });
                     </p>
                 </div>
-                <div class="slide" id="slide-4">
-                    <div class="unittitle">狀態類別設定相機</div>
-                    <p>
-                        首先宣告三個變數<span class='text-danger'>cameras、_controller、isInit</span>，cameras用於儲存所有可用相機，_controller為相機控制物件，isInit用於偵測相機控制物件_controller是否已經起始。<span class='text-danger'>late</span>宣告用於設定該變數將會在後續步驟起始。
-                    </p>
-                    <p>
-                      <span class="text-danger">iniState()</span>函數用於設定widget起始時執行步驟，由於取用相機需要時間，因此函數 cameraInit 需設定為非同步 <span class="text-danger">async</span>，函數內部才能使用<span class="text-danger">await</span>，函數 cameraInit 首先取得可用相機，之後使用第一個可用相機(cameras.first)產生相機控制物件，之後起始相機控制物件，當相機控制物件起始後，將isInit直設為true。
-                    </p>                    
-                      <p class="codeblock">
-    // 狀態類別
-    class _MyHomePageState extends State<MyHomePage> {
-      //宣告可用相機,相機控制物件,控制物件是否起始 變數
-      late dynamic cameras;
-      late CameraController _controller;
-      bool isInit = false;
-    
-      @override
-      void initState() {
-        super.initState();
-        //相機起始設定
-        cameraInit();
-      }
-    
-      void cameraInit() async {
-        //取得所有可用相機
-        cameras = await availableCameras();
-        //設定相機控制物件
-        _controller = CameraController(cameras[0], ResolutionPreset.high);
-        //當控制物件啟示後
-        _controller.initialize().then((_) {
-          //mounted用於檢查widget是否在widget樹並正在顯示
-          if (!mounted) {
-            return;
-          }
-          //控制物件啟示後將變數isInit設為true
-          setState(() {
-            isInit = true;
-          });
-        }).catchError((Object e) {
-          if (e is CameraException) {
-            switch (e.code) {
-              case 'CameraAccessDenied':
-                //相機取得失敗錯誤設定
-                break;
-              default:
-                //其他錯誤設定
-                break;
-            }
-          }
-        });
-      }
-    
-      @override
-      void dispose() {
-        //當widget從widget樹移除時，移除控制物件
-        _controller.dispose();
-        super.dispose();
-      }
-                      </p>                         
-                </div>
-                <div class="slide" id="slide-5">
-                  <div class="unittitle">完整程式</div>
-                  <p class="codeblock">
-      import 'package:flutter/cupertino.dart';
-      import 'package:flutter/foundation.dart';
-      import 'package:flutter/material.dart';
-      import 'dart:io';
-      //匯入相機套件模組
-      import 'package:camera/camera.dart';
-      
-      main() {
-        //確保套件已經起始
-        WidgetsFlutterBinding.ensureInitialized();
-        runApp(const MyApp());
-      }
-      
-      class MyApp extends StatelessWidget {
-        const MyApp({super.key});
-      
-        @override
-        Widget build(BuildContext context) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-            home: const MyHomePage(),
-            debugShowCheckedModeBanner: false,
-          );
-        }
-      }
-      
-      class MyHomePage extends StatefulWidget {
-        const MyHomePage({super.key});
-      
-        @override
-        State&lt;MyHomePage&gt; createState() => _MyHomePageState();
-      }
-      
-      class _MyHomePageState extends State&lt;MyHomePage&gt; {
-        late dynamic cameras;
-        late CameraController _controller;
-        bool isInit = false;
-        var image;
-      
-        @override
-        void initState() {
-          //相機起始設定
-          super.initState();
-          cameraInit();
-        }
-      
-        void cameraInit() async {
-          //取得所有可用相機
-          cameras = await availableCameras();
-          //設定相機控制物件
-          _controller = CameraController(cameras[0], ResolutionPreset.high);
-      
-          _controller.initialize().then((_) {
-            //mounted用於檢查widget是否在widget樹並正在顯示
-            if (!mounted) {
-              return;
-            }
-            //控制物件啟示後將變數isInit設為true
-            setState(() {
-              isInit = true;
-            });
-          }).catchError((Object e) {
-            if (e is CameraException) {
-              switch (e.code) {
-                case 'CameraAccessDenied':
-                  //相機取得失敗錯誤設定
-                  break;
-                default:
-                  //其他錯誤設定
-                  break;
-              }
-            }
-          });
-        }
-      
-        @override
-        void dispose() {
-          // Dispose of the controller when the widget is disposed.
-          _controller.dispose();
-          super.dispose();
-        }
-        //相機控制物件拍照傳回照片檔XFile格式
-        //由於照相需要時間因此函數傳回類型為 Future&lt;XFile?&gt;
-        Future&lt;XFile?&gt; takePic() async {
-          if (_controller.value.isTakingPicture) {
-            return null;
-          }
-          try {
-            XFile file = await _controller.takePicture();
-      
-            return file;
-          } on CameraException catch (e) {
-            print('拍照錯誤: $e');
-            return null;
-          }
-        }
-      
-        @override
-        Widget build(BuildContext context) {
-          return Scaffold(
-              body: Container(
-                  child: Column(
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.black,
-                  )),
-              Expanded(
-                  flex: 6,
-                  child: Container(
-                      color: Colors.white,
-                      child: !isInit
-                          ? const Center(child: CircularProgressIndicator())
-                          : CameraPreview(_controller))),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                      color: Colors.black,
-                      child: Row(children: [
-                        Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.8,
-                                width: MediaQuery.of(context).size.width * 0.2,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white)),
-                                child: image == null
-                                    ? null
-                                    : kIsWeb //web不支援Image.file
-                                        ? Image.network(image.path, fit: BoxFit.cover)
-                                        : Image.file(File(image.path)))),
-                        IconButton(
-                            onPressed: () async {
-                              if (isInit) {
-                                image = await takePic();
-                                setState(() {});
-                              }
-                            },
-                            icon: Icon(CupertinoIcons.largecircle_fill_circle,
-                                color: Colors.white, size: 60)),
-                      ]))),
-            ],
-          )));
-        }
-      }    
-                  </p>
-              </div>
-              
+                
             
                 
                 
