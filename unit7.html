@@ -29,20 +29,24 @@
             </div>
             <div class="unititem">
               <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
-              <div>主程式設定go_router路由組態</div>                                                              
+              <div>簡單頁面導覽(按鈕進行跳頁)</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
-                <div>不具狀態/具狀態 頁面範本</div>                                                              
+                <div>無跨頁底部導覽列進行跳頁</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-6" class="itembutton" onclick="nextSlide(6);">6</a></div>
-                <div>路徑參數設定</div>                                                              
+                <div>跨頁底部導覽列進行跳頁</div>                                                              
             </div>
             <div class="unititem">
                 <div><a href="#slide-7" class="itembutton" onclick="nextSlide(7);">7</a></div>
-                <div>查詢字串參數設定</div>                                                              
+                <div>頁面間參數傳遞- 路徑參數</div>                                                              
             </div>
+            <div class="unititem">
+              <div><a href="#slide-8" class="itembutton" onclick="nextSlide(8);">8</a></div>
+              <div>頁面間參數傳遞- 查詢字串</div>                                                              
+          </div>
         </div>
         <div class="main">
             <div class="slides">
@@ -51,16 +55,17 @@
                     <div class="unittitle">go_router設定步驟</div>
                     <p class="codeblock">
     1. 安裝go_router套件
-    2. 設定go_router路由組態
-    3. 套用go_router路由組態
-    4. 匯入不具狀態/具狀態 頁面
-    5. 頁面間參數傳遞- 路徑參數
-    6. 頁面間參數傳遞- 查詢字串
+    2. 設定go_router路由組態、套用go_router路由組態
+    3. 簡單頁面導覽(按鈕進行跳頁)
+    4. 無跨頁底部導覽列進行跳頁
+    5. 跨頁底部導覽列進行跳頁
+    6. 頁面間參數傳遞- 路徑參數
+    7. 頁面間參數傳遞- 查詢字串
                 </div>
                 <div class="slide" id="slide-2">
                     <div class="unittitle">安裝go_router套件</div>
                     <p>
-                        <span class="text-danger">go_router(https://pub.dev/packages/go_router)</span>為Flutter套件，目的用於頁面導覽，選擇VS Code中<span class="text-danger">終端機-新增終端機</span>，請確認終端機目錄在專案目錄下後，輸入下令命令安裝 go_router套件
+                        <span class="text-danger">go_router(https://pub.dev/packages/go_router)</span>為Flutter套件，目的用於頁面導覽(跳頁)，選擇VS Code中<span class="text-danger">終端機-新增終端機</span>，請確認終端機目錄在專案目錄下後，輸入下令命令安裝 go_router套件
                     </p>
                     <p class="codeblock">
     flutter pub add go_router
@@ -73,12 +78,12 @@
                     </p>
                 </div>
                 <div class="slide" id="slide-3">
-                    <div class="unittitle">設定go_router路由組態</div>
+                    <div class="unittitle">設定go_router路由組態、套用go_router路由組態</div>
                     <p>
                         go_router套件藉由GoRouter物件設定頁面路由，頁面路由設於 routes 屬性中，每個頁面包含於GoRoute物件中，包含 名稱(name)、頁面路徑(path)、執行跳頁動作(builder)，請注意：<span class='text-danger'>頁面路徑 / 代表首頁，initialLocation用於設定起始頁面</span>。
                     </p>                     
                       <p class="codeblock">
-    // GoRouter 組態設定
+    // main.dart中GoRouter 組態設定變數
     final _router = GoRouter(
     initialLocation:'/',
     routes: [
@@ -94,278 +99,482 @@
         ),
     ],
     );
+                      </p>
+                      <p>
+                        組態設定後，將main.dart程式中 <span class="text-danger">MyApp Widget build</span>改為下列設定，其中<span class="text-danger">routerConfig:_router</span>為組態ˋ設定變數：                  
+                      </p>
+                      <p class="codeblock">
+        Widget build(BuildContext context) {
+        return MaterialApp.router(
+          routerConfig: _router,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          debugShowCheckedModeBanner: false,
+        );
+      }     
                       </p>                         
                 </div>
                 <div class="slide" id="slide-4">
-                  <div class="unittitle">套用go_router路由組態</div>
+                  <div class="unittitle">簡單頁面導覽(按鈕進行跳頁)</div>
                   <p>
-                    將主程式中 <span class="text-danger">MyApp Widget build</span>改為下列設定：                  
+                    下列程式將包含3個 dart 程式檔(main.dart、home.dart、page2.dart)，主程式設定go_router路由組態、套用go_router路由組態後開啟 home.dart 頁面，home.dart頁面包含兩個按鈕，點選後(onPress)利用<span class="text-danger">context.go</span>命令跳至組態設定頁面。                  
                   </p>
                   <p class="codeblock">
-    Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+  //main.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
+  import 'home.dart';
+  import 'page2.dart';
+
+  // GoRouter 組態設定
+  final _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        name: 'home', //設定name屬性，go_router可透過name進行跳頁
+        path: '/',
+        builder: (context, state) => const Home(),
       ),
-      debugShowCheckedModeBanner: false,
-    );
-  }     
+      GoRoute(
+        name: 'page2',
+        path: '/page2',
+        builder: (context, state) => const Page2(),
+      ),
+    ],
+  );
+
+  void main() {
+    runApp(const MyApp());
+  }
+
+  class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp.router(
+        routerConfig: _router,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+      );
+    }
+  }
+  
+  //home.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
+
+  class Home extends StatelessWidget {
+    const Home({super.key});
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          appBar: AppBar(title: const Text('Home')),
+          body: Center(
+            child:
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              ElevatedButton(
+                  onPressed: () {
+                    context.go('/');
+                  },
+                  child: const Text('Home')),
+              ElevatedButton(
+                  onPressed: () {
+                    context.go('/Page2');
+                  },
+                  child: const Text('Page 2'))
+            ]),
+          ));
+    }
+  }
+
+  //page2.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
+
+  class Page2 extends StatelessWidget {
+    const Page2({super.key});
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          appBar: AppBar(title: const Text('Page 2')),
+          body: Center(
+            child:
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              ElevatedButton(
+                  onPressed: () {
+                    context.go('/');
+                  },
+                  child: const Text('Home')),
+              ElevatedButton(
+                  onPressed: () {
+                    context.go('/Page2');
+                  },
+                  child: const Text('Page 2'))
+            ]),
+          ));
+    }
+  }
                   </p>
               </div>
               <div class="slide" id="slide-5">
-                <div class="unittitle">匯入不具狀態/具狀態 頁面</div>
+                <div class="unittitle">無跨頁底部導覽列進行跳頁</div>
                 <p>
-                    路由組態包含兩個頁面類別<span class='text-danger'>HomeScreen與Page2Screen</span>，頁面狀態可為具狀態或不具狀態，下列頁面範例同時宣告具狀態或不具狀態頁面，可依照狀態類型挑選。
+                  下列程式將包含3個 dart 程式檔(main.dart、home.dart、page2.dart)，主程式設定go_router路由組態、套用go_router路由組態後開啟 home.dart 頁面設定底部導覽列進行跳頁，點選後(onTap)利用<span class="text-danger">context.go</span>命令跳至組態設定頁面。主程式 main.dart同上，以下僅顯示 home.dart與page2.dart。<span class="text-danger">請注意：本節中的底部導覽列會不一致，例如 home.dart有底部導覽列，page2.dart沒有底部導覽列，當從home.dart跳至page2.dart則底部導覽列會不見。</span>
                   </p>
                   <p class="codeblock">
-    //不具狀態 Homescreen.dart
-    import 'package:flutter/material.dart';
-    import 'package:go_router/go_router.dart';
+  //home.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
 
-    class Homescreen extends StatelessWidget {
-    const Homescreen({super.key});
+  class Home extends StatefulWidget {
+    const Home({super.key});
+    @override
+    State createState() => _HomeState();
+  }
+
+  class _HomeState extends State&lt;Home&gt; {
+    int selidx = 0;
     @override
     Widget build(BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(title: Text('Home')),
-            body: Center(
-            child:
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                ElevatedButton(
-                    onPressed: () {
-                    context.go('/');
-                    },
-                    child: Text('Home')),
-                ElevatedButton(
-                    onPressed: () {
-                    context.go('/Page2');
-                    },
-                    child: Text('Page 2'))
-            ]),
-            ));
+      return Scaffold(
+        appBar: AppBar(title: const Text('Home')),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const &lt;BottomNavigationBarItem&gt;[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '首頁',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Page 2',
+            ),
+          ],
+          currentIndex: selidx,
+          selectedItemColor: Colors.amber[800],
+          onTap: (int i) {
+            setState(() {
+              selidx = i;
+            });
+            if (i == 0) {
+              context.go('/');
+            } else {
+              context.go('/page2');
+            }
+          },
+        ),
+      );
     }
-    }
+  }
 
-    //不具狀態 Page2screen.dart
-    import 'package:flutter/material.dart';
-    import 'package:go_router/go_router.dart';
+  //page2.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
 
-    class Page2screen extends StatelessWidget {
-    const Page2screen({super.key});
+  class Page2 extends StatefulWidget {
+    const Page2({super.key});
+    @override
+    State createState() => _Page2State();
+  }
+
+  class _Page2State extends State&lt;Page2&gt; {
+    int selidx = 0;
     @override
     Widget build(BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(title: Text('Page 2')),
-            body: Center(
-            child: Row(children: [
-                ElevatedButton(
-                    onPressed: () {
-                    context.go('/');
-                    },
-                    child: Text('Home')),
-                ElevatedButton(
-                    onPressed: () {
-                    context.go('/Page2');
-                    },
-                    child: Text('Page 2'))
-            ]),
-            ));
+      return Scaffold(
+        appBar: AppBar(title: const Text('Page 2')),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const &lt;BottomNavigationBarItem&gt;[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '首頁',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_alarm),
+              label: 'Page 2',
+            ),
+          ],
+          currentIndex: selidx,
+          selectedItemColor: Colors.amber[800],
+          onTap: (int i) {
+            setState(() {
+              selidx = i;
+            });
+            if (i == 0) {
+              context.go('/');
+            } else {
+              context.go('/page2');
+            }
+          },
+        ),
+      );
     }
-    }
+  } 
                   </p>
                 
             </div>
             <div class="slide" id="slide-6">
-                <div class="unittitle">Widget- BottomNavigationBar(底部導覽列)</div>
+                <div class="unittitle">跨頁底部導覽列進行跳頁</div>
                 <p>
-                    BottomNavigationBar widget常用於Scaffold widget設定底部導覽列，底部導覽列<span class="text-danger">最少要包含2個項目</span>，項目內容會使用<span class="text-danger">ButtonNavigationBarItem</span> widget，<span class="text-danger">ButtonNavigationBarItem</span> widget中<span class="text-danger">icon、label</span>屬性不可為空值。
+                  Flutter進行跳頁時可透過<span class="text-danger">GlobalKey&lt;NavigatorState&gt;()</span>來儲存導覽頁面顯示狀態，進行跨頁底部導覽列進行跳頁需改變 go_router 組態設定如下列 main.dart檔。跨頁導覽底部導覽列需置於<span class="text-danger">shellRoute</span>下，設定導覽鍵值<span class="text-danger">navigatorKey</span>為 _shellNavigatorKey，請注意：如果有多個跨頁導覽底部導覽列，則須多個 GlobalKey&lt;NavigatorState&gt;() 物件，在<span class="text-danger">shellRoute</span> builder中傳回共用底部導覽列設定，請注意：共用底部導覽列設定中頁面內容(body)將用於設定導覽頁面內容(child)。
                   </p>
                   <p class="codeblock">
-        BottomNavigationBar(
-          {Key? key,
-            required List<BottomNavigationBarItem> items,
-            ValueChanged<int>? onTap,
-            int currentIndex = 0,
-            double? elevation,
-            BottomNavigationBarType? type,
-            Color? fixedColor,
-            Color? backgroundColor,
-            double iconSize = 24.0,
-            Color? selectedItemColor,
-            Color? unselectedItemColor,
-            IconThemeData? selectedIconTheme,
-            IconThemeData? unselectedIconTheme,
-            double selectedFontSize = 14.0,
-            double unselectedFontSize = 12.0,
-            TextStyle? selectedLabelStyle,
-            TextStyle? unselectedLabelStyle,
-            bool? showSelectedLabels,
-            bool? showUnselectedLabels,
-            MouseCursor? mouseCursor,
-            bool? enableFeedback,
-            BottomNavigationBarLandscapeLayout? landscapeLayout}
-        )
-        BottomNavigationBarItem(
-          {required Widget icon,
-          String? label,
-          Widget? activeIcon,
-          Color? backgroundColor,
-          String? tooltip}
-        )   
+  //main.dart檔
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
+  import 'home.dart';
+  import 'page2.dart';
+
+  //產生主頁面與跨頁導覽全域鍵值
+  final _rootNavigatorKey = GlobalKey&lt;NavigatorState&gt;();
+  final _shellNavigatorKey = GlobalKey&lt;NavigatorState&gt;();
+
+  // GoRouter 組態設定
+  final _router = GoRouter(
+    initialLocation: '/',
+    navigatorKey: _rootNavigatorKey,
+    routes: [
+      ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          builder: (context, state, child) =>
+              BottomNavigationBarScaffold(child: child),
+          routes: [
+            GoRoute(
+              name: 'home', //設定name屬性，go_router可透過name進行跳頁
+              path: '/',
+              //parentNavigatorKey: _shellNavigatorKey,
+              builder: (context, state) => const Home(),
+            ),
+            GoRoute(
+              name: 'page2',
+              path: '/page2',
+              //parentNavigatorKey: _shellNavigatorKey,
+              builder: (context, state) => const Page2(),
+            ),
+          ])
+    ],
+  );
+
+  class BottomNavigationBarScaffold extends StatefulWidget {
+    const BottomNavigationBarScaffold({super.key, required this.child});
+    final Widget child; //代入參數
+    @override
+    State createState() => _BottomState();
+  }
+
+  class _BottomState extends State&lt;BottomNavigationBarScaffold&gt; {
+    int selidx = 0;
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          body: widget.child,
+          bottomNavigationBar: BottomNavigationBar(
+            items: const &lt;BottomNavigationBarItem&gt;[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: '首頁',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.business),
+                label: 'Page 2',
+              ),
+            ],
+            currentIndex: selidx,
+            selectedItemColor: Colors.amber[800],
+            onTap: (int i) {
+              setState(() {
+                selidx = i;
+              });
+              if (i == 0) {
+                context.go('/');
+              } else {
+                context.go('/page2');
+              }
+            },
+          ));
+    }
+  }
+  
+  //home.dart
+  import 'package:flutter/material.dart';
+
+  class Home extends StatefulWidget {
+    const Home({super.key});
+    @override
+    State createState() => _HomeState();
+  }
+
+  class _HomeState extends State&lt;Home&gt; {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Home')),
+      );
+    }
+  }
+
+  //page2.dart
+  import 'package:flutter/material.dart';
+
+  class Page2 extends StatefulWidget {
+    const Page2({super.key});
+    @override
+    State createState() => _Page2State();
+  }
+
+  class _Page2State extends State&lt;Page2&gt; {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Page 2')),
+      );
+    }
+  }
                   </p>
-                  <ul>
-                    <li style="margin-bottom:0.5ex;">
-                      <span class="text-danger">items</span>：為必要(required)屬性，用於設定底部導覽列項目。
-                    </li>
-                    <li style="margin-bottom:0.5ex;">
-                      <span class="text-danger">onTap</span>：為一代入整數值函數，用於代入使用者點選項目索引值，並執行設計的動作。
-                    </li>
-                    <li style="margin-bottom:0.5ex;">
-                      <span class="text-danger">currentIndex</span>：用於設定正在作用的項目索引值，當使用者點選新項目時，可在<span class="text-danger">onTap</span>屬性透過狀態更新<span class="text-danger">setState((){});</span>更新正在作用項目狀態。
-                    </li>
-                    <img src="imgs/unit5/bottomnavigationbar.png"/>
-                    <p class="codeblock">
-        class _MyHomePageState extends State&lt;MyHomePage&gt; {
-          @override
-          Widget build(BuildContext context) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: null,
-                title: const Text('FloatingActionButton'),
-              ),
-              body: const Center(
-                child: Text('FloatingActionButton onPressed:null'),
-              ),
-              <span class="text-danger">bottomNavigationBar: BottomNavigationBar(
-                items: const &lt;BottomNavigationBarItem&gt;[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: '首頁',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.business),
-                    label: '商業',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.school),
-                    label: '學校',
-                  ),
-                ],
-                currentIndex: 0,
-                selectedItemColor: Colors.amber[800],
-                onTap: (int i) {},
-              )</span>,
-            );
-          }
-        }
-                    </p> 
-                  </ul>
                 
             </div>
             <div class="slide" id="slide-7">
-                <div class="unittitle">Widget- Text(文字)</div>
+                <div class="unittitle">頁面間參數傳遞- 路徑參數</div>
                 <p>
-                    Text widget用於顯示文字。Text widgets包含Text與Text.rich widgets，Text widget所有的文字套用相同文字樣式，而Text.rich widget可對部分文字設定不同樣式。請注意設定文字可包含特殊符號如<span class="text-danger">\n(強迫跳行)、\t(跳格)</span>等。
+                  在go_router組態<span class="text-danger">path</span>中設定如下設定，用於頁面間參數傳遞- 路徑參數。路徑參數只能設定一個，在<span class="text-danger">builder</span>中透過<span class="text-danger">state.pathParameters</span>取得變數。
                   </p>
                   <p class="codeblock">
-        Text(String data,
-          { Key key,
-            TextStyle style,
-            TextAlign textAlign,
-            TextDirection textDirection,
-            Locale locale,
-            bool softWrap,
-            TextOverflow overflow,
-            double textScaleFactor,
-            int maxLines, 
-            String semanticsLabel })   
+  //main.dart
+  import 'package:flutter/material.dart';
+  import 'package:go_router/go_router.dart';
+  import 'home.dart';
+  import 'page2.dart';
+
+  //產生主頁面與跨頁導覽全域鍵值
+  final _rootNavigatorKey = GlobalKey&lt;NavigatorState&gt;();
+  final _shellNavigatorKey = GlobalKey&lt;NavigatorState&gt;();
+
+  // GoRouter 組態設定
+  final _router = GoRouter(
+    initialLocation: '/',
+    navigatorKey: _rootNavigatorKey,
+    routes: [
+      ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          builder: (context, state, child) =>
+              BottomNavigationBarScaffold(child: child),
+          routes: [
+            GoRoute(
+              name: 'home', //設定name屬性，go_router可透過name進行跳頁
+              path: '/',
+              //parentNavigatorKey: _shellNavigatorKey,
+              builder: (context, state) => const Home(),
+            ),
+            GoRoute(
+              name: 'page2',
+              path: '/page2/:id',
+              //parentNavigatorKey: _shellNavigatorKey,
+              builder: (context, state) {
+                final id = state.pathParameters['id'];
+                return Page2(id: id);
+              },
+            ),
+          ])
+    ],
+  );
+
+  class BottomNavigationBarScaffold extends StatefulWidget {
+    const BottomNavigationBarScaffold({super.key, required this.child});
+    final Widget child;
+    @override
+    State createState() => _BottomState();
+  }
+
+  class _BottomState extends State&lt;BottomNavigationBarScaffold&gt; {
+    int selidx = 0;
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          body: widget.child,
+          bottomNavigationBar: BottomNavigationBar(
+            items: const &lt;BottomNavigationBarItem&gt;[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: '首頁',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.business),
+                label: 'Page 2',
+              ),
+            ],
+            currentIndex: selidx,
+            selectedItemColor: Colors.amber[800],
+            onTap: (int i) {
+              setState(() {
+                selidx = i;
+              });
+              if (i == 0) {
+                context.go('/');
+              } else {
+                context.go('/page2/100');
+              }
+            },
+          ));
+    }
+  }
+
+  void main() {
+    runApp(const MyApp());
+  }
+
+  class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp.router(
+        routerConfig: _router,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+      );
+    }
+  }
+  
+  //page2.dart
+  import 'package:flutter/material.dart';
+
+  class Page2 extends StatefulWidget {
+    const Page2({super.key, required this.id});
+    final String? id;
+    @override
+    State createState() => _Page2State();
+  }
+
+  class _Page2State extends State&lt;Page2&gt; {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          appBar: AppBar(title: const Text('Page 2')),
+          body: Center(child: Text(widget.id!)));
+    }
+  }
                   </p>
-                  <ul>
-                    <li>
-                      <span class="text-danger">String data</span>：欲顯示的文字，置於單括號或雙括內。
-                    </li>
-                    <li>
-                      <span class="text-danger">textAlign</span>：使用TextAlign列舉類別包含center(置中)、end(文字方向左到右則靠右，文字方向又到左則靠左)、justify(分散對其)、left(靠左)、right(靠右)、start(文字方向左到右則靠左，文字方向又到左則靠右)。
-                    </li>
-                    <li>
-                      <span class="text-danger">textDirection</span>：利用TextDirection列舉類別，包含ltr(文字左到右)與rtl(文字右到左)。
-                    </li>
-                    <li>
-                      <span class="text-danger">locale</span>：在地化設定，用於設定語言及國家。
-                    </li>
-                    <li>
-                      <span class="text-danger">softWrap</span>：布林值用於設定是否自動跳行。
-                    </li>
-                    <li>
-                      <span class="text-danger">style</span>：利用TextStyle類別來設定文字樣式包含color(顏色)、fontSize(字體大小)、fontWeight(字體粗細)、fontStyle(字體樣式如斜體)、letterSpaceing(字母間距)、wordSpacing(字間距)、textBaseline(文字對齊基準線)、height(行高)、locale(設定本地化語言)、foreground(前景樣式)、background(背景樣式)、decoration(設定底線或刪除線等裝飾)、decorationColor(設定裝飾線顏色)、decorationStyle(設定裝飾線樣式)、debugLabel(除錯狀態樣式說明文字)、fontFamily(字型)與package(套件名稱)。
-                    </li>
-                    <p class="codeblock">
-          TextStyle({bool inherit: true,
-            Color color,
-            double fontSize,
-            FontWeight fontWeight,
-            FontStyle fontStyle,
-            double letterSpacing,
-            double wordSpacing,
-            TextBaseline textBaseline,
-            double height,
-            Locale locale,
-            Paint foreground,
-            Paint background,
-            TextDecoration decoration,
-            Color decorationColor,
-            TextDecorationStyle decorationStyle,
-            String debugLabel,
-            String fontFamily,
-            String package })
-                    </p>
-                    <ul>
-                      <li>
-                        <span class="text-danger">color</span>：用於設定顏色，使用Colors或Color類別。Colors藉由選擇顏色並套用顏色樣本值來設定顏色強度，顏色強度值在0到900之間，例如Colors.green代表預設強度為500的綠色(Colors.green[500])。Color類別則是代入透明度及紅綠藍的16進位值如Color(0xAARRGGBB)，其中AA,RR,GG,BB為16進位數字從00到ff，分別代表透明度與紅綠藍的值(例如Color(0xffff0000)為紅色完全不透明)。使用者也可使用Color.fromARGB(AA,RR,GG,BB)代入透明度與紅綠藍的值，代入值可以是16進位或10進位值。Color.fromRGBO(RR,GG,BB,O)，其中O為透明度，值從0.0到1.0，分別代表完全透明到完全不透明。
-                        <p class="text-success">練習：請使用Colors與Color類別練習不同顏色與透明度設定。</p>
-                      </li>
-                      <li>
-                        <span class="text-danger">fontWeight</span>：FontWeight類別用於設定字體粗細，可用normal、bold或w100到w900等常數來設定字體粗細。
-                      </li>
-                      <li>
-                        <span class="text-danger">fontStyle</span>：FontStyle類別，使用normal或italic常數設定正常字體或斜體。
-                      </li>
-                      <li>
-                        <span class="text-danger">textBaseline</span>：TextBaseline類別，用於設定底線對齊，包含alphabetic(文字)與ideographic(表意圖示)兩個常數值。
-                      </li>
-                      <li>
-                        <span class="text-danger">decoration</span>：TextDecoration類別，用於設定lineThrough(刪除線)、overline(上標線)與underline(底線)。
-                      </li>
-                      <li>
-                        <span class="text-danger">decorationStyle</span>：TextDecorationStyle類別，用於設定decoration樣式包含常數dashed(虛線)、dotted(點線)、double(雙線)、solid(實線)與wavy(波浪線)。
-                      </li>
-                    </ul>
-                  </ul>
-                  <p>
-                    當設計者希望將不同的樣式套用於一段文字，則需使用Text.rich widget，Text.rich widget使用TextSpan widget來包含多段不同樣式的文字，TextSpan widget又可包含多個TextSpan widgets，而每個TextSpan均可設定樣式。
-                  </p>
-                  <p class="codeblock">
-        Text.rich(TextSpan textSpan,
-        { Key key,
-          TextStyle style,
-          TextAlign textAlign,
-          TextDirection textDirection,
-          Locale locale,
-          bool softWrap,
-          TextOverflow overflow,
-          double textScaleFactor,
-          int maxLines, 
-          String semanticsLabel })
-          
-        TextSpan({TextStyle style,
-          String text,
-          List children,
-          GestureRecognizer recognizer })
-                  </p>
+                  
                 
+            </div>
+            <div class="slide" id="slide-8">
+              <div class="unittitle">頁面間參數傳遞- 查詢字串</div>
+              <p>
+                在go_router<span class="text-danger">context.go</span>代入如網頁路徑查詢字串(/page2?id=100)，用於頁面間參數傳遞- 路徑參數。路徑參數只能設定一個，在<span class="text-danger">builder</span>中透過<span class="text-danger">state.uri.queryParameters</span>取得變數。
+                </p>
             </div>
                 
                 
